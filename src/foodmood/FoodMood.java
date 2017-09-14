@@ -7,7 +7,7 @@ package foodmood;
 
 /**
  *
- * @author Michael Kramer <mpk5206 @ psu.edu>
+ * @author Michael Kramer
  */
 public class FoodMood {
 
