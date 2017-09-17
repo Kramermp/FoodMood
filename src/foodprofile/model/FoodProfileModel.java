@@ -3,11 +3,13 @@ package foodprofile.model;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 public class FoodProfileModel {
     private int id;
     private String name;
     private ArrayList<String> foodCategories;
+    private GregorianCalendar time;
     
     /**
      * Default constructor for FoodProfileModel
@@ -65,6 +67,22 @@ public class FoodProfileModel {
      */
     public void addFoodCategory(String foodCategory){
         
+    }
+    
+    /**
+     * Gets the time of the Food as a GregorianCalendar
+     * @return 
+     */
+    public GregorianCalendar getTime() {
+        return this.time;
+    }
+    
+    /**
+     * Sets the time equal to the Provided GregorianCalendar
+     * @param time 
+     */
+    public void setTime(GregorianCalendar time) {
+        this.time = time;
     }
 
 

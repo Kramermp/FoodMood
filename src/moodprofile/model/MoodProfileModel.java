@@ -1,12 +1,12 @@
 package moodprofile.model;
 
-import java.util.ArrayList;
-import java.util.Date;
+import java.util.GregorianCalendar;
 
 public class MoodProfileModel {
     private int id;
     private String name;
     private int moodScore;
+    private GregorianCalendar time = new GregorianCalendar();
 
     
     /**
@@ -64,5 +64,19 @@ public class MoodProfileModel {
         this.moodScore = moodScore;
     }
     
+    /**
+     * Gets the time of the Mood as a GregorianCalendar
+     * @return 
+     */
+    public GregorianCalendar getTime() {
+        return this.time;
+    }
     
+    /**
+     * Sets the time of the Mood equal to the provided GregorianCalendar
+     * @param time 
+     */
+    public void setTime(GregorianCalendar time) {
+        this.time = time;
+    }
 }
