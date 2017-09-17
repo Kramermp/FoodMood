@@ -22,6 +22,18 @@ public class UserList {
     }
     
     /**
+     * Goes through the UserList validates the provided credentials
+     * @param username The Username to validate
+     * @param password The Password to validate
+     * @return 
+     */
+    public boolean authenticateUserCredentials(String username, char[] password) {
+        System.err.println("This is a stub.");
+        //TODO: Implment authenticateUserCredentials
+        return true;
+    }
+    
+    /**
      * Adds a User to the UserList with the provided UserName and Password
      * @param username Username of the new User
      * @param password Password of the new User
