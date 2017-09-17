@@ -6,8 +6,8 @@
 
 import userprofilemodel.UserList;
 import userprofilemodel.User;
-import moodmodel.*;
-import foodmodel.*;
+import moodprofile.model.*;
+import foodprofile.model.*;
 
 /**
  *
