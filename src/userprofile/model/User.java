@@ -5,6 +5,9 @@
  */
 package userprofile.model;
 
+import foodprofile.model.FoodList;
+import moodprofile.model.MoodList;
+
 /**
  *
  * @author Michael Kramer
@@ -12,6 +15,8 @@ package userprofile.model;
 public class User {
     private String username;
     private char[] password;
+    private FoodList usersFoodList = new FoodList();
+    private MoodList usersMoodList = new MoodList();
 
     /**
      * This constructor takes no arguments, and creates a User object with 
