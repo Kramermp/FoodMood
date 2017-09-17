@@ -10,6 +10,7 @@ public class FoodProfileModel {
     private String name;
     private ArrayList<String> foodCategories;
     private GregorianCalendar time;
+    private ArrayList<Integer> moods;
     
     /**
      * Default constructor for FoodProfileModel
@@ -84,6 +85,40 @@ public class FoodProfileModel {
     public void setTime(GregorianCalendar time) {
         this.time = time;
     }
+    
+        /**
+     * This method retrieves all moods this food is linked to
+     * @return the moods
+     */
+    public ArrayList<Integer> getMoods() {
+        return moods;
+    }
+
+    /**
+     * This method adds linked moods to this food
+     * @param moods the moods to set
+     */
+    public void setMoods(ArrayList<Integer> moods) {
+        this.moods = moods;
+    }
+        
+    /**
+     * This method deletes a mood linked to this food
+     * @param toDelete 
+     */
+    public void deleteMood(int toDelete){
+        
+    }
+    
+    /**
+     * This method returns a mood linked to this food, given its index in the ArrayList of moodIDs
+     * @param index
+     * @return 
+     */
+    public int getMood(int index){
+        return moods.get(index);
+    }
+
 
 
 }

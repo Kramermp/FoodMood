@@ -79,4 +79,46 @@ public class MoodProfileModel {
     public void setTime(GregorianCalendar time) {
         this.time = time;
     }
+    
+    
+    /**
+     * returns all foods linked to this mood
+     * @return the foodIDs
+     */
+    public ArrayList<Integer> getFoodIDs() {
+        return foodIDs;
+    }
+    
+    /**
+     * returns a food linked to this mood given the index.
+     * @param index
+     * @return 
+     */
+    public int getFood(int index){
+        return 1;
+    }
+
+    /**
+     * adds all moods linked to this food
+     * @param foodIDs the foodIDs to set
+     */
+    public void setFoodIDs(ArrayList<Integer> foodIDs) {
+        this.foodIDs = foodIDs;
+    }
+    
+    /**
+     * deletes a food linked to this mood
+     * @param toDelete 
+     */
+    public void deleteFood(int toDelete){
+        
+    }
+    
+    /**
+     * adds a food linkage to this mood
+     * @param toAdd 
+     */
+    public void addFood(int toAdd){
+        
+    }
 }
