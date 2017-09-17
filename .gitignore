@@ -22,3 +22,5 @@
 hs_err_pid*
 /FoodMood/nbproject/private/
 /nbproject/private/
+/dist/
+/build/
