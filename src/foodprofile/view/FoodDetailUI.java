@@ -12,13 +12,13 @@ import foodprofile.model.FoodProfileModel;
  *
  * @author mpk5206
  */
-public class FoodView {
+public class FoodUI {
     private FoodProfileModel theFoodProfileModel;
     
     /**
      * Default Constructor for empty FoodView
      */
-    public FoodView(FoodController parentController) {
+    public FoodUI(FoodController parentController) {
        System.err.println("This is a stub.");
         //TODO: Implment FoodView 
     }

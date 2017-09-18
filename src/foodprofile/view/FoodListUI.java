@@ -9,11 +9,11 @@ package foodprofile.view;
  *
  * @author mpk5206
  */
-public class FoodListView {
+public class FoodListUI {
     /**
-     * Default constructor for FoodListView
+     * Default constructor for FoodListUI
      */
-    public void FoodListView(){
+    public FoodListUI(){
 
     }
 }

@@ -5,17 +5,15 @@
  */
 package moodprofile.view;
 
-import moodprofile.controller.MoodController;
-
 /**
  *
- * @author Micahel Kramer
+ * @author mpk5206
  */
-public class MoodUI {
+public class MoodListUI {
     /**
-     * Default constructor for MoodView
+     * Default Constructor for MoodListUI
      */
-    public MoodView() {
+    public MoodListUI() {
 
     }
 }
