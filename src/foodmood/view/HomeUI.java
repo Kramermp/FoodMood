@@ -10,5 +10,7 @@ package foodmood.view;
  * @author hilarygodin
  */
 public class HomeUI {
-    
+    public HomeUI(){
+        
+    }
 }
