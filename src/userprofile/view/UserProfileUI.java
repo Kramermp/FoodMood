@@ -11,7 +11,7 @@ import userprofile.model.User;
 
 /**
  *
- * @author Michael Kramer <mpk5206 @ psu.edu>
+ * @author Michael Kramer
  */
 public class UserProfileUI {
 	private UserCntl parentController;
@@ -28,7 +28,8 @@ public class UserProfileUI {
 	
 	/**
 	 * Creates a UserProfile UI with the SourceUser
-	 * @param sourceUser 
+	 * @param sourceUser the user to populate the the UI with
+	 * @param parentController the parentController
 	 */
 	public UserProfileUI(UserCntl parentController, User sourceUser) {
 		System.err.println("This is a stub.");

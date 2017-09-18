@@ -39,7 +39,7 @@ public class NotificationList {
     
     /**
      * Adds a notification to the list
-     * @param toAdd 
+     * @param toAdd the notification to add to the list
      */
     public void addNotification(Notification toAdd){
         
@@ -47,7 +47,7 @@ public class NotificationList {
     
     /**
      * Updates a notification in the list, using the ID to find it
-     * @param toUpdate 
+     * @param toUpdate the notification to update
      */
     public void updateNotification(Notification toUpdate){
         
@@ -55,7 +55,7 @@ public class NotificationList {
     
     /**
      * Marks a notification as read
-     * @param notificationID 
+     * @param notificationID the notification Id to mark as read
      */
     public void markNotificationAsRead(int notificationID){
         
@@ -63,7 +63,7 @@ public class NotificationList {
     
     /**
      * Deletes a notification
-     * @param notificationID 
+     * @param notificationID the ID of the notification to mark as read
      */
     public void deleteNotification(int notificationID){
         
@@ -71,7 +71,7 @@ public class NotificationList {
     
     /**
      * Retrieves a notification given the index
-     * @param index 
+     * @param index the index of the notification to get
      * @return notification
      */
     public Notification getNotification(int index){

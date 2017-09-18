@@ -17,6 +17,7 @@ public class FoodUI {
     
     /**
      * Default Constructor for empty FoodView
+	 * @param parentController the parentController
      */
     public FoodUI(FoodController parentController) {
        System.err.println("This is a stub.");
@@ -25,7 +26,8 @@ public class FoodUI {
     
     /**
      * Creates a FoodView of the provided FoodProfile
-     * @param foodProfile 
+     * @param foodProfile the source foodprofile
+	 * @param parentController the parent controller
      */
     public FoodUI(FoodController parentController, 
             FoodProfileModel foodProfile) {

@@ -25,7 +25,7 @@ public class UserList {
      * Goes through the UserList validates the provided credentials
      * @param username The Username to validate
      * @param password The Password to validate
-     * @return 
+     * @return the boolean if it is authenticated
      */
     public boolean authenticateUserCredentials(String username, char[] password) {
         System.err.println("This is a stub.");
@@ -56,7 +56,7 @@ public class UserList {
     /**
      * Returns if a User is found with the provided Username
      * @param username The Username to check for
-     * @return 
+     * @return the boolean of if it has user
      */
     public boolean hasUser(String username) {
         System.err.println("This is a stub.");
@@ -67,7 +67,7 @@ public class UserList {
     /**
      * Gets the User with Username from the UserList
      * @param username The Username of the User to get
-     * @return 
+     * @return the User
      */
     public User getUser(String username) {
         System.err.println("This is a stub.");
@@ -77,7 +77,7 @@ public class UserList {
     
     /**
      * Returns the number of Users in the UserList
-     * @return 
+     * @return the Count of Users
      */
     public int getUserCount() {
         System.err.println("This is a stub.");

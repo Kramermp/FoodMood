@@ -21,6 +21,7 @@ public class FoodMoodCntl {
 
     /**
      * This is the default constructor for FoodMoodCntl
+	 * @param currentUser the current User
      */  
     public FoodMoodCntl(User currentUser){
         
@@ -44,7 +45,7 @@ public class FoodMoodCntl {
     
     /**
      * Adds a Food to the current user's FoodList
-     * @param food 
+     * @param food the food to add
      */
     public void addFood(FoodProfileModel food){
         
@@ -52,7 +53,7 @@ public class FoodMoodCntl {
     
     /**
      * This updates a food, using the id stored within the food class
-     * @param food 
+     * @param food  the food to update
      */
     public void updateFood(FoodProfileModel food){
         
@@ -60,7 +61,7 @@ public class FoodMoodCntl {
     
     /**
      * This deletes the food from the current user's FoodList
-     * @param foodID 
+     * @param foodID the food to delete
      */
     public void deleteFood(int foodID){
         
@@ -84,7 +85,7 @@ public class FoodMoodCntl {
     
     /**
      * Adds a Mood to the current user's FoodList
-     * @param mood 
+     * @param mood the mood to add
      */
     public void addMood(MoodProfileModel mood){
         
@@ -92,7 +93,7 @@ public class FoodMoodCntl {
     
     /**
      * This updates a mood, using the id stored within the mood class. Also updates linkages
-     * @param food 
+     * @param mood the mood to update
      */
     public void updateMood(MoodProfileModel mood){
         
@@ -100,7 +101,7 @@ public class FoodMoodCntl {
     
     /**
      * This deletes the mood from the current user's MoodList
-     * @param foodID 
+     * @param moodID the mood to delete
      */
     public void deleteMood(int moodID){
         
@@ -117,7 +118,7 @@ public class FoodMoodCntl {
     
     /**
      * Deletes a mood from the current user's MoodList and the linkages of all foods it was linked to
-     * @param mood 
+     * @param mood the mood to delete
      */
     public void deleteMood(MoodProfileModel mood){
         

@@ -9,7 +9,7 @@ import userprofile.model.UserList;
 
 /**
  *
- * @author Michael Kramer <mpk5206 @ psu.edu>
+ * @author Michael Kramer
  */
 public class UserCntl {
 	private UserList theUserList;

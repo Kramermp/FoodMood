@@ -51,7 +51,7 @@ public class ExternalDataCntl {
     
     /**
      * Writes the list of all foods consumed
-     * @param foodList 
+     * @param foodList  the list of Food
      */
     public void writeFoodList(FoodList foodList){
         
@@ -59,7 +59,7 @@ public class ExternalDataCntl {
     
     /**
      * Adds a single food to the database
-     * @param food 
+     * @param food the food to write to file
      */
     public void writeSingleFood(FoodProfileModel food){
         
@@ -67,7 +67,7 @@ public class ExternalDataCntl {
     
     /**
      * Writes the list of moods to the database
-     * @param moodList 
+     * @param moodList the mood to write to file
      */
     public void writeMoodList(MoodList moodList){
         
@@ -75,7 +75,7 @@ public class ExternalDataCntl {
     
     /**
      * Writes a single mood to the database
-     * @param mood
+     * @param mood the mood to write to file
      */
     public void writeSingleMood(MoodProfileModel mood){
         
@@ -83,7 +83,7 @@ public class ExternalDataCntl {
     
     /**
      * Writes the userList to the database
-     * @para userList
+     * @param userList the user list to write to file
      */
     public void writeUserList(UserList userList){
         
@@ -91,7 +91,7 @@ public class ExternalDataCntl {
     
     /**
      * Writes a single user to the database
-     * @param user 
+     * @param user  the user to write tot file
      */
     public void writeSingleUser(User user){
         

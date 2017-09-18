@@ -68,7 +68,7 @@ public class MoodProfileModel {
     
     /**
      * Gets the time of the Mood as a GregorianCalendar
-     * @return 
+     * @return the calendar
      */
     public GregorianCalendar getTime() {
         return this.time;
@@ -76,7 +76,7 @@ public class MoodProfileModel {
     
     /**
      * Sets the time of the Mood equal to the provided GregorianCalendar
-     * @param time 
+     * @param time  the time to be set to
      */
     public void setTime(GregorianCalendar time) {
         this.time = time;
@@ -93,8 +93,8 @@ public class MoodProfileModel {
     
     /**
      * returns a food linked to this mood given the index.
-     * @param index
-     * @return 
+     * @param index the index of the food to get
+     * @return the food's index
      */
     public int getFood(int index){
         return 1;
@@ -110,7 +110,7 @@ public class MoodProfileModel {
     
     /**
      * deletes a food linked to this mood
-     * @param toDelete 
+     * @param toDelete the index of the food to delete
      */
     public void deleteFood(int toDelete){
         
@@ -118,7 +118,7 @@ public class MoodProfileModel {
     
     /**
      * adds a food linkage to this mood
-     * @param toAdd 
+     * @param toAdd the food to add
      */
     public void addFood(int toAdd){
         

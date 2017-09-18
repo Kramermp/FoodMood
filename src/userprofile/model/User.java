@@ -5,7 +5,7 @@
  */
 package userprofile.model;
 
-import NotificationProfile.Model.Notification;
+import notificationprofile.model.Notification;
 import foodprofile.model.FoodList;
 import moodprofile.model.MoodList;
 import notificationprofile.model.NotificationList;
@@ -85,14 +85,14 @@ public class User {
     
     /**
     *Sets the notificationList for the User
-    *@param notificationList
+    *@param notifications the list to set
     */
     public void setNotificationList(NotificationList notifications){
     }
     
     /**
     *Gets notificationList for the User
-    *@return NotificationList
+    *@return NotificationList 
     */
     public NotificationList getNotificationList(){
         return new NotificationList() ;
@@ -100,7 +100,7 @@ public class User {
     
     /**
     *Adds a notification to the notificationList
-    *@param notification
+    *@param notification the notification to add
     */
     public void addNotification(Notification notification){
 		
@@ -108,7 +108,7 @@ public class User {
     
     /**
     *Deletes notification
-    *@param notificationID
+    *@param notificationID the Id of notification to add
     */
     public void deleteNotificaiton(int notificationID){
 		
@@ -116,7 +116,7 @@ public class User {
     
     /**
     *Marks notification as read
-    *@param notificationID
+    *@param notificationID the ID of the notification to mark as read
     */
     public void markNotificationAsRead(int notificationID){
 		

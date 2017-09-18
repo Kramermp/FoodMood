@@ -17,7 +17,7 @@ public class MoodList {
     
     /**
      * Adds the provided MoodProfile to the MoodList
-     * @param moodProfileToAdd 
+     * @param moodProfileToAdd the mood to add
      */
     public void addMoodProfile(MoodProfileModel moodProfileToAdd) {
         System.err.println("This is a stub.");
@@ -26,7 +26,7 @@ public class MoodList {
     
     /**
      * Removes the provided MoodProfile from the MoodList
-     * @param moodProfileToRemove 
+     * @param moodProfileToRemove the mood to remove
      */
     public void removeMoodProfile(MoodProfileModel moodProfileToRemove) {
         System.err.println("This is a stub.");
@@ -35,8 +35,8 @@ public class MoodList {
     
     /**
      * Checks if the MoodList contains the provided MoodProfile
-     * @param moodProfile
-     * @return 
+     * @param moodProfile the profile to test food
+     * @return boolean if it has the specified food
      */
     public boolean hasMoodProfile(MoodProfileModel moodProfile) {
         System.err.println("This is a stub.");
@@ -46,7 +46,7 @@ public class MoodList {
     
     /**
      * Returns the size of the MoodList
-     * @return 
+     * @return the size of moodlist
      */
     public int size() {
         System.err.println("This is a stub.");

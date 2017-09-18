@@ -7,7 +7,7 @@ package foodmood.controller;
 
 /**
  *
- * @author Michael Kramer <mpk5206 @ psu.edu>
+ * @author Michael Kramer
  */
 public class NavigationCntl {
 	

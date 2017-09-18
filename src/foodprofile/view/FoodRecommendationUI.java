@@ -7,7 +7,7 @@ package foodprofile.view;
 
 /**
  *
- * @author Michael Kramer <mpk5206 @ psu.edu>
+ * @author Michael Kramer
  */
 public class FoodRecommendationUI {
 	

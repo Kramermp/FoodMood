@@ -22,7 +22,7 @@ public class LoginView {
     
     /**
      * Creates a LoginView with a reference to the parent LoginController
-     * @param parentController 
+     * @param parentController the parentController
      */
     public LoginView(LoginController parentController) {
         System.err.println("This is a stub.");

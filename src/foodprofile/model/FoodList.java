@@ -26,7 +26,7 @@ public class FoodList {
     
     /**
      * Removes the provided from the FoodList
-     * @param foodToRemove 
+     * @param foodToRemove Food to be removed from the FoodList
      */
     public void removeFoodProfile(FoodProfileModel foodToRemove) {
         System.err.println("This is a stub.");
@@ -35,8 +35,8 @@ public class FoodList {
     
     /**
      * Checks if the FoodList contains the provided FoodProfile
-     * @param foodProfile
-     * @return 
+     * @param foodProfile the Food to check for
+     * @return the food to check for
      */
     public boolean hasFoodProfile(FoodProfileModel foodProfile) {
         System.err.println("This is a stub.");
@@ -46,7 +46,7 @@ public class FoodList {
     
     /**
      * Returns the size of the FoodList
-     * @return 
+     * @return the size of the FoodList
      */
     public int size() {
         System.err.println("This is a stub.");

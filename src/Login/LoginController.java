@@ -25,8 +25,8 @@ public class LoginController {
     /**
      * Compares the provided Username and Password to UserList to authenticate
      * the provided User credentials.
-     * @param username
-     * @param password 
+     * @param username the Username
+     * @param password the Password
      */
     public void authenticateUserCredentials(String username, char[] password) {
         System.err.println("This is a stub.");
