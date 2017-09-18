@@ -5,10 +5,12 @@
  */
 package foodmoodv1;
 
-import foodmodel.*;
+import foodprofile.model.FoodList;
+import foodprofile.model.FoodProfileModel;
 import java.util.GregorianCalendar;
-import moodmodel.*;
-import userprofilemodel.User;
+import moodprofile.model.MoodList;
+import moodprofile.model.MoodProfileModel;
+import userprofile.model.User;
 /**
  *
  * @author HannahGarthwaite

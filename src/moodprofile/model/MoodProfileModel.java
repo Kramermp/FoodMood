@@ -1,5 +1,6 @@
 package moodprofile.model;
 
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 public class MoodProfileModel {
@@ -7,6 +8,7 @@ public class MoodProfileModel {
     private String name;
     private int moodScore;
     private GregorianCalendar time = new GregorianCalendar();
+	private ArrayList<Integer> foodIDs = new ArrayList<>();
 
     
     /**

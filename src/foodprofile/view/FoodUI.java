@@ -27,7 +27,7 @@ public class FoodUI {
      * Creates a FoodView of the provided FoodProfile
      * @param foodProfile 
      */
-    public FoodView(FoodController parentController, 
+    public FoodUI(FoodController parentController, 
             FoodProfileModel foodProfile) {
         System.err.println("This is a stub.");
         //TODO: Implment FoodView

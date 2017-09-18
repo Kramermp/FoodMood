@@ -15,7 +15,8 @@ public class MoodUI {
     /**
      * Default constructor for MoodView
      */
-    public MoodView() {
-
+    public MoodUI() {
+		System.err.println("This is a stub.");
+		//TODO: Implement ModUI
     }
 }

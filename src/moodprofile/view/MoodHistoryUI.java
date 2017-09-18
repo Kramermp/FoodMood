@@ -10,7 +10,8 @@ package moodprofile.view;
  * @author hilarygodin
  */
 public class MoodHistoryUI {
-    public MoodHistory(){
-        
+    public MoodHistoryUI(){
+        System.err.println("This is a stub.");
+		//TODO: Implement MoodHistoryUI
     }
 }

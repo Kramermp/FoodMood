@@ -5,8 +5,10 @@
  */
 package userprofile.model;
 
+import NotificationProfile.Model.Notification;
 import foodprofile.model.FoodList;
 import moodprofile.model.MoodList;
+import notificationprofile.model.NotificationList;
 
 /**
  *
@@ -93,7 +95,7 @@ public class User {
     *@return NotificationList
     */
     public NotificationList getNotificationList(){
-        return userNotificationList;
+        return new NotificationList() ;
     }
     
     /**
@@ -101,6 +103,7 @@ public class User {
     *@param notification
     */
     public void addNotification(Notification notification){
+		
     }
     
     /**
@@ -108,6 +111,7 @@ public class User {
     *@param notificationID
     */
     public void deleteNotificaiton(int notificationID){
+		
     }
     
     /**
@@ -115,6 +119,7 @@ public class User {
     *@param notificationID
     */
     public void markNotificationAsRead(int notificationID){
+		
     }
        
 }
