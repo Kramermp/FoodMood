@@ -3,17 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package foodprofile.view;
+package moodprofile.view;
 
 /**
  *
  * @author mpk5206
  */
-public class FoodListUI {
+public class MoodListUI {
     /**
-     * Default constructor for FoodListUI
+     * Default Constructor for MoodListUI
      */
-    public FoodListUI(){
+    public MoodListUI() {
 
     }
 }
