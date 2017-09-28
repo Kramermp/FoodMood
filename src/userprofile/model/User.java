@@ -37,6 +37,7 @@ public class User {
     public User(String username, char[] password) {
         this.username = username;
         this.password = password;
+        usersNotificationList = new NotificationList();
     }
     
     /**
@@ -45,10 +46,12 @@ public class User {
      * @param password The Password to authenticate
      * @return The boolean result from authenticate, true is authenticated.
      */
-    public boolean authenticate(String username, String password) {
-        System.err.println("This is a stub.");
-        //TODO: Implement the authenticate method
-        return true;
+    public boolean authenticate(String username, char[] password) {
+        if(username.equals(this.username) && java.util.Arrays.equals(password, this.password)){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     /**
@@ -88,6 +91,7 @@ public class User {
     *@param notifications the list to set
     */
     public void setNotificationList(NotificationList notifications){
+        this.usersNotificationList = notifications;
     }
     
     /**
@@ -95,7 +99,7 @@ public class User {
     *@return NotificationList 
     */
     public NotificationList getNotificationList(){
-        return new NotificationList() ;
+        return usersNotificationList;
     }
     
     /**
@@ -103,7 +107,7 @@ public class User {
     *@param notification the notification to add
     */
     public void addNotification(Notification notification){
-		
+	usersNotificationList.addNotification(notification);
     }
     
     /**
@@ -111,7 +115,7 @@ public class User {
     *@param notificationID the Id of notification to add
     */
     public void deleteNotificaiton(int notificationID){
-		
+	usersNotificationList.deleteNotification(notificationID);
     }
     
     /**
@@ -119,7 +123,7 @@ public class User {
     *@param notificationID the ID of the notification to mark as read
     */
     public void markNotificationAsRead(int notificationID){
-		
+	usersNotificationList.markNotificationAsRead(notificationID);
     }
        
 }
