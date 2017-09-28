@@ -60,5 +60,11 @@ public class FoodController {
     public void deleteFood(int foodID){
         
     }
+    /**
+     * Updates all food mood links based on times
+     */
+    public void updateFoodMoodLinks(){
+        
+    }
     
 }
