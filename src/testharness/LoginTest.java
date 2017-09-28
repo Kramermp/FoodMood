@@ -28,12 +28,12 @@ public class LoginTest {
         LoginView theLoginView = new LoginView(theLoginController);
         theLoginView.enterCredentialsFromSavedValues(username, incorrectPassword);
         System.out.println("Incorrect user credentials entered in LoginView");
-        theLoginView.submitUserCredentials();
+        //theLoginView.submitUserCredentials();
         System.out.println("Incorrect user credentials sent for login");
         
         theLoginView.enterCredentialsFromSavedValues(username, incorrectPassword);
         System.out.println("Correct user credentials entered in LoginView");
-        theLoginView.submitUserCredentials();
+       //theLoginView.submitUserCredentials();
         System.out.println("Correct user credentials sent for login");
         
         if(theLoginController.authenticateUserCredentials(username, password)){

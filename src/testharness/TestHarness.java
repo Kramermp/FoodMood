@@ -12,6 +12,6 @@ package testharness;
 public class TestHarness {
     public TestHarness(){
         System.out.println("Starting Test Harness.");
-        new LoginTest();
+        UserTestHarness.run();
     }
 }

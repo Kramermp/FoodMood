@@ -35,8 +35,8 @@ public class NavigationTest {
     public void testFoodModule(){
         theNavigationCntl.goFoodScreen();
         System.out.println("\nThe Navigation Controller called goFoodScreen.");
-        foodprofile.controller.FoodController theFoodController = new foodprofile.controller.FoodController();
-        FoodTest theFoodTest = new FoodTest(theFoodController);
+        //foodprofile.controller.FoodController theFoodController = new foodprofile.controller.FoodController();
+        //FoodTest theFoodTest = new FoodTest(theFoodController);
     }
     
     public void testMoodModule(){
