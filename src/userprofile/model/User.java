@@ -19,7 +19,7 @@ public class User {
     private char[] password;
     private FoodList usersFoodList = new FoodList();
     private MoodList usersMoodList = new MoodList();
-    private NotificationList usersNotificationList;
+    private NotificationList usersNotificationList = new NotificationList();
 
     /**
      * This constructor takes no arguments, and creates a User object with 
@@ -37,7 +37,7 @@ public class User {
     public User(String username, char[] password) {
         this.username = username;
         this.password = password;
-        usersNotificationList = new NotificationList();
+        this.usersNotificationList = new NotificationList();
     }
     
     /**
@@ -124,6 +124,22 @@ public class User {
     */
     public void markNotificationAsRead(int notificationID){
 	usersNotificationList.markNotificationAsRead(notificationID);
+    }
+    
+    public FoodList getFoodList() {
+        return this.usersFoodList;
+    }
+    
+    public MoodList getMoodList() {
+        return this.usersMoodList;
+    }
+    
+    public void setFoodList(FoodList foodList) {
+        this.usersFoodList = foodList;
+    }
+    
+    public void setMoodList(MoodList moodList) {
+        this.usersMoodList = moodList;
     }
        
 }
