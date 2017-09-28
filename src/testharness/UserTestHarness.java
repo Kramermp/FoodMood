@@ -23,7 +23,7 @@ import userprofile.model.User;
  * @since.1
  */
 public class UserTestHarness {
-    private int errorCount = 0;
+    private static int errorCount = 0;
     
     public static void run() {
         System.out.println("Running the User Test Harness.");
@@ -37,11 +37,12 @@ public class UserTestHarness {
         System.out.println("Testing the User Class's constructors.");
         User testUser = new User();
         if(testUser != null){
-            System.out.println("The Default constructor successfully created "
+            System.out.println("The Default constructor successfully created"
                 + " the User object.");
         } else {
-            System.err.println("The default constructor failed to create the "
+            System.err.println("The default constructor failed to create the"
                 + " the User object.");
+            errorCount++;
         }
         
         String testUsername = "Test User";
@@ -66,9 +67,10 @@ public class UserTestHarness {
                         + " successfully assigned the Username.");
                 } else {
                     System.err.println("The User(String, char[]) constructor"
-                        + " failed to properly assign the Username");
-                    System.err.println("Expected:" + testUsername);
-                    System.err.println("Found:" + detectedUsername);
+                        + " failed to properly assign the Username \n"
+                        + " Expected:" + testUsername + "\n"
+                        + " Found:" + detectedUsername);
+                    errorCount++;
                 }
                 //You actually want to compare using == because we are expecting
                 //These to be the exact same object aka sharing the same memory
@@ -78,19 +80,22 @@ public class UserTestHarness {
                         + " successfully assigned the password.");
                 } else {
                     System.err.println("The User(String, char[]) constructor"
-                        + " failed to properly assign the password");
-                    System.err.println("Expected:" + testPassword.toString());
-                    System.err.println("Found:" + detectedPassword.toString());
+                        + " failed to properly assign the password \n"
+                        + " Expected:" + testPassword.toString() + "\n"
+                        + " Found:" + detectedPassword.toString());
+                    errorCount++;
                 }
             } catch (NoSuchFieldException e) {
                 System.err.println("Error During User(String, char[])");
                 System.err.println(e.getMessage());
+                errorCount++;
             } catch (IllegalArgumentException | IllegalAccessException ex) {
-                System.err.println("Error During User(String, char[])");
-                System.err.println(ex.getMessage());
+                System.err.println("Error During User(String, char[]) \n"
+                    + ex.getMessage());
+                errorCount++;
             }
         } else {
-            System.out.println("The User(String, char[]) constructor "
+            System.out.println("The User(String, char[]) constructor"
                     + " failed to create the User object.");
         }
     }
@@ -110,10 +115,11 @@ public class UserTestHarness {
                 System.out.println("The method User.getUsername() successfully"
                     + " retrieved the Username");
             } else {
-                System.err.println("The method User.getUsername() failed to "
-                    + " properly retrieve the Username");
-                System.err.println("Expected:" + testUsername);
-                System.err.println("Found:" + detectedUsername);
+                System.err.println("The method User.getUsername() failed to"
+                    + " properly retrieve the Username \n"
+                    + " Expected:" + testUsername + "\n"
+                    + " Found:" + detectedUsername);
+                errorCount++;
             }
             
             //Tests getPassword
@@ -126,9 +132,10 @@ public class UserTestHarness {
                     + " retrieved the password.");
             } else {
                 System.err.println("The method User.getPassword() failed to"
-                    + " properly retrieve the password");
-                System.err.println("Expected:" + Arrays.toString(testPassword));
-                System.err.println("Found:" + Arrays.toString(detectedPassword));
+                    + " properly retrieve the password \n"
+                    + " Expected:" + Arrays.toString(testPassword) + "\n"
+                    + " Found:" + Arrays.toString(detectedPassword));
+                errorCount++;
             }
             
             //Tests getFoodList()
@@ -142,6 +149,7 @@ public class UserTestHarness {
             } else {
                 System.err.println("The method User.getFoodList() failed to"
                     + " properly retrieve the usersFoodList");
+                errorCount++;
             }
             
             //Tests getMoodList()
@@ -155,6 +163,7 @@ public class UserTestHarness {
             } else {
                 System.err.println("The method User.getMoodList() failed to"
                     + " properly retrieve the usersFoodList");
+                errorCount++;
             }
             
             //Test getNotficationList()
@@ -168,13 +177,17 @@ public class UserTestHarness {
             } else {
                 System.err.println("The method User.getNotificationList() failed to"
                     + " properly retrieve the usersFoodList");
+                errorCount++;
             }
               
         } catch (NoSuchFieldException e) {
-            System.err.println("Error while testing the User Accessors.");
-            System.err.println(e.getMessage());
+            System.err.println("Error while testing the User Accessors. \n"
+                + e.getMessage());
+            errorCount++;
         } catch (IllegalArgumentException | IllegalAccessException ex) {
-            Logger.getLogger(UserTestHarness.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println("Error whilte testing the User Accessors. \n"
+                + ex.getMessage());
+            errorCount++;
         }
         
     }
@@ -265,8 +278,8 @@ public class UserTestHarness {
             }
               
         } catch (NoSuchFieldException e) {
-            System.err.println("Error while testing User accessors.");
-            System.err.println(e.getMessage());
+            System.err.println("Error while testing User accessors. \n"
+                + e.getMessage());
         } catch (IllegalArgumentException | IllegalAccessException ex) {
             
         }
