@@ -6,6 +6,7 @@
 package test;
 
 import Login.LoginController;
+import Login.LoginView;
 import foodmood.controller.NavigationCntl;
 
 /**
@@ -18,12 +19,29 @@ public class LoginTest {
         if(theLoginController != null) {
             System.out.println("The Login Controller was created.");
         }
-        if(theLoginController.authenticateUserCredentials("correct", new char[5])){
+        
+        String username = "correct";
+        char[] password = "password".toCharArray();
+        char[] incorrectPassword = "incorrect".toCharArray();
+        
+                
+        LoginView theLoginView = new LoginView(theLoginController);
+        theLoginView.enterCredentialsFromSavedValues(username, incorrectPassword);
+        System.out.println("Incorrect user credentials entered in LoginView");
+        theLoginView.submitUserCredentials();
+        System.out.println("Incorrect user credentials sent for login");
+        
+        theLoginView.enterCredentialsFromSavedValues(username, incorrectPassword);
+        System.out.println("Correct user credentials entered in LoginView");
+        theLoginView.submitUserCredentials();
+        System.out.println("Correct user credentials sent for login");
+        
+        if(theLoginController.authenticateUserCredentials(username, password)){
             System.out.println("The Login Controller successfully authenticated user.");
         }else{
             System.out.println("The Login Controller failed to authenticate user.");
         }
-        if(theLoginController.authenticateUserCredentials("incorrect", new char[5])){
+        if(theLoginController.authenticateUserCredentials(username, incorrectPassword)){
             System.out.println("The Login Controller successfully denied access.");
         }else{
             System.out.println("The Login Controller incorrectly logged a user in.");
