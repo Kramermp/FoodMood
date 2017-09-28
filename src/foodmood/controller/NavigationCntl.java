@@ -5,25 +5,27 @@
  */
 package foodmood.controller;
 
+import foodmood.view.*;
+import foodprofile.view.*;
 /**
  *
  * @author Michael Kramer
  */
 public class NavigationCntl {
 	
+        private HomeUI theHomeUI;
 	/**
 	 * Creates a default NavigationController Constructor
 	 */
 	public NavigationCntl () {
-		System.err.println("This is a stub.");
-		//TODO: Implement NavigationCntl
+		goHomeScreen();
 	}
 	
 	/**
 	 * Loads the default Screen
 	 */
 	public void goHomeScreen() {
-		
+		theHomeUI = new HomeUI(this);
 	}
 	
 	/**
