@@ -28,9 +28,16 @@ public class UserList {
      * @return the boolean if it is authenticated
      */
     public boolean authenticateUserCredentials(String username, char[] password) {
-        System.err.println("This is a stub.");
-        //TODO: Implment authenticateUserCredentials
-        return true;
+        boolean authenticated = false;
+        for (int i = 0; i < theListOfUsers.size(); i++) {
+            if(theListOfUsers.get(i).getUsername().equals(username)){
+                if(java.util.Arrays.equals(password, theListOfUsers.get(i).getPassword())){
+                    authenticated = true;
+                    break;
+                }
+            }
+        }
+        return authenticated;
     }
     
     /**
@@ -39,8 +46,8 @@ public class UserList {
      * @param password Password of the new User
      */
     public void addUser(String username, char[] password) {
-        System.err.println("This is a stub.");
-        //TODO: Implement addUser
+        User newUser = new User(username, password);
+        theListOfUsers.add(newUser);
     }
     
     /**
@@ -49,8 +56,14 @@ public class UserList {
      * @param password The Password of the User to remove 
      */
     public void deleteUser(String username, char[] password) {
-        System.err.println("This is a stub.");
-        //TODO: Implement deleteUser
+        for (int i = 0; i < theListOfUsers.size(); i++) {
+            if(theListOfUsers.get(i).getUsername().equals(username)){
+                if(java.util.Arrays.equals(password, theListOfUsers.get(i).getPassword())){
+                    theListOfUsers.remove(i);
+                }
+            }
+        }
+        
     }
     
     /**
@@ -59,9 +72,14 @@ public class UserList {
      * @return the boolean of if it has user
      */
     public boolean hasUser(String username) {
-        System.err.println("This is a stub.");
-        //TODO: Implement hasUser
-        return false;
+        boolean found = false;
+        for (int i = 0; i < theListOfUsers.size(); i++) {
+            if(theListOfUsers.get(i).getUsername().equals(username)){
+                found = true;
+                break;
+            }
+        }
+        return found;
     }  
     
     /**
@@ -70,9 +88,12 @@ public class UserList {
      * @return the User
      */
     public User getUser(String username) {
-        System.err.println("This is a stub.");
-        //TODO: Implement getUser
-        return new User();
+        for (int i = 0; i < theListOfUsers.size(); i++) {
+            if(theListOfUsers.get(i).getUsername().equals(username)){
+                return theListOfUsers.get(i);
+            }
+        }
+        return null;
     }
     
     /**
@@ -80,8 +101,6 @@ public class UserList {
      * @return the Count of Users
      */
     public int getUserCount() {
-        System.err.println("This is a stub.");
-        //TODO: implement getUserCount
-        return 0;
+        return theListOfUsers.size();
     }
 }
