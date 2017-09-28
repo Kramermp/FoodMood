@@ -28,6 +28,18 @@ public class LoginView{
         this.parentController = parentController;
     }
     
+    /**
+     * Optionally implemented if user saves credentials on the device
+     * (Here for initial testing purposes)
+     */
+    public void enterCredentialsFromSavedValues(String username, char[] password){
+        usernameTextField.setText(username);
+        passwordField.setText(new String(password));
+    }
+    
+    /**
+     * Initializes components of the view
+     */
     private void initializeComponents(){
         usernameTextField = new JTextField();
         passwordField = new JPasswordField();
