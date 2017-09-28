@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package test;
+package testharness;
 import foodprofile.controller.*;
 import foodprofile.model.*;
 import foodprofile.view.*;
