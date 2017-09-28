@@ -31,10 +31,8 @@ public class UserList {
         boolean authenticated = false;
         for (int i = 0; i < theListOfUsers.size(); i++) {
             if(theListOfUsers.get(i).getUsername().equals(username)){
-                if(java.util.Arrays.equals(password, theListOfUsers.get(i).getPassword())){
-                    authenticated = true;
-                    break;
-                }
+                authenticated = theListOfUsers.get(i).authenticate(username, password);
+                break;
             }
         }
         return authenticated;
