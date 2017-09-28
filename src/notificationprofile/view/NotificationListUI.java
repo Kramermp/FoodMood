@@ -5,12 +5,15 @@
  */
 package notificationprofile.view;
 
+import notificationprofile.controller.NotificationCntl;
+import notificationprofile.model.NotificationList;
+
 /**
  *
  * @author hilarygodin
  */
 public class NotificationListUI {
-    public NotificationListUI(){
+    public NotificationListUI(NotificationCntl notificationCntl, NotificationList notificationList){
         
     }
 }

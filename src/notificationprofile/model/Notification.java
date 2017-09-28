@@ -18,6 +18,15 @@ public class Notification {
     private GregorianCalendar timeIssued;
     private boolean read;
 
+    
+    public Notification(int id, String name, String description, GregorianCalendar timeIssued, boolean read){
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.timeIssued = timeIssued;
+        this.read = read;
+    }
+    
     /**
      * @return the id
      */

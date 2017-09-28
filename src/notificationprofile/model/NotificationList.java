@@ -18,7 +18,7 @@ public class NotificationList {
      * Default constructor for NotificationList
      */
     public NotificationList(){
-        
+        notificationList = new ArrayList();
     }
 
     /**
@@ -42,7 +42,10 @@ public class NotificationList {
      * @param toAdd the notification to add to the list
      */
     public void addNotification(Notification toAdd){
-        
+        if(notificationList == null){
+            notificationList = new ArrayList();
+        }
+        notificationList.add(toAdd);
     }
     
     /**
@@ -50,7 +53,12 @@ public class NotificationList {
      * @param toUpdate the notification to update
      */
     public void updateNotification(Notification toUpdate){
-        
+        for (int i = 0; i < notificationList.size(); i++) {
+            if (notificationList.get(i).getId() == toUpdate.getId()) {
+                notificationList.set(i, toUpdate);
+                break;
+            }
+        }
     }
     
     /**
@@ -58,7 +66,11 @@ public class NotificationList {
      * @param notificationID the notification Id to mark as read
      */
     public void markNotificationAsRead(int notificationID){
-        
+        for (int i = 0; i < notificationList.size(); i++) {
+            if (notificationList.get(i).getId() == notificationID) {
+                notificationList.get(i).setRead(true);
+            }
+        }
     }
     
     /**
@@ -66,7 +78,12 @@ public class NotificationList {
      * @param notificationID the ID of the notification to mark as read
      */
     public void deleteNotification(int notificationID){
-        
+        for (int i = 0; i < notificationList.size(); i++) {
+            if (notificationList.get(i).getId() == notificationID) {
+                notificationList.remove(i);
+                break;
+            }
+        }
     }
     
     /**
@@ -75,6 +92,15 @@ public class NotificationList {
      * @return notification
      */
     public Notification getNotification(int index){
+        return notificationList.get(index);
+    }
+    
+    public Notification getNotificationByID(int id){
+        for (int i = 0; i < notificationList.size(); i++) {
+            if (notificationList.get(i).getId() == id) {
+                return notificationList.get(i);
+            }
+        }
         return null;
     }
     

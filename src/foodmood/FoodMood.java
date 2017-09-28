@@ -15,8 +15,7 @@ public class FoodMood {
 	 * @param args the command line arguments
 	 */
 	public static void main(String[] args) {
-            System.err.println("This is a stub.");
-            //TODO: Implement main
+            test.TestHarness theTestHarness = new test.TestHarness();
 	}
 	
 }

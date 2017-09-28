@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package login;
+package Login;
 
 import userprofile.model.UserList;
 
@@ -18,8 +18,8 @@ public class LoginController {
      * Creates a LoginController
      */
     public LoginController() {
-        System.err.println("This is a stub.");
-        //TODO: Implment LoginController
+        theListOfUsers = new UserList();
+        new LoginView(this);
     }
     
     /**
@@ -28,8 +28,11 @@ public class LoginController {
      * @param username the Username
      * @param password the Password
      */
-    public void authenticateUserCredentials(String username, char[] password) {
-        System.err.println("This is a stub.");
-        //TODO: Implment authenticateUserCredentials
+    public boolean authenticateUserCredentials(String username, char[] password) {
+        return theListOfUsers.authenticateUserCredentials(username, password);
+    }
+    
+    public void login(){
+        foodmood.controller.NavigationCntl theNavigationCntl = new foodmood.controller.NavigationCntl();
     }
 }
