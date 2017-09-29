@@ -12,14 +12,14 @@ import java.util.ArrayList;
  * @author Micahel Kramer
  */
 public class MoodList {
-    private ArrayList<MoodProfileModel> listOfMoods = 
-            new ArrayList<MoodProfileModel>();
+    private ArrayList<Mood> listOfMoods = 
+            new ArrayList<Mood>();
     
     /**
      * Adds the provided MoodProfile to the MoodList
      * @param moodProfileToAdd the mood to add
      */
-    public void addMoodProfile(MoodProfileModel moodProfileToAdd) {
+    public void addMoodProfile(Mood moodProfileToAdd) {
         System.err.println("This is a stub.");
         //TODO: Implment addMoodProfile
     }
@@ -28,7 +28,7 @@ public class MoodList {
      * Removes the provided MoodProfile from the MoodList
      * @param moodProfileToRemove the mood to remove
      */
-    public void removeMoodProfile(MoodProfileModel moodProfileToRemove) {
+    public void removeMoodProfile(Mood moodProfileToRemove) {
         System.err.println("This is a stub.");
         //TODO: Implment removeMoodProfile
     }
@@ -38,7 +38,7 @@ public class MoodList {
      * @param moodProfile the profile to test food
      * @return boolean if it has the specified food
      */
-    public boolean hasMoodProfile(MoodProfileModel moodProfile) {
+    public boolean hasMoodProfile(Mood moodProfile) {
         System.err.println("This is a stub.");
         //TODO: Implment hasMoodProfile
         return false;
