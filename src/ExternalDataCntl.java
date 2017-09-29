@@ -61,7 +61,7 @@ public class ExternalDataCntl {
      * Adds a single food to the database
      * @param food the food to write to file
      */
-    public void writeSingleFood(FoodProfileModel food){
+    public void writeSingleFood(Food food){
         
     }
     
@@ -77,7 +77,7 @@ public class ExternalDataCntl {
      * Writes a single mood to the database
      * @param mood the mood to write to file
      */
-    public void writeSingleMood(MoodProfileModel mood){
+    public void writeSingleMood(Mood mood){
         
     }
     
