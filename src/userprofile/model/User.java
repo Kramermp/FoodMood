@@ -7,6 +7,7 @@ package userprofile.model;
 
 import notificationprofile.model.Notification;
 import foodprofile.model.FoodList;
+import java.util.Arrays;
 import moodprofile.model.MoodList;
 import notificationprofile.model.NotificationList;
 
@@ -141,5 +142,11 @@ public class User {
     public void setMoodList(MoodList moodList) {
         this.usersMoodList = moodList;
     }
-       
+    
+    @Override
+    public boolean equals(Object objectToCompare) {
+        User testUser = (User) objectToCompare;
+        return testUser.getUsername().equals(this.username) 
+                && Arrays.equals(this.password, testUser.getPassword());
+    }
 }
