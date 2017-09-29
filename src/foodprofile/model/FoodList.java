@@ -12,14 +12,14 @@ import java.util.ArrayList;
  * @author Michael Kramer
  */
 public class FoodList {
-    private ArrayList<FoodProfileModel> listOfFoods = 
-            new ArrayList<FoodProfileModel>();  
+    private ArrayList<Food> listOfFoods = 
+            new ArrayList<Food>();  
     
     /**
      * Adds the provide FoodProfile to the FoodList
      * @param foodToAdd the foodToAdd 
      */
-    public void addFoodProfile(FoodProfileModel foodToAdd) {
+    public void addFoodProfile(Food foodToAdd) {
         System.err.println("This is a stub.");
         //TODO: Implment addFoodProfile
     }
@@ -28,7 +28,7 @@ public class FoodList {
      * Removes the provided from the FoodList
      * @param foodToRemove Food to be removed from the FoodList
      */
-    public void removeFoodProfile(FoodProfileModel foodToRemove) {
+    public void removeFoodProfile(Food foodToRemove) {
         System.err.println("This is a stub.");
         //TODO: Implment removeFoodProfile
     }
@@ -38,7 +38,7 @@ public class FoodList {
      * @param foodProfile the Food to check for
      * @return the food to check for
      */
-    public boolean hasFoodProfile(FoodProfileModel foodProfile) {
+    public boolean hasFoodProfile(Food foodProfile) {
         System.err.println("This is a stub.");
         //TODO: Implment hasFoodProfile
         return false;
