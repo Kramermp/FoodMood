@@ -8,7 +8,7 @@ public class Mood {
     private String name;
     private int moodScore;
     private GregorianCalendar time = new GregorianCalendar();
-	private ArrayList<Integer> foodIDs = new ArrayList<>();
+    private ArrayList<Integer> foodIDs = new ArrayList<>();
 
     
     /**
@@ -22,7 +22,7 @@ public class Mood {
      * Get the id of the mood
      * @return the id
      */
-    public int getId() {
+    public int getID() {
         return id;
     }
 
