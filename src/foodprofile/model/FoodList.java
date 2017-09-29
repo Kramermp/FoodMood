@@ -16,10 +16,17 @@ public class FoodList {
             new ArrayList<Food>();  
     
     /**
+     * Default Constructor
+     */
+    public FoodList() {
+        
+    }
+    
+    /**
      * Adds the provide FoodProfile to the FoodList
      * @param foodToAdd the foodToAdd 
      */
-    public void addFoodProfile(Food foodToAdd) {
+    public void addFood(Food foodToAdd) {
         System.err.println("This is a stub.");
         //TODO: Implment addFoodProfile
     }
@@ -28,7 +35,7 @@ public class FoodList {
      * Removes the provided from the FoodList
      * @param foodToRemove Food to be removed from the FoodList
      */
-    public void removeFoodProfile(Food foodToRemove) {
+    public void removeFood(Food foodToRemove) {
         System.err.println("This is a stub.");
         //TODO: Implment removeFoodProfile
     }
@@ -38,7 +45,7 @@ public class FoodList {
      * @param foodProfile the Food to check for
      * @return the food to check for
      */
-    public boolean hasFoodProfile(Food foodProfile) {
+    public boolean hasFood(Food foodProfile) {
         System.err.println("This is a stub.");
         //TODO: Implment hasFoodProfile
         return false;
@@ -49,8 +56,6 @@ public class FoodList {
      * @return the size of the FoodList
      */
     public int size() {
-        System.err.println("This is a stub.");
-        //TODO: Implment size;
-        return 0;
+        return listOfFoods.size();
     }
 }
