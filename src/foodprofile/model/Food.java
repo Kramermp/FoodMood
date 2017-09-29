@@ -2,15 +2,14 @@ package foodprofile.model;
 
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class Food {
     private int id;
-    private String name;
-    private ArrayList<String> foodCategories;
-    private GregorianCalendar time;
-    private ArrayList<Integer> moods;
+    private String name = "No Name";
+    private ArrayList<String> foodCategories = new ArrayList<String>();
+    private GregorianCalendar time = new GregorianCalendar();
+    private ArrayList<Integer> moods = new ArrayList<Integer>();
     
     /**
      * Default constructor for FoodProfileModel
@@ -19,17 +18,20 @@ public class Food {
         
     }
     
+    //TODO: Add other constructors for food
+    
     /**
      * @return the id
      */
-    public int getId() {
+    public int getID() {
         return id;
     }
-
+    
+    //This agruablly should not be included
     /**
      * @param id the id to set
      */
-    public void setId(int id) {
+    public void setID(int id) {
         this.id = id;
     }
 
@@ -67,7 +69,7 @@ public class Food {
      * @param foodCategory to add
      */
     public void addFoodCategory(String foodCategory){
-        
+        foodCategories.add(foodCategory);
     }
     
     /**
@@ -117,6 +119,14 @@ public class Food {
      */
     public int getMood(int index){
         return moods.get(index);
+    }
+    
+    public void deleteFoodCategory(String foodCategory) {
+        foodCategories.remove(foodCategory);
+    }
+    
+    public void addMood(Integer mood) {
+        moods.add(mood);
     }
 
 
