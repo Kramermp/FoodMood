@@ -15,7 +15,7 @@ public class FoodMood {
 	 * @param args the command line arguments
 	 */
 	public static void main(String[] args) {
-            test.TestHarness theTestHarness = new test.TestHarness();
+            testharness.TestHarness theTestHarness = new testharness.TestHarness();
 	}
 	
 }

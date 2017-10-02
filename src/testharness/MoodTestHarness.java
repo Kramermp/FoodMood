@@ -50,7 +50,7 @@ public class MoodTestHarness {
             Field idField = moodClass.getDeclaredField("id");
             idField.setAccessible(true);
             int detectedID = (int) idField.get(testMood);
-            if(detectedID == testMood.getID()) {
+            if(detectedID == testMood.getId()) {
                 System.out.println("The method Mood.getID() successfully"
                         + " retrieved the id.");
             } else {
