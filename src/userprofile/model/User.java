@@ -149,4 +149,18 @@ public class User {
         return testUser.getUsername().equals(this.username) 
                 && Arrays.equals(this.password, testUser.getPassword());
     }
+	
+	/**
+	 * Checks if a char[] meets the requirements to be a password.
+	 * @return true if it is a valid password
+	 */
+	public static boolean isValidPassword(char[] passwordToCheck) {
+		/*
+			It is unclear what the requirements will be for passwords, so I will
+			implement a very simple requirement that it must be more than 3
+			characters long.
+		*/
+		
+		return passwordToCheck.length > 3;
+	}
 }
