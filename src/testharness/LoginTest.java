@@ -5,8 +5,8 @@
  */
 package testharness;
 
-import Login.LoginController;
-import Login.LoginView;
+import userprofile.controller.LoginCntl;
+import userprofile.view.LoginView;
 import foodmood.controller.NavigationCntl;
 
 /**
@@ -15,7 +15,7 @@ import foodmood.controller.NavigationCntl;
  */
 public class LoginTest {
     public LoginTest() {
-        LoginController theLoginController = new LoginController();
+        LoginCntl theLoginController = new LoginCntl();
         if(theLoginController != null) {
             System.out.println("The Login Controller was created.");
         }
