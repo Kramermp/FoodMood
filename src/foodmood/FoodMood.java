@@ -5,6 +5,8 @@
  */
 package foodmood;
 
+import userprofile.controller.LoginCntl;
+
 /**
  *
  * @author Michael Kramer
@@ -15,7 +17,7 @@ public class FoodMood {
 	 * @param args the command line arguments
 	 */
 	public static void main(String[] args) {
-            testharness.TestHarness theTestHarness = new testharness.TestHarness();
-	}
+            LoginCntl logingCntl = new LoginCntl();
+        }
 	
 }

@@ -6,11 +6,12 @@
 package foodmood.view;
 import foodmood.controller.NavigationCntl;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 /**
  *
  * @author hilarygodin
  */
-public class HomeUI {
+public class HomeUI extends JFrame {
     
     private NavigationCntl theNavigationCntl;
     private JButton goFoodScreenButton;

@@ -5,22 +5,26 @@
  */
 package userprofile.controller;
 
-import userprofile.view.LoginView;
+import userprofile.view.LoginUI;
 import userprofile.model.UserList;
+import userprofile.view.UserProfileUI;
 
 /**
  *
  * @author Michael Kramer
  */
 public class LoginCntl {
-    private UserList theListOfUsers = new UserList();
+    private UserList theUserList = new UserList();
+    private LoginUI childUI;
+    private UserCntl userCntl;
     
     /**
      * Creates a LoginController
      */
     public LoginCntl() {
-        theListOfUsers = new UserList();
-        new LoginView(this);
+        this.theUserList = new UserList();
+        this.childUI = new LoginUI(this);
+        this.childUI.setVisible(true);
     }
     
     /**
@@ -30,10 +34,35 @@ public class LoginCntl {
      * @param password the Password
      */
     public boolean authenticateUserCredentials(String username, char[] password) {
-        return theListOfUsers.authenticateUserCredentials(username, password);
+        return theUserList.authenticateUserCredentials(username, password);
+    }
+    
+    public void submitUserCredentials(String username, char[] password) {
+        if(authenticateUserCredentials(username, password)) {
+            login();
+        } else {
+            loginInvalid();
+        }
     }
     
     public void login(){
         foodmood.controller.NavigationCntl theNavigationCntl = new foodmood.controller.NavigationCntl();
+        
+    }
+    
+    public void loginInvalid() {
+        System.out.println("Error Loging in with those credentials.");
+    }
+    
+    public void signup() {
+        userCntl = new UserCntl(theUserList);
+        userCntl.registerNewUser();
+    }
+    
+    /**
+     * This method exits the program
+     */
+    public void exit() {
+        System.exit(0);
     }
 }

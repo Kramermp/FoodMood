@@ -26,6 +26,7 @@ public class NavigationCntl {
 	 */
 	public void goHomeScreen() {
 		theHomeUI = new HomeUI(this);
+                theHomeUI.setVisible(true);
 	}
 	
 	/**

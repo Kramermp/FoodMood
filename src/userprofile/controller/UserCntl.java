@@ -15,14 +15,12 @@ import userprofile.view.UserProfileUI;
  * @author Michael Kramer
  */
 public class UserCntl {
-	private UserList theUserList = new UserList();
-	private UserProfileUI userProfileUI = new UserProfileUI(this);
+	private UserList theUserList;
+	private UserProfileUI userProfileUI;
 	
-	public UserCntl () {
-		System.err.println("This is a stub.");
-		userProfileUI.setVisible(true);
-		userProfileUI.pack();
-		//TODO: Implement UserCntl
+	public UserCntl (UserList theUserList) {
+            this.theUserList = theUserList;
+		System.out.println("Created a UserController.");
 	}
 	
 	public void submitUser() {
@@ -133,4 +131,10 @@ public class UserCntl {
 		System.err.println("This is a stub.");
 		//TODO: Implement deleteUser
 	}
+        
+        public void registerNewUser() {
+            userProfileUI = new UserProfileUI(this);
+            userProfileUI.setVisible(true);
+            userProfileUI.pack();
+        }
 }
