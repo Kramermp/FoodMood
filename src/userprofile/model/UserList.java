@@ -79,7 +79,7 @@ public class UserList {
     public boolean hasUser(String username) {
         boolean found = false;
         for (int i = 0; i < theListOfUsers.size(); i++) {
-            if(theListOfUsers.get(i).getUsername().equals(username)){
+            if(theListOfUsers.get(i).getUsername().equalsIgnoreCase(username)){
                 found = true;
                 break;
             }
