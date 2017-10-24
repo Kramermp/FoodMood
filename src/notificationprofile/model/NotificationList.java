@@ -56,7 +56,7 @@ public class NotificationList {
         if(index >= notificationList.size()){
             index = 0;
         }
-        return notificationList.get(id);
+        return notificationList.get(index);
     }
     
     public Notification previous(int id){
