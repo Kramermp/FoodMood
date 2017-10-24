@@ -28,6 +28,41 @@ public class NotificationList {
     public ArrayList<Notification> getNotificationList() {
         return notificationList;
     }
+    
+    public int size(){
+        return notificationList.size();
+    }
+    
+    public Notification next(int id){
+        int index = 0;
+        for (int i = 0; i < notificationList.size(); i++) {
+            if(notificationList.get(i).getId() == id){
+                index = i;
+                break;
+            }
+        }
+        index++;
+        if(index >= notificationList.size()){
+            index = 0;
+        }
+        return notificationList.get(id);
+    }
+    
+    public Notification previous(int id){
+        int index = 0;
+        for (int i = 0; i < notificationList.size(); i++) {
+            if(notificationList.get(i).getId() == id){
+                index = i;
+                break;
+            }
+        }
+        index--;
+        if(index < 0){
+            index = notificationList.size()-1;
+        }
+        return notificationList.get(index);
+    }
+
 
     /**
      * Sets the list of notifications
