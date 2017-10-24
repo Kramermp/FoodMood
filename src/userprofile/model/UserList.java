@@ -37,7 +37,7 @@ public class UserList {
     public boolean authenticateUserCredentials(String username, char[] password) {
         boolean authenticated = false;
         for (int i = 0; i < theListOfUsers.size(); i++) {
-            if(theListOfUsers.get(i).getUsername().equals(username)){
+            if(theListOfUsers.get(i).getUsername().toLowerCase().equals(username.toLowerCase())){
                 authenticated = theListOfUsers.get(i).authenticate(username, password);
                 break;
             }
