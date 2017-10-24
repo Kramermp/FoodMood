@@ -51,7 +51,7 @@ public class Notification {
     
     public String getTimeString(){
         Date theDate = timeIssued.getTime();
-        return theDate.getMonth()+"/"+theDate.getDate()+theDate.getTime();
+        return theDate.getMonth()+"/"+theDate.getDate()+" "+theDate.getHours()+":"+theDate.getMinutes();
     }
 
     /**
