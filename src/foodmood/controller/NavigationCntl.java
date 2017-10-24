@@ -6,7 +6,7 @@
 package foodmood.controller;
 
 import foodmood.view.*;
-import foodprofile.controller.FoodController;
+import foodprofile.controller.FoodCntl;
 import foodprofile.view.*;
 import moodprofile.controller.MoodController;
 import notificationprofile.controller.NotificationCntl;
@@ -39,7 +39,7 @@ public class NavigationCntl {
 	 * Loads the foodScreen
 	 */
 	public void goFoodScreen() {
-		FoodController foodController = new FoodController(activeUser);
+		FoodCntl foodController = new FoodCntl(activeUser);
 	}
 	
 	/**

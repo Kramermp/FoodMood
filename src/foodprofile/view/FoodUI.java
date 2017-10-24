@@ -5,7 +5,7 @@
  */
 package foodprofile.view;
 
-import foodprofile.controller.FoodController;
+import foodprofile.controller.FoodCntl;
 import foodprofile.model.FoodProfileModel;
 
 /**
@@ -19,7 +19,7 @@ public class FoodUI {
      * Default Constructor for empty FoodView
 	 * @param parentController the parentController
      */
-    public FoodUI(FoodController parentController) {
+    public FoodUI(FoodCntl parentController) {
        System.err.println("This is a stub.");
         //TODO: Implment FoodView 
     }
@@ -29,7 +29,7 @@ public class FoodUI {
      * @param foodProfile the source foodprofile
 	 * @param parentController the parent controller
      */
-    public FoodUI(FoodController parentController, 
+    public FoodUI(FoodCntl parentController, 
             FoodProfileModel foodProfile) {
         System.err.println("This is a stub.");
         //TODO: Implment FoodView

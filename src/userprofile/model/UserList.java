@@ -18,12 +18,13 @@ public class UserList {
      * Default Constructor of the UserList, creates an empty UserList
      */
     public UserList() {
-        
+        theListOfUsers.add(new User("TestUser", "pass".toCharArray()));
     }
     
     public static UserList createTestUserList() {
         UserList testUserList = new UserList();
         testUserList.theListOfUsers = new ArrayList<User>();
+		testUserList.theListOfUsers.add(new User("TestUser", "pass".toCharArray()));
         return testUserList;
     }
     

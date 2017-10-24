@@ -6,7 +6,7 @@
 package testharness;
 
 import userprofile.controller.LoginCntl;
-import userprofile.view.LoginView;
+import userprofile.view.LoginUI;
 import foodmood.controller.NavigationCntl;
 
 /**
@@ -25,7 +25,7 @@ public class LoginTest {
         char[] incorrectPassword = "incorrect".toCharArray();
         
                 
-        LoginView theLoginView = new LoginView(theLoginController);
+        LoginUI theLoginView = new LoginUI(theLoginController);
         theLoginView.enterCredentialsFromSavedValues(username, incorrectPassword);
         System.out.println("Incorrect user credentials entered in LoginView");
         //theLoginView.submitUserCredentials();
