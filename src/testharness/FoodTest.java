@@ -13,9 +13,9 @@ import foodprofile.view.*;
  */
 public class FoodTest {
     
-    FoodController theFoodController;
+    FoodCntl theFoodController;
     
-    public FoodTest(FoodController theFoodController){
+    public FoodTest(FoodCntl theFoodController){
         this.theFoodController = theFoodController;
     }
 }

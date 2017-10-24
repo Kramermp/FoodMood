@@ -13,11 +13,11 @@ import userprofile.model.User;
  *
  * @author Michael Kramer
  */
-public class FoodController {
+public class FoodCntl {
 
     private FoodList foodList;
         
-    public FoodController(User currentUser){
+    public FoodCntl(User currentUser){
         
     }
         
