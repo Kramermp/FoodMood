@@ -5,7 +5,7 @@
  */
 package userprofile.view;
 
-import userprofile.controller.LoginController;
+import userprofile.controller.LoginCntl;
 import javax.swing.JButton;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -15,7 +15,7 @@ import javax.swing.JTextField;
  * @author Michael Kramer
  */
 public class LoginView{
-    private LoginController parentController;
+    private LoginCntl parentController;
     private JTextField usernameTextField;
     private JPasswordField passwordField;
     private JButton loginButton;
@@ -25,7 +25,7 @@ public class LoginView{
      * Creates a LoginView with a reference to the parent LoginController
      * @param parentController the parentController
      */
-    public LoginView(LoginController parentController) {
+    public LoginView(LoginCntl parentController) {
         this.parentController = parentController;
     }
     
