@@ -21,10 +21,12 @@ public class NotificationCntl {
     public NotificationCntl(User user){
         theUser = user;
         theNotificationList = user.getNotificationList();
+        viewNotificationList();
     }
     
     public void viewNotificationList(){
         NotificationListUI theNotificationListUI = new NotificationListUI(this, theNotificationList);
+        theNotificationListUI.setVisible(true);
     }
     
     public void viewNotification(int id){

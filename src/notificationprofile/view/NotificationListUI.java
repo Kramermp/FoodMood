@@ -64,6 +64,7 @@ public class NotificationListUI extends javax.swing.JFrame {
                     singleNotificationPanel.setBackground(new Color(238,238,238));
                 }
             });
+            scrollPane.add(singleNotificationPanel);
         }
     }
     
