@@ -5,6 +5,7 @@
  */
 package notificationprofile.model;
 
+import java.util.Date;
 import java.util.GregorianCalendar;
 
 /**
@@ -46,6 +47,11 @@ public class Notification {
      */
     public String getName() {
         return name;
+    }
+    
+    public String getTimeString(){
+        Date theDate = timeIssued.getTime();
+        return theDate.getMonth()+"/"+theDate.getDate()+theDate.getTime();
     }
 
     /**

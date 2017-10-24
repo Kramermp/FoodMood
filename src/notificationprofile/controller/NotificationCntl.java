@@ -36,6 +36,7 @@ public class NotificationCntl {
             }
         }
         NotificationUI theNotificationUI = new NotificationUI(this, theNotificationToView);
+        theNotificationUI.setVisible(true);
         theNotificationList.markNotificationAsRead(theNotificationToView.getId());
     }
     
@@ -45,5 +46,21 @@ public class NotificationCntl {
     
     public void goHome(){
         NavigationCntl theNavigationCntl = new NavigationCntl();
+    }
+    
+    public void next(int id){
+        Notification theNotificationToView = theNotificationList.next(id);
+        NotificationUI theNotificationUI = new NotificationUI(this, theNotificationToView);
+        theNotificationList.markNotificationAsRead(theNotificationToView.getId());
+    }
+    
+    public void previous(int id){
+        Notification theNotificationToView = theNotificationList.previous(id);
+        NotificationUI theNotificationUI = new NotificationUI(this, theNotificationToView);
+        theNotificationList.markNotificationAsRead(theNotificationToView.getId());
+    }
+    
+    public void deleteNotification(int id){
+        theNotificationList.deleteNotification(id);
     }
 }
