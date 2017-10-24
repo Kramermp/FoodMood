@@ -6,18 +6,24 @@
 package foodmood.controller;
 
 import foodmood.view.*;
+import foodprofile.controller.FoodController;
 import foodprofile.view.*;
+import moodprofile.controller.MoodController;
+import notificationprofile.controller.NotificationCntl;
+import userprofile.model.User;
 /**
  *
  * @author Michael Kramer
  */
 public class NavigationCntl {
-	
+		private User activeUser;
         private HomeUI theHomeUI;
 	/**
 	 * Creates a default NavigationController Constructor
 	 */
 	public NavigationCntl () {
+		//This needs to get the acutal User from login or get it
+		activeUser = new User("TempUser", "pass".toCharArray());
 		goHomeScreen();
 	}
 	
@@ -33,20 +39,21 @@ public class NavigationCntl {
 	 * Loads the foodScreen
 	 */
 	public void goFoodScreen() {
-		
+		FoodController foodController = new FoodController(activeUser);
 	}
 	
 	/**
 	 * Loads the Mood Screen
 	 */
 	public void goMoodScreen() {
-		
+		MoodController moodController = new MoodController(activeUser);
 	}
 	
 	/**
 	 * Loads Food Mood Screen
 	 */
 	public void goFoodMoodScreen() {
+		//I think this referes to the stats screen
 		
 	}
 	
@@ -54,13 +61,13 @@ public class NavigationCntl {
 	 * Loads the Notification Screen
 	 */
 	public void goNotifcationScreen() {
-		
+		NotificationCntl notificationController = new NotificationCntl(activeUser);
 	}
 	
 	/**
 	 * Loads the Login Screen
 	 */
 	public void logout() {
-		
+		theHomeUI.dispose();
 	}
 }
