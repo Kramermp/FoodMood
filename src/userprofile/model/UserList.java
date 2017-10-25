@@ -94,7 +94,7 @@ public class UserList {
      */
     public User getUser(String username) {
         for (int i = 0; i < theListOfUsers.size(); i++) {
-            if(theListOfUsers.get(i).getUsername().equals(username)){
+            if(theListOfUsers.get(i).getUsername().equalsIgnoreCase(username)){
                 return theListOfUsers.get(i);
             }
         }
