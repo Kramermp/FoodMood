@@ -5,14 +5,21 @@
  */
 package userprofile.view;
 
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import userprofile.controller.LoginCntl;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import java.awt.Dimension;
+import java.awt.Insets;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 
 /**
  *
@@ -20,7 +27,7 @@ import javax.swing.JTextField;
  */
 public class LoginUI extends JFrame {
     private LoginCntl parentController;
-    private JTextField usernameTextField;
+    private JTextHint usernameTextField;
     private JPasswordField passwordField;
     private JButton loginButton;
     private JButton exitButton;
@@ -35,7 +42,8 @@ public class LoginUI extends JFrame {
         buildWindow();
         initializeComponents();
         addComponents();
-        pack();
+		this.requestFocus();
+        //pack();
     }
     
     /**
@@ -53,13 +61,14 @@ public class LoginUI extends JFrame {
     private void buildWindow() {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLayout(new GridBagLayout());
+		this.setSize(new Dimension( 500, 700));
     }
     
     /**
      * Initializes components of the view
      */
     private void initializeComponents(){
-        usernameTextField = new JTextField();
+        usernameTextField = new JTextHint("Username");
         passwordField = new JPasswordField();
         
         loginButton = new JButton("Login");
@@ -87,38 +96,105 @@ public class LoginUI extends JFrame {
     
     private void addComponents() {
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.gridwidth = 2;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.weightx = 1;
-        add(usernameTextField, gbc);
-        gbc.gridx = 0;
-        gbc.gridy = 1;
+		JPanel leftMargin = new JPanel();
+		//leftMargin.setBackground(Color.RED);
+		gbc.gridx = 0;
+		gbc.gridy = 0;
+		gbc.gridheight = 6;
+		gbc.fill = GridBagConstraints.BOTH;
+		gbc.weightx = 1;
+		gbc.weighty = 1;
+		add(leftMargin, gbc);
+		
+		JPanel rightMargin = new JPanel();
+		//rightMargin.setBackground(Color.RED);
+		gbc.gridx = 3;
+		gbc.gridy = 0;
+		gbc.gridheight = 6;
+		gbc.fill = GridBagConstraints.BOTH;
+		gbc.weightx = 1;
+		gbc.weighty = 1;
+		add(rightMargin, gbc);
+		
+		JPanel topMargin = new JPanel();
+		//topMargin.setBackground(Color.BLUE);
+		gbc.gridx = 1;
+		gbc.gridy = 0;
+		gbc.gridheight = 1;
+		gbc.fill = GridBagConstraints.BOTH;
+		gbc.gridwidth = 2;
+		gbc.weightx = 1;
+		gbc.weighty = 1;
+		add(topMargin, gbc);
+		
+		
+		JPanel bottomMargin = new JPanel();
+		//bottomMargin.setBackground(Color.CYAN);
+		gbc.gridx = 1;
+		gbc.gridy = 5;
+		gbc.gridheight = 1;
+		gbc.fill = GridBagConstraints.BOTH;
+		gbc.gridwidth = 2;
+		gbc.weightx = 1;
+		gbc.weighty = 1;
+		add(bottomMargin, gbc);
+		
+		//usernameTextField.setText("Username");
+		usernameTextField.setToolTipText("Username");
+		//usernameTextField.addFocusListener(new UserNameFieldListener());
+		usernameTextField.setHorizontalAlignment(JTextField.CENTER);
+		gbc.gridx = 1;
+		gbc.gridy = 1;
+		gbc.gridwidth = 2;
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		gbc.weightx = 1;
+		gbc.weighty = 1;
+		add(usernameTextField, gbc);
+		
+		passwordField.setToolTipText("Password");
+		passwordField.setHorizontalAlignment(JPasswordField.CENTER);
+		passwordField.addFocusListener(new PasswordFieldListener());
+		passwordField.setAlignmentX(JPasswordField.CENTER_ALIGNMENT);
+        gbc.gridx = 1;
+        gbc.gridy = 2;
         gbc.gridwidth = 2;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.weightx = 1;
         add(passwordField, gbc);
-        gbc.gridx = 0;
-        gbc.gridy = 2;
+		
+		exitButton.setPreferredSize(new Dimension (10, 15));
+        gbc.gridx = 1;
+        gbc.gridy = 3;
         gbc.gridwidth = 1;
-        gbc.fill = GridBagConstraints.NONE;
-        gbc.weightx = 0;
+        gbc.fill = GridBagConstraints.BOTH;
+		gbc.insets = new Insets(0,0,0,10);
+        gbc.weightx = 1;
+		gbc.weighty = .1;
         gbc.anchor = GridBagConstraints.NORTH;
         add(exitButton, gbc);
-        gbc.gridx = 1;
-        gbc.gridy = 2;
+		
+		loginButton.setPreferredSize(new Dimension (10, 15));
+		gbc.insets = new Insets(0, 10, 0, 0);
+        gbc.gridx = 2;
+        gbc.gridy = 3;
         gbc.gridwidth = 1;
-        gbc.fill = GridBagConstraints.NONE;
-        gbc.weightx = 0;
+        gbc.fill = GridBagConstraints.BOTH;
+        gbc.weightx = 1;
+		gbc.weighty = .1;
         gbc.anchor = GridBagConstraints.NORTH;
         add(loginButton, gbc);
-        gbc.gridx = 0;
-        gbc.gridy = 3;
+		
+		signupButton.setPreferredSize(new Dimension(10, 15));
+		gbc.insets = new Insets(10, 0, 0,0);
+        gbc.gridx = 1;
+        gbc.gridy = 4;
         gbc.gridwidth = 2;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.fill = GridBagConstraints.BOTH;
         gbc.weightx = 1;
+		gbc.weighty = .1;
         add(signupButton, gbc);
+		
+		
         
     }
     
@@ -131,4 +207,46 @@ public class LoginUI extends JFrame {
     private void submitUserCredentials() {
         parentController.submitUserCredentials(usernameTextField.getText(), passwordField.getPassword());
     }
+
+	private class PasswordFieldListener implements FocusListener {
+		char[] value = new char[0];
+		char[] hint = "Password".toCharArray();
+		Color hintColor = Color.GRAY;
+		Color textColor = Color.BLACK;
+		
+		private void setText(char text) {
+			
+		}
+		public PasswordFieldListener() {
+			passwordField.setText(hint);
+			passwordField.setEchoChar((char) 0);
+		}
+
+		@Override
+		public void focusGained(FocusEvent fe) {
+			System.out.println("Focus was gained");
+			if(passwordField.getPassword() == hint) {
+				passwordField.setText("");
+			}
+			//passwordField.setText(hint);
+			
+		}
+
+		@Override
+		public void focusLost(FocusEvent fe) {
+			System.out.println("Focus Lost");
+			if(getText() == hint) {
+				//Do Nothing
+				System.out.println("The Value was not the hint");
+			} else {
+				if(getText().isEmpty()) {
+					setText(hint);
+					setForeground(hintColor);
+					value = "";
+				} else {
+					value = getText();
+				}
+			}
+		}
+	}
 }
