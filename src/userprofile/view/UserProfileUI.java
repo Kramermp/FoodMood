@@ -115,7 +115,7 @@ public class UserProfileUI extends JFrame {
                     gbc.gridx = 1;
                     gbc.gridy = 0;
                     inputPanel.add(usernameTakenErrLbl, gbc);
-                    passwordStrength = new JProgressBar(0, 12);
+                    passwordStrength = new JProgressBar(0, 16);
                     passwordTxtFld = new JPasswordField("Password");
                     passwordTxtFld.getDocument().addDocumentListener(new DocumentListener(){
                         @Override
@@ -135,12 +135,28 @@ public class UserProfileUI extends JFrame {
 
                         private void updateLabel(DocumentEvent e) {
                             char[] text = passwordTxtFld.getPassword(); //get the pass as a char array
-                            if (text.length < 1) {
-                                passwordStrength.setValue(0);
-                                System.out.println("Value is 0");
-                            } else {
+                            if (text.length > -1 && text.length < 8) {
                                 passwordStrength.setValue(text.length);
                                 System.out.println("Value is "+text.length);
+                            } else if (text.length >= 8) {
+                                boolean[] strengths = {false, false, false};
+                                for(char c: text){
+                                    if(Character.isDigit(c))
+                                        strengths[0] = true;
+                                    if(Character.isLowerCase(c))
+                                        strengths[1] = true;
+                                    if(Character.isUpperCase(c))
+                                        strengths[2] = true;
+                                }
+                                if(strengths[0] && strengths[1] && strengths[2]){
+                                    passwordStrength.setValue(16);
+                                } else if((strengths[1] && strengths[2]) || (strengths[0] && (strengths[1] || strengths[2]))){
+                                    passwordStrength.setValue(12);
+                                } else if(strengths[0] || strengths[1] || strengths[2]){
+                                    passwordStrength.setValue(10);
+                                } else {
+                                    passwordStrength.setValue(8);
+                                }
                             }
                         }
                     });

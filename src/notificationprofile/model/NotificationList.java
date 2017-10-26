@@ -19,6 +19,17 @@ public class NotificationList {
      */
     public NotificationList(){
         notificationList = new ArrayList();
+        populateTestData();
+    }
+    
+    public void populateTestData(){
+        //public Notification(int id, String name, String description, GregorianCalendar timeIssued, boolean read){
+        Notification notification1 = new Notification(1, "Have you eaten?", "It has been a while since you entered a food!", new java.util.GregorianCalendar(), false);
+        Notification notification2 = new Notification(2, "Sociopath?", "It has been a while since you entered a mood!", new java.util.GregorianCalendar(), false);
+        Notification notification3 = new Notification(3, "Where have you been?", "It has been a while since we saw you!", new java.util.GregorianCalendar(), false);
+        notificationList.add(notification1);
+        notificationList.add(notification2);
+        notificationList.add(notification3);
     }
 
     /**
@@ -45,7 +56,7 @@ public class NotificationList {
         if(index >= notificationList.size()){
             index = 0;
         }
-        return notificationList.get(id);
+        return notificationList.get(index);
     }
     
     public Notification previous(int id){

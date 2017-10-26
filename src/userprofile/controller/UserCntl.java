@@ -5,6 +5,11 @@
  */
 package userprofile.controller;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Arrays;
 import userprofile.model.User;
 import userprofile.model.UserList;
@@ -17,10 +22,13 @@ import userprofile.view.UserProfileUI;
 public class UserCntl {
 	private UserList theUserList;
 	private UserProfileUI userProfileUI;
+        
+        Connection theConnection = null;
+        Statement theStatement = null;
 	
 	public UserCntl (UserList theUserList) {
             this.theUserList = theUserList;
-		System.out.println("Created a UserController.");
+            System.out.println("Created a UserController.");
 	}
 	
 	public void submitUser() {
@@ -58,6 +66,8 @@ public class UserCntl {
 			theUserList.addUser(userProfileUI.getUsername(), 
 					userProfileUI.getPassword());
 			System.out.println("The user was added to the userlist.");
+                        addUserToDB(userProfileUI.getUsername(), userProfileUI.getPassword());
+                        
 		} else {
 			System.out.println("There were errors with the information entered"
 				+	" the user was not added to the userList.");
@@ -136,5 +146,81 @@ public class UserCntl {
             userProfileUI = new UserProfileUI(this);
             userProfileUI.setVisible(true);
             userProfileUI.pack();
+            
         }
+        
+        public void addUserToDB(String username, char[] password){
+            createUserTable();
+            System.out.println("adding user to db");
+            try{
+                Class.forName("org.sqlite.JDBC");
+                theConnection = DriverManager.getConnection("jdbc:sqlite:logins.db");
+                theStatement = theConnection.createStatement();
+                System.out.println("successfully opened db");
+                
+                String passwordString = "";
+                for (int i = 0; i < password.length; i++) {
+                    passwordString += password[i];
+                }
+
+                String insert = "INSERT INTO login VALUES ('"+username+"', '"+passwordString+"');";
+                theStatement.executeUpdate(insert);
+                
+                theStatement.close();
+                theConnection.close(); 
+                System.out.println("User added to db");
+
+            }catch(Exception e){
+                e.printStackTrace();
+                System.exit(0);
+            }
+    }
+        
+        public void updateUser(String oldUsername, User newUser){
+        System.out.println("updating user to db");
+        try{
+            Class.forName("org.sqlite.JDBC");
+            theConnection = DriverManager.getConnection("jdbc:sqlite:logins.db");
+            theStatement = theConnection.createStatement();
+            System.out.println("successfully opened db");
+
+            String newPasswordString = "";
+            for (int i = 0; i < newUser.getPassword().length; i++) {
+                newPasswordString += newUser.getPassword()[i];
+            }
+
+            String update = "UPDATE login SET username = '"+newUser.getUsername()+"', password = '"+newPasswordString+"' WHERE username = '"+oldUsername+"';";
+            theStatement.executeUpdate(update);
+
+            theStatement.close();
+            theConnection.close(); 
+            System.out.println("User added to db");
+
+        }catch(Exception e){
+            e.printStackTrace();
+            System.exit(0);
+        }
+    }
+
+            public void createUserTable(){
+        System.out.println("creating user table \n");
+        try{
+            Class.forName("org.sqlite.JDBC");
+            theConnection = DriverManager.getConnection("jdbc:sqlite:logins.db");
+            theStatement = theConnection.createStatement();
+            
+            String create = "CREATE TABLE IF NOT EXISTS login (username varchar, password varchar);";
+            theStatement.executeUpdate(create);
+            
+            String insert = "INSERT INTO login VALUES ('user1', 'passworD');";
+                theStatement.executeUpdate(insert);
+            
+            theStatement.close();
+            theConnection.close(); 
+        } catch(Exception e){
+                e.printStackTrace();
+                System.exit(0);
+        }
+    }
+        
 }

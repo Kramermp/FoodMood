@@ -21,6 +21,10 @@ public class UserList {
         theListOfUsers.add(new User("TestUser", "pass".toCharArray()));
     }
     
+    public UserList(ArrayList<User> users){
+        theListOfUsers = users;
+    }
+    
     public static UserList createTestUserList() {
         UserList testUserList = new UserList();
         testUserList.theListOfUsers = new ArrayList<User>();
@@ -94,7 +98,7 @@ public class UserList {
      */
     public User getUser(String username) {
         for (int i = 0; i < theListOfUsers.size(); i++) {
-            if(theListOfUsers.get(i).getUsername().equals(username)){
+            if(theListOfUsers.get(i).getUsername().equalsIgnoreCase(username)){
                 return theListOfUsers.get(i);
             }
         }

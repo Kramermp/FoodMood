@@ -5,9 +5,12 @@
  */
 package notificationprofile.view;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import notificationprofile.controller.NotificationCntl;
@@ -30,12 +33,15 @@ public class NotificationListUI extends javax.swing.JFrame {
     
     public NotificationListUI(NotificationCntl theNotificationCntl, NotificationList theNotificationList) {
         notificationList = theNotificationList;
-        notificationCntl = notificationCntl;
+        notificationCntl = theNotificationCntl;
         initComponents();
         initCustomComponents();
     }
     
     public void initCustomComponents(){
+        JPanel listPanel = new JPanel();
+        listPanel.setLayout(new BoxLayout(listPanel, BoxLayout.Y_AXIS));
+        
         for (int i = 0; i < notificationList.size(); i++) {
             JPanel singleNotificationPanel = new JPanel();
             JLabel singleNotificationName = new JLabel(notificationList.getNotification(i).getName());
@@ -64,7 +70,8 @@ public class NotificationListUI extends javax.swing.JFrame {
                     singleNotificationPanel.setBackground(new Color(238,238,238));
                 }
             });
-            scrollPane.add(singleNotificationPanel);
+            listPanel.add(singleNotificationPanel);
+            scrollPane.getViewport().add(listPanel, BorderLayout.NORTH);
         }
     }
     
