@@ -70,4 +70,8 @@ public class NavigationCntl {
 	public void logout() {
 		theHomeUI.dispose();
 	}
+
+    public void goUserProfile() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
