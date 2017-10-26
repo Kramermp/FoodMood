@@ -154,7 +154,7 @@ public class UserCntl {
             System.out.println("adding user to db");
             try{
                 Class.forName("org.sqlite.JDBC");
-                theConnection = DriverManager.getConnection("jdbc:sqlite:logins.db");
+                theConnection = DriverManager.getConnection("jdbc:sqlite:foodmood.db");
                 theStatement = theConnection.createStatement();
                 System.out.println("successfully opened db");
                 
@@ -180,7 +180,7 @@ public class UserCntl {
         System.out.println("updating user to db");
         try{
             Class.forName("org.sqlite.JDBC");
-            theConnection = DriverManager.getConnection("jdbc:sqlite:logins.db");
+            theConnection = DriverManager.getConnection("jdbc:sqlite:foodmood.db");
             theStatement = theConnection.createStatement();
             System.out.println("successfully opened db");
 
@@ -206,7 +206,7 @@ public class UserCntl {
         System.out.println("creating user table \n");
         try{
             Class.forName("org.sqlite.JDBC");
-            theConnection = DriverManager.getConnection("jdbc:sqlite:logins.db");
+            theConnection = DriverManager.getConnection("jdbc:sqlite:foodmood.db");
             theStatement = theConnection.createStatement();
             
             String create = "CREATE TABLE IF NOT EXISTS login (username varchar, password varchar);";
