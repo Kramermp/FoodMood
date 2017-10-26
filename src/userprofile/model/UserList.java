@@ -21,6 +21,10 @@ public class UserList {
         theListOfUsers.add(new User("TestUser", "pass".toCharArray()));
     }
     
+    public UserList(ArrayList<User> users){
+        theListOfUsers = users;
+    }
+    
     public static UserList createTestUserList() {
         UserList testUserList = new UserList();
         testUserList.theListOfUsers = new ArrayList<User>();
