@@ -20,6 +20,7 @@ public class HomeUI extends JFrame {
     private JButton goMoodScreenButton;
     private JButton goNotificationScreenButton;
     private JButton logoutButton;
+    private JButton goHistoryScreen;
     private JButton goUserProfile;
     private JFrame frame = new JFrame("Home Menu");
     
@@ -30,48 +31,54 @@ public class HomeUI extends JFrame {
     }
     
     private void initializeComponents(){
-                frame.setSize(500,500); 
-		frame.setLayout(new GridLayout(2,3));
-                goFoodScreenButton = new JButton("Food");
-                frame.add(goFoodScreenButton);
-		goMoodScreenButton = new JButton("Mood");
-                frame.add(goMoodScreenButton);
-		goNotificationScreenButton = new JButton("Notifications");
-                frame.add(goNotificationScreenButton);
-                goUserProfile = new JButton("User Profile");
-                frame.add(goUserProfile);
-                logoutButton = new JButton("Logout");
-                frame.add(logoutButton);
-                frame.setVisible(true);
-       
-		goFoodScreenButton.addActionListener((ActionEvent ae) -> { 
-			System.out.println("goFoodScreenBtn click event triggered.");
-			parentCntl.goFoodScreen();
-		});
-		
-        
-		goMoodScreenButton.addActionListener((ActionEvent ae) -> { 
-			System.out.println("goMoodScreenBtn click event triggered.");
-			parentCntl.goMoodScreen();
-		});
-		
-       
-		goNotificationScreenButton.addActionListener((ActionEvent ae) -> { 
-			System.out.println("goNotificationBtn click event triggered.");
-			parentCntl.goNotifcationScreen();
-		});
-		
-        
-                goUserProfile.addActionListener((ActionEvent ae) -> {
-                        System.out.println("goUserProfile click event triggered.");
-                        parentCntl.goUserProfile();
-                });
-                
+        frame.setSize(400,400); 
+        frame.setLayout(new GridLayout(2,3));
+        goFoodScreenButton = new JButton("Food");
+        frame.add(goFoodScreenButton);
+        goMoodScreenButton = new JButton("Mood");
+        frame.add(goMoodScreenButton);
+	goNotificationScreenButton = new JButton("Notifications");
+        frame.add(goNotificationScreenButton);
+        goUserProfile = new JButton("User Profile");
+        frame.add(goUserProfile);
+        goHistoryScreen = new JButton("History");
+        frame.add(goHistoryScreen);
         logoutButton = new JButton("Logout");
-		logoutButton.addActionListener((ActionEvent ae) -> { 
-			System.out.println("logoutBtn click event triggered.");
-			parentCntl.logout();
-		});
+        frame.add(logoutButton);
+        frame.setVisible(true);
+       
+        goFoodScreenButton.addActionListener((ActionEvent ae) -> { 
+            System.out.println("goFoodScreenBtn click event triggered.");
+            parentCntl.goFoodScreen();
+	});
+		
+        
+	goMoodScreenButton.addActionListener((ActionEvent ae) -> { 
+            System.out.println("goMoodScreenBtn click event triggered.");
+            parentCntl.goMoodScreen();
+	});
+		
+       
+	goNotificationScreenButton.addActionListener((ActionEvent ae) -> { 
+            System.out.println("goNotificationBtn click event triggered.");
+            parentCntl.goNotifcationScreen();
+	});
+		
+        
+        goUserProfile.addActionListener((ActionEvent ae) -> {
+            System.out.println("goUserProfile click event triggered.");
+            parentCntl.goUserProfile();
+        });
+                
+        goHistoryScreen.addActionListener((ActionEvent ae) -> {
+            System.out.println("goHistoryScreen click event triggered.");
+            parentCntl.goHistoryScreen();
+        });
+        
+        logoutButton.addActionListener((ActionEvent ae) -> { 
+            System.out.println("logoutBtn click event triggered.");
+            parentCntl.logout();
+	});
 		
     }
     
@@ -86,6 +93,12 @@ public class HomeUI extends JFrame {
     }
     private void goNotificationScreen(){
         parentCntl.goNotifcationScreen();
+    }
+    private void goUserProfile(){
+        parentCntl.goUserProfile();
+    }
+    private void goHistoryScreen(){
+        parentCntl.goHistoryScreen();
     }
     private void logout(){
         parentCntl.logout();
