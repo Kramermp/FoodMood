@@ -5,8 +5,14 @@
  */
 package userprofile.controller;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
 import userprofile.view.LoginUI;
 import userprofile.model.UserList;
+import userprofile.model.User;
 import userprofile.view.UserProfileUI;
 
 /**
@@ -18,11 +24,15 @@ public class LoginCntl {
     private LoginUI childUI;
     private UserCntl userCntl;
     
+    
+    Connection theConnection = null;
+    Statement theStatement = null;
+    
     /**
      * Creates a LoginController
      */
     public LoginCntl() {
-        this.theUserList = new UserList();
+        readLogins();
         this.childUI = new LoginUI(this);
         this.childUI.setVisible(true);
     }
@@ -64,5 +74,55 @@ public class LoginCntl {
      */
     public void exit() {
         System.exit(0);
+    }
+    
+    public void createUserTable(){
+        System.out.println("creating user table \n");
+        try{
+            Class.forName("org.sqlite.JDBC");
+            theConnection = DriverManager.getConnection("jdbc:sqlite:logins.db");
+            theStatement = theConnection.createStatement();
+            
+            String create = "CREATE TABLE IF NOT EXISTS login (username varchar, password varchar)";
+            theStatement.executeUpdate(create);
+            
+//            String insert = "INSERT INTO logins VALUES (username, 'passwor);";
+//                theStatement.executeUpdate(insert);
+            
+            theStatement.close();
+            theConnection.close(); 
+        } catch(Exception e){
+                e.printStackTrace();
+                System.exit(0);
+        }
+    }
+        
+    public void readLogins(){
+        System.out.println("Reading logins");
+        try{
+            Class.forName("org.sqlite.JDBC");
+            theConnection = DriverManager.getConnection("jdbc:sqlite:logins.db");
+            theStatement = theConnection.createStatement();
+            
+            ResultSet set = theStatement.executeQuery("SELECT * FROM login");
+            ArrayList<User> users = new ArrayList();
+            while(set.next()){
+                String username = set.getString("username");
+                char[] password = set.getString("password").toCharArray();
+                
+                User user = new User(username, password);
+                users.add(user);
+            }
+            theUserList = new UserList(users);
+             
+            theStatement.close();
+            theConnection.close(); 
+            
+        }catch(Exception e){
+            e.printStackTrace();
+            System.exit(0);
+        }
+        
+        
     }
 }
