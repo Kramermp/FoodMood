@@ -32,6 +32,7 @@ public class LoginCntl {
      * Creates a LoginController
      */
     public LoginCntl() {
+        createUserTable();
         readLogins();
         this.childUI = new LoginUI(this);
         this.childUI.setVisible(true);
@@ -86,14 +87,19 @@ public class LoginCntl {
             String create = "CREATE TABLE IF NOT EXISTS login (username varchar, password varchar)";
             theStatement.executeUpdate(create);
             
-//            String insert = "INSERT INTO logins VALUES (username, 'passwor);";
-//                theStatement.executeUpdate(insert);
+            String delete = "DELETE FROM login WHERE username = 'User1';";
+            theStatement.executeUpdate(delete);
+            delete = "DELETE FROM login WHERE username = 'user1';";
+            theStatement.executeUpdate(delete);
+            
+            String insert = "INSERT INTO login VALUES ('User1', 'password');";
+            theStatement.executeUpdate(insert);
             
             theStatement.close();
             theConnection.close(); 
         } catch(Exception e){
-                e.printStackTrace();
-                System.exit(0);
+            e.printStackTrace();
+            System.exit(0);
         }
     }
         
@@ -109,6 +115,10 @@ public class LoginCntl {
             while(set.next()){
                 String username = set.getString("username");
                 char[] password = set.getString("password").toCharArray();
+                System.out.println(username);
+                for (int i = 0; i < password.length; i++) {
+                    System.out.println(password[i]);
+                }
                 
                 User user = new User(username, password);
                 users.add(user);
