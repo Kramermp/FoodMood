@@ -36,6 +36,7 @@ public class LoginCntl {
         readLogins();
         this.childUI = new LoginUI(this);
         this.childUI.setVisible(true);
+        this.childUI.requestFocus();
     }
     
     /**
@@ -63,6 +64,7 @@ public class LoginCntl {
     
     public void loginInvalid() {
         System.out.println("Error Loging in with those credentials.");
+        childUI.displayLoginFailure();
     }
     
     public void signup() {
