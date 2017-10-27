@@ -6,8 +6,13 @@
 package foodprofile.controller;
 
 import foodprofile.model.FoodList;
-import foodprofile.model.FoodProfileModel;
+import foodprofile.model.Food;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 import userprofile.model.User;
+import java.sql.Connection;
+import java.sql.Statement;
 
 /**
  *
@@ -16,6 +21,8 @@ import userprofile.model.User;
 public class FoodCntl {
 
     private FoodList foodList;
+    private Connection theConnection = null;
+    private Statement theStatement = null;
         
     public FoodCntl(User currentUser){
         
@@ -41,16 +48,16 @@ public class FoodCntl {
      * Adds a Food to the current user's FoodList
      * @param food the food to add
      */
-    public void addFood(FoodProfileModel food){
-        
+    public void addFood(Food food){
+        this.foodList.addFood(food);
     }
     
     /**
      * This updates a food, using the id stored within the food class
      * @param food  the food to update
      */
-    public void updateFood(FoodProfileModel food){
-        
+    public void updateFood(Food food){
+        //this.foodList.updateFood(food);
     }
     
     /**
@@ -64,6 +71,37 @@ public class FoodCntl {
      * Updates all food mood links based on times
      */
     public void updateFoodMoodLinks(){
+        
+    }
+    
+    
+    public void readFoods(){
+        System.out.println("Reading foods");
+        try{
+            Class.forName("org.sqlite.JDBC");
+            theConnection = DriverManager.getConnection("jdbc:sqlite:foodmood.db");
+            theStatement = theConnection.createStatement();
+            
+            ResultSet set = theStatement.executeQuery("SELECT * FROM food");
+            ArrayList<Food> foods = new ArrayList();
+            while(set.next()){
+                int id = set.getInt("id");
+                String name = set.getString("name");
+                Food food = new Food();
+                food.setID(id);
+                food.setName(name);
+                foods.add(food);
+            }
+            foodList = new FoodList(foods);
+             
+            theStatement.close();
+            theConnection.close(); 
+            
+        }catch(Exception e){
+            e.printStackTrace();
+            System.exit(0);
+        }
+        
         
     }
     

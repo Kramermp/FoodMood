@@ -6,6 +6,12 @@
 package foodprofile.model;
 
 import java.util.ArrayList;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 /**
  *
@@ -14,12 +20,34 @@ import java.util.ArrayList;
 public class FoodList {
     private ArrayList<Food> listOfFoods = 
             new ArrayList<Food>();  
+    private Statement theStatement = null;
+    private Connection theConnection = null;
     
     /**
      * Default Constructor
      */
     public FoodList() {
-        
+        System.out.println("creating food table \n");
+        try{
+            Class.forName("org.sqlite.JDBC");
+            theConnection = DriverManager.getConnection("jdbc:sqlite:foodmood.db");
+            theStatement = theConnection.createStatement();
+            
+            String create = "CREATE TABLE IF NOT EXISTS food (name varchar, categories blob, time integer)";
+            theStatement.executeUpdate(create);
+            
+            
+            
+            theStatement.close();
+            theConnection.close(); 
+        } catch(Exception e){
+            e.printStackTrace();
+            System.exit(0);
+        }
+    }
+    
+    public FoodList(ArrayList<Food> foods){
+        this.listOfFoods = foods;
     }
     
     /**
@@ -27,8 +55,37 @@ public class FoodList {
      * @param foodToAdd the foodToAdd 
      */
     public void addFood(Food foodToAdd) {
-        System.err.println("This is a stub.");
-        //TODO: Implment addFoodProfile
+        Connection conn = null;
+        PreparedStatement stmt;
+        try {
+            // db parameters
+            String url = "jdbc:sqlite:foodmood.db";
+            // create a connection to the database
+            conn = DriverManager.getConnection(url);
+            
+            System.out.println("Connected to foodmood.db");
+            
+            stmt = conn.prepareStatement("INSERT INTO person (name, categories, time) values (?, ?, ?)");
+            stmt.setString(1, foodToAdd.getName());
+            stmt.setString(2, foodToAdd.getFoodCategories().toString());
+            //stmt.setString(3, foodToAdd.getMoods().toString());
+            stmt.setString(3, foodToAdd.getTime().toString());
+            stmt.executeUpdate();
+            
+            
+            
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (conn != null) {
+                    conn.close();
+                    System.out.println("Closed connection to foodmood.db");
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
     }
     
     /**
@@ -36,8 +93,31 @@ public class FoodList {
      * @param foodToRemove Food to be removed from the FoodList
      */
     public void removeFood(Food foodToRemove) {
-        System.err.println("This is a stub.");
-        //TODO: Implment removeFoodProfile
+        Connection conn = null;
+        PreparedStatement stmt;
+        try {
+            // db parameters
+            String url = "jdbc:sqlite:foodmood.db";
+            // create a connection to the database
+            conn = DriverManager.getConnection(url);
+            
+            System.out.println("Connected to foodmood.db");
+            stmt = conn.prepareStatement("DELETE FROM food WHERE id = (?)");
+            stmt.setInt(1, foodToRemove.getID());
+            stmt.execute();
+            
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (conn != null) {
+                    conn.close();
+                    System.out.println("Closed connection to foodmood.db");
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
     }
     
     /**
