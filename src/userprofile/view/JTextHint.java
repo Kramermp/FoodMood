@@ -21,14 +21,15 @@ public class JTextHint extends JTextField {
 	private String value = "";
 	
 	public void setTextColor(Color textColor) {
-		this.textColor = textColor;
+            this.textColor = textColor;
 	}
 	
 	public void setHintColor(Color hintColor) {
 		this.hintColor = hintColor;
 	}
 	
-	public JTextHint(String hint) {
+	public JTextHint(String hint, int width) {
+            super(width);
 		this.hint = hint;
 		this.addFocusListener(new HintListener());
 		this.setForeground(hintColor);

@@ -20,6 +20,9 @@ import java.awt.Dimension;
 import java.awt.Insets;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.util.Arrays;
+import javax.swing.JLabel;
+import javax.swing.JTextArea;
 
 /**
  *
@@ -27,11 +30,9 @@ import java.awt.event.FocusListener;
  */
 public class LoginUI extends JFrame {
     private LoginCntl parentController;
-    private JTextHint usernameTextField;
-    private JPasswordField passwordField;
-    private JButton loginButton;
-    private JButton exitButton;
-    private JButton signupButton;
+    private JTextHint usernameTxtFld;
+    private JPasswordHint passwordFld;
+    private JPanel errorMessage;
     
     /**
      * Creates a LoginView with a reference to the parent LoginCntl
@@ -40,9 +41,7 @@ public class LoginUI extends JFrame {
     public LoginUI(LoginCntl parentController) {
         this.parentController = parentController;
         buildWindow();
-        initializeComponents();
         addComponents();
-		this.requestFocus();
         //pack();
     }
     
@@ -51,8 +50,8 @@ public class LoginUI extends JFrame {
      * (Here for initial testing purposes)
      */
     public void enterCredentialsFromSavedValues(String username, char[] password){
-        usernameTextField.setText(username);
-        passwordField.setText(new String(password));
+        usernameTxtFld.setText(username);
+        passwordFld.setText(new String(password));
     }
     
     /**
@@ -64,138 +63,119 @@ public class LoginUI extends JFrame {
 		this.setSize(new Dimension( 500, 700));
     }
     
-    /**
-     * Initializes components of the view
-     */
-    private void initializeComponents(){
-        usernameTextField = new JTextHint("Username");
-        passwordField = new JPasswordField();
+    private void addComponents() {
+	setLayout(new GridBagLayout());
+        // The labelInset will be the standard inset used by the label objects
+        Insets labelInset = new Insets(15, 0, 0, 0);
+        // The fieldInset will be the standard inset used by the field objects
+        Insets fieldInset = new Insets(5, 0, 0, 0);
+		
+        JLabel usernameLbl = new JLabel("USERNAME");
+        GridBagConstraints c = new GridBagConstraints();
+        c.insets = labelInset;
+        c.anchor = GridBagConstraints.SOUTH;
+        c.gridx = 0;
+        c.gridwidth = 2;
+        c.gridy = 0;
+        c.weighty = .75;
+        add(usernameLbl, c);
+		
+        usernameTxtFld = new JTextHint("Username", 25);
+        usernameTxtFld.setHorizontalAlignment(JTextField.CENTER);
+        //Add ActionListener for username field
+        c = new GridBagConstraints();
+        c.insets = fieldInset;
+        c.gridx = 0;
+        c.gridwidth = 2;
+        c.gridy = 3;
+        add(usernameTxtFld, c);
+		
+        JLabel passwordLbl = new JLabel("PASSWORD");
+        c = new GridBagConstraints();
+        c.insets = labelInset;
+        c.gridx = 0;
+        c.gridwidth = 2;
+        c.gridy = 4;
+        add(passwordLbl, c);
+
+        passwordFld = new JPasswordHint("Password", 25);
+        passwordFld.setHorizontalAlignment(JPasswordField.CENTER);
+        //Add actionListener for username field
+        //passwordFld.addActionListener(new PasswordFldListener());
+        c = new GridBagConstraints();
+        c.insets = fieldInset;
+        c.gridx = 0;
+        c.gridwidth = 2;
+        c.gridy = 5;
+        add(passwordFld, c);
+		
+        errorMessage = new JPanel();
+        //errorMessage.setBackground( new Color(0,0,0));
+        JLabel errorText = new JLabel("The Username or Password was"
+                + " incorrect.");
+        errorText.setForeground(Color.RED);
+        errorMessage.add(errorText);
+        errorMessage.setEnabled(false);
+        errorMessage.setVisible(false);
         
-        loginButton = new JButton("Login");
-        loginButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                System.out.println("Login Button click event registered");
-                submitUserCredentials();
-            }   
+        c = new GridBagConstraints();
+        c.insets = fieldInset;
+        c.anchor = GridBagConstraints.NORTH;
+        c.gridx = 0;
+        c.gridwidth = 2;
+        c.gridy = 6;	
+        add(errorMessage, c);	
+
+        JButton cancelBtn = new JButton("Cancel");
+        cancelBtn.addActionListener((ActionEvent) -> { 
+            this.parentController.exit();
         });
         
-        exitButton = new JButton("Exit");
-        exitButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                System.out.println("Exit Button click event registered");
-                exit();
-            }   
+        //cancelBtn.addActionListener(new CancelBtnListener());
+        c = new GridBagConstraints();
+        c.insets = new Insets(150, 10, 0, 5);
+        c.anchor = GridBagConstraints.NORTH;
+        c.gridx = 0;
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.weightx = 1;
+        c.gridy = 6;
+        add(cancelBtn, c);
+		
+        JButton submitBtn = new JButton("Submit");
+        submitBtn.addActionListener((ActionEvent -> { 
+            submitUserCredentials();
+        }));
+        c = new GridBagConstraints();
+        c.insets = new Insets(150, 5, 0, 10);
+        c.anchor = GridBagConstraints.NORTH;
+        c.gridx = 1;
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.weightx = 1;
+        c.gridy = 6;
+        add(submitBtn, c);
+		
+        JButton signupBtn = new JButton("Sign Up");
+        signupBtn.addActionListener((ActionEvent) -> { 
+            this.parentController.signup();
         });
-        
-        signupButton = new JButton("Sign Up");
-        signupButton.addActionListener((ActionEvent ae) -> { 
-            System.out.println("Signup Button click event registered");
-            parentController.signup();
-        });
+        //registerBtn.addActionListener(new RegisterBtnListener());
+        c = new GridBagConstraints();
+        c.insets = new Insets(5, 10, 0, 10);
+        c.anchor = GridBagConstraints.NORTH;
+        c.gridx = 0;
+        c.gridwidth = 2;
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.weightx = 1;
+        c.gridy = 7;
+        c.weighty = .75;
+        add(signupBtn, c);    
     }
     
-    private void addComponents() {
-        GridBagConstraints gbc = new GridBagConstraints();
-		JPanel leftMargin = new JPanel();
-		//leftMargin.setBackground(Color.RED);
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		gbc.gridheight = 6;
-		gbc.fill = GridBagConstraints.BOTH;
-		gbc.weightx = 1;
-		gbc.weighty = 1;
-		add(leftMargin, gbc);
-		
-		JPanel rightMargin = new JPanel();
-		//rightMargin.setBackground(Color.RED);
-		gbc.gridx = 3;
-		gbc.gridy = 0;
-		gbc.gridheight = 6;
-		gbc.fill = GridBagConstraints.BOTH;
-		gbc.weightx = 1;
-		gbc.weighty = 1;
-		add(rightMargin, gbc);
-		
-		JPanel topMargin = new JPanel();
-		//topMargin.setBackground(Color.BLUE);
-		gbc.gridx = 1;
-		gbc.gridy = 0;
-		gbc.gridheight = 1;
-		gbc.fill = GridBagConstraints.BOTH;
-		gbc.gridwidth = 2;
-		gbc.weightx = 1;
-		gbc.weighty = 1;
-		add(topMargin, gbc);
-		
-		
-		JPanel bottomMargin = new JPanel();
-		//bottomMargin.setBackground(Color.CYAN);
-		gbc.gridx = 1;
-		gbc.gridy = 5;
-		gbc.gridheight = 1;
-		gbc.fill = GridBagConstraints.BOTH;
-		gbc.gridwidth = 2;
-		gbc.weightx = 1;
-		gbc.weighty = 1;
-		add(bottomMargin, gbc);
-		
-		//usernameTextField.setText("Username");
-		usernameTextField.setToolTipText("Username");
-		//usernameTextField.addFocusListener(new UserNameFieldListener());
-		usernameTextField.setHorizontalAlignment(JTextField.CENTER);
-		gbc.gridx = 1;
-		gbc.gridy = 1;
-		gbc.gridwidth = 2;
-		gbc.fill = GridBagConstraints.HORIZONTAL;
-		gbc.weightx = 1;
-		gbc.weighty = 1;
-		add(usernameTextField, gbc);
-		
-		passwordField.setToolTipText("Password");
-		passwordField.setHorizontalAlignment(JPasswordField.CENTER);
-		passwordField.addFocusListener(new PasswordFieldListener());
-		passwordField.setAlignmentX(JPasswordField.CENTER_ALIGNMENT);
-        gbc.gridx = 1;
-        gbc.gridy = 2;
-        gbc.gridwidth = 2;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.weightx = 1;
-        add(passwordField, gbc);
-		
-		exitButton.setPreferredSize(new Dimension (10, 15));
-        gbc.gridx = 1;
-        gbc.gridy = 3;
-        gbc.gridwidth = 1;
-        gbc.fill = GridBagConstraints.BOTH;
-		gbc.insets = new Insets(0,0,0,10);
-        gbc.weightx = 1;
-		gbc.weighty = .1;
-        gbc.anchor = GridBagConstraints.NORTH;
-        add(exitButton, gbc);
-		
-		loginButton.setPreferredSize(new Dimension (10, 15));
-		gbc.insets = new Insets(0, 10, 0, 0);
-        gbc.gridx = 2;
-        gbc.gridy = 3;
-        gbc.gridwidth = 1;
-        gbc.fill = GridBagConstraints.BOTH;
-        gbc.weightx = 1;
-		gbc.weighty = .1;
-        gbc.anchor = GridBagConstraints.NORTH;
-        add(loginButton, gbc);
-		
-		signupButton.setPreferredSize(new Dimension(10, 15));
-		gbc.insets = new Insets(10, 0, 0,0);
-        gbc.gridx = 1;
-        gbc.gridy = 4;
-        gbc.gridwidth = 2;
-        gbc.fill = GridBagConstraints.BOTH;
-        gbc.weightx = 1;
-		gbc.weighty = .1;
-        add(signupButton, gbc);
-		
-		
-        
+    public void displayLoginFailure() {
+        errorMessage.setEnabled(true);
+        errorMessage.setVisible(true);
+        System.out.println(usernameTxtFld.getText());
+        System.out.println(Arrays.toString(passwordFld.getPassword()));
     }
     
     private void exit() {
@@ -205,48 +185,12 @@ public class LoginUI extends JFrame {
     }
     
     private void submitUserCredentials() {
-        parentController.submitUserCredentials(usernameTextField.getText(), passwordField.getPassword());
+        errorMessage.setEnabled(false);
+        errorMessage.setVisible(false);
+        parentController.submitUserCredentials(usernameTxtFld.getText(),
+                passwordFld.getPassword());
     }
 
-	private class PasswordFieldListener implements FocusListener {
-		char[] value = new char[0];
-		char[] hint = "Password".toCharArray();
-		Color hintColor = Color.GRAY;
-		Color textColor = Color.BLACK;
-		
-		private void setText(char text) {
-			
-		}
-		public PasswordFieldListener() {
-			passwordField.setText(hint);
-			passwordField.setEchoChar((char) 0);
-		}
 
-		@Override
-		public void focusGained(FocusEvent fe) {
-			System.out.println("Focus was gained");
-			if(passwordField.getPassword() == hint) {
-				passwordField.setText("");
-			}
-			//passwordField.setText(hint);
-			
-		}
-
-		@Override
-		public void focusLost(FocusEvent fe) {
-			System.out.println("Focus Lost");
-			if(getText() == hint) {
-				//Do Nothing
-				System.out.println("The Value was not the hint");
-			} else {
-				if(getText().isEmpty()) {
-					setText(hint);
-					setForeground(hintColor);
-					value = "";
-				} else {
-					value = getText();
-				}
-			}
-		}
-	}
+	
 }
