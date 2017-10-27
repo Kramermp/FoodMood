@@ -33,6 +33,8 @@ public class LoginUI extends JFrame {
     private JTextHint usernameTxtFld;
     private JPasswordHint passwordFld;
     private JPanel errorMessage;
+    private JLabel errorText;
+    private JButton submitBtn;
     
     /**
      * Creates a LoginView with a reference to the parent LoginCntl
@@ -82,6 +84,11 @@ public class LoginUI extends JFrame {
 		
         usernameTxtFld = new JTextHint("Username", 25);
         usernameTxtFld.setHorizontalAlignment(JTextField.CENTER);
+        usernameTxtFld.addActionListener((ActionEvent ae) -> { 
+            System.out.println("An Action occured on Username Field.");
+            passwordFld.requestFocus();
+           
+        });
         //Add ActionListener for username field
         c = new GridBagConstraints();
         c.insets = fieldInset;
@@ -100,8 +107,11 @@ public class LoginUI extends JFrame {
 
         passwordFld = new JPasswordHint("Password", 25);
         passwordFld.setHorizontalAlignment(JPasswordField.CENTER);
-        //Add actionListener for username field
-        //passwordFld.addActionListener(new PasswordFldListener());
+        passwordFld.addActionListener((ActionEvent ae) -> { 
+            System.out.println("An Action occured on Password Field.");
+            submitBtn.requestFocus();
+        });
+        
         c = new GridBagConstraints();
         c.insets = fieldInset;
         c.gridx = 0;
@@ -110,8 +120,7 @@ public class LoginUI extends JFrame {
         add(passwordFld, c);
 		
         errorMessage = new JPanel();
-        //errorMessage.setBackground( new Color(0,0,0));
-        JLabel errorText = new JLabel("The Username or Password was"
+        errorText = new JLabel("The Username or Password was"
                 + " incorrect.");
         errorText.setForeground(Color.RED);
         errorMessage.add(errorText);
@@ -141,7 +150,7 @@ public class LoginUI extends JFrame {
         c.gridy = 6;
         add(cancelBtn, c);
 		
-        JButton submitBtn = new JButton("Submit");
+        submitBtn = new JButton("Submit");
         submitBtn.addActionListener((ActionEvent -> { 
             submitUserCredentials();
         }));
@@ -174,8 +183,7 @@ public class LoginUI extends JFrame {
     public void displayLoginFailure() {
         errorMessage.setEnabled(true);
         errorMessage.setVisible(true);
-        System.out.println(usernameTxtFld.getText());
-        System.out.println(Arrays.toString(passwordFld.getPassword()));
+        errorText.setText("The Username or Password entered was incorrect.");
     }
     
     private void exit() {
@@ -187,8 +195,29 @@ public class LoginUI extends JFrame {
     private void submitUserCredentials() {
         errorMessage.setEnabled(false);
         errorMessage.setVisible(false);
-        parentController.submitUserCredentials(usernameTxtFld.getText(),
-                passwordFld.getPassword());
+        if(usernameTxtFld.getValue().isEmpty()) {
+            //If the Username field is empty
+            if(passwordFld.getValue().length > 0) {
+                //But the Password field has a value
+                errorMessage.setEnabled(true);
+                errorMessage.setVisible(true);
+                errorText.setText("Please Enter Your Username");
+            } else {
+                //If both Username and password are empty
+                errorMessage.setEnabled(true);
+                errorMessage.setVisible(true);
+                errorText.setText("Please Enter Your Username and Password.");
+            }
+        } else if (passwordFld.getValue().length < 1) {
+            //If Username field is not empty but the password field is empty
+            errorMessage.setEnabled(true);
+            errorMessage.setVisible(true);
+            errorText.setText("Please Enter Your Password.");       
+        } else {
+            //If both username and Password fields have values entered into them
+            parentController.submitUserCredentials(usernameTxtFld.getValue(),
+                passwordFld.getValue());
+        }  
     }
 
 
