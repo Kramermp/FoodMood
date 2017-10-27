@@ -83,7 +83,7 @@ public class LoginCntl {
         System.out.println("creating user table \n");
         try{
             Class.forName("org.sqlite.JDBC");
-            theConnection = DriverManager.getConnection("jdbc:sqlite:logins.db");
+            theConnection = DriverManager.getConnection("jdbc:sqlite:foodmood.db");
             theStatement = theConnection.createStatement();
             
             String create = "CREATE TABLE IF NOT EXISTS login (username varchar, password varchar)";
@@ -109,7 +109,7 @@ public class LoginCntl {
         System.out.println("Reading logins");
         try{
             Class.forName("org.sqlite.JDBC");
-            theConnection = DriverManager.getConnection("jdbc:sqlite:logins.db");
+            theConnection = DriverManager.getConnection("jdbc:sqlite:foodmood.db");
             theStatement = theConnection.createStatement();
             
             ResultSet set = theStatement.executeQuery("SELECT * FROM login");
