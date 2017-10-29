@@ -20,13 +20,14 @@ import java.sql.Statement;
 public class FoodList {
     private ArrayList<Food> listOfFoods = 
             new ArrayList<Food>();  
-    private Statement theStatement = null;
-    private Connection theConnection = null;
+
     
     /**
      * Default Constructor
      */
     public FoodList() {
+        Statement theStatement = null;
+        Connection theConnection = null;
         System.out.println("creating food table \n");
         try{
             Class.forName("org.sqlite.JDBC");
@@ -65,7 +66,7 @@ public class FoodList {
             
             System.out.println("Connected to foodmood.db");
             
-            stmt = conn.prepareStatement("INSERT INTO person (name, categories, time) values (?, ?, ?)");
+            stmt = conn.prepareStatement("INSERT INTO food (name, categories, time) values (?, ?, ?)");
             stmt.setString(1, foodToAdd.getName());
             stmt.setString(2, foodToAdd.getFoodCategories().toString());
             //stmt.setString(3, foodToAdd.getMoods().toString());
