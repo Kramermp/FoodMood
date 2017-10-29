@@ -9,6 +9,7 @@ import foodmood.view.*;
 import foodprofile.controller.FoodCntl;
 import foodprofile.view.*;
 import moodprofile.controller.MoodController;
+import moodprofile.view.MoodUI;
 import notificationprofile.controller.NotificationCntl;
 import userprofile.model.User;
 /**
@@ -40,6 +41,7 @@ public class NavigationCntl {
 	 */
 	public void goFoodScreen() {
 		FoodCntl foodController = new FoodCntl(activeUser);
+                FoodUI foodUI = new FoodUI(foodController);
 	}
 	
 	/**
@@ -47,6 +49,7 @@ public class NavigationCntl {
 	 */
 	public void goMoodScreen() {
 		MoodController moodController = new MoodController(activeUser);
+                MoodUI moodUI = new MoodUI(moodController);
 	}
 	
 	/**

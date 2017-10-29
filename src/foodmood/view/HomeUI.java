@@ -72,7 +72,7 @@ public class HomeUI extends JFrame {
                 
         goHistoryScreen.addActionListener((ActionEvent ae) -> {
             System.out.println("goHistoryScreen click event triggered.");
-            parentCntl.goHistoryScreen();
+            //parentCntl.goHistoryScreen();
         });
         
         logoutButton.addActionListener((ActionEvent ae) -> { 
@@ -98,7 +98,7 @@ public class HomeUI extends JFrame {
         parentCntl.goUserProfile();
     }
     private void goHistoryScreen(){
-        parentCntl.goHistoryScreen();
+        //parentCntl.goHistoryScreen();
     }
     private void logout(){
         parentCntl.logout();

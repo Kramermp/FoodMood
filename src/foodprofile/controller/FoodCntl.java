@@ -7,6 +7,7 @@ package foodprofile.controller;
 
 import foodprofile.model.FoodList;
 import foodprofile.model.Food;
+import foodprofile.view.FoodUI;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.util.ArrayList;
