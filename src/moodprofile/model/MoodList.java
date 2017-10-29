@@ -42,6 +42,10 @@ public class MoodList {
         }
     }
     
+    public MoodList(ArrayList<Mood> moods){
+        this.listOfMoods = moods;
+    }
+    
     /**
      * Adds the provided MoodProfile to the MoodList
      * @param moodProfileToAdd the mood to add

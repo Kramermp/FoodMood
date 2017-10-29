@@ -5,9 +5,14 @@
  */
 package moodprofile.controller;
 
+import java.sql.Connection;
+import moodprofile.model.Mood;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import moodprofile.model.MoodList;
-import moodprofile.model.MoodProfileModel;
 import userprofile.model.User;
 
 /**
@@ -16,6 +21,8 @@ import userprofile.model.User;
  */
 public class MoodController {
     private MoodList moodList;
+    private Connection theConnection;
+    private Statement theStatement;
     
     public MoodController(User currentUser){
         
@@ -31,15 +38,15 @@ public class MoodController {
      * Adds a Mood to the current user's FoodList
      * @param mood the mood to add
      */
-    public void addMood(MoodProfileModel mood){
-        
+    public void addMood(Mood mood){
+        moodList.addMoodProfile(mood);
     }
     
     /**
      * This updates a mood, using the id stored within the mood class. Also updates linkages
      * @param mood the mood to update
      */
-    public void updateMood(MoodProfileModel mood){
+    public void updateMood(Mood mood){
         
     }
     
@@ -54,8 +61,8 @@ public class MoodController {
      * Deletes a mood from the current user's MoodList and the linkages of all foods it was linked to
      * @param mood the mood to delete
      */
-    public void deleteMood(MoodProfileModel mood){
-        
+    public void deleteMood(Mood mood){
+        moodList.removeMoodProfile(mood);
     }
     /**
      * Links foods and moods based on the time the food was consumed
@@ -63,6 +70,38 @@ public class MoodController {
      * @param time time the mood was entered
      */
     public void addLinkedFoodsToMood(int moodID, GregorianCalendar time){
+        
+    }
+    
+    public void readMoods(){
+        System.out.println("Reading moods");
+        try{
+            Class.forName("org.sqlite.JDBC");
+            theConnection = DriverManager.getConnection("jdbc:sqlite:foodmood.db");
+            theStatement = theConnection.createStatement();
+            
+            ResultSet set = theStatement.executeQuery("SELECT * FROM mood");
+            ArrayList<Mood> moods = new ArrayList();
+            while(set.next()){
+                int id = set.getInt("id");
+                String name = set.getString("name");
+                int score = set.getInt("score");
+                Mood mood = new Mood();
+                mood.setId(id);
+                mood.setName(name);
+                mood.setMoodScore(score);
+                moods.add(mood);
+            }
+            moodList = new MoodList(moods);
+             
+            theStatement.close();
+            theConnection.close(); 
+            
+        }catch(Exception e){
+            e.printStackTrace();
+            System.exit(0);
+        }
+        
         
     }
 }
