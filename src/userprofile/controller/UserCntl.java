@@ -31,7 +31,7 @@ public class UserCntl {
             System.out.println("Created a UserController.");
 	}
 	
-	public void submitUser() {
+	public boolean submitUser() {
 		System.out.println("UserCntl.submitUser()");
 		boolean[] testResults = validateNewUserInput();
 		boolean failedATest = false;
@@ -67,11 +67,13 @@ public class UserCntl {
 					userProfileUI.getPassword());
 			System.out.println("The user was added to the userlist.");
                         addUserToDB(userProfileUI.getUsername(), userProfileUI.getPassword());
+                        return true;
                         
 		} else {
 			System.out.println("There were errors with the information entered"
 				+	" the user was not added to the userList.");
 		}
+                return false;
 	}
 	
 	/**
