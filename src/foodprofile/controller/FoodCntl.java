@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import userprofile.model.User;
 import java.sql.Connection;
 import java.sql.Statement;
+import java.util.GregorianCalendar;
 
 /**
  *
@@ -26,7 +27,7 @@ public class FoodCntl {
     private Statement theStatement = null;
         
     public FoodCntl(User currentUser){
-        
+        readFoods();
     }
         
      /**
@@ -51,6 +52,17 @@ public class FoodCntl {
      */
     public void addFood(Food food){
         this.foodList.addFood(food);
+    }
+    
+
+    public void addFood(String name, String foodCategory, GregorianCalendar time){
+        if(foodList == null){
+            readFoods();
+        }
+        int id = foodList.size()+1;
+        Food theFood = new Food(id, name, foodCategory, time);
+        foodList.addFood(theFood);
+        System.out.println("Food created: "+theFood.getName()+" "+theFood.getTime().getTime().getMonth()+"/"+theFood.getTime().getTime().getDate());
     }
     
     /**
@@ -86,10 +98,12 @@ public class FoodCntl {
             ResultSet set = theStatement.executeQuery("SELECT * FROM food");
             ArrayList<Food> foods = new ArrayList();
             while(set.next()){
-                int id = set.getInt("id");
+                //Commented out as there's no such column
+//                int id = set.getInt("id");
                 String name = set.getString("name");
                 Food food = new Food();
-                food.setID(id);
+                //commented out as there's no such column
+//                food.setID(id);
                 food.setName(name);
                 foods.add(food);
             }
