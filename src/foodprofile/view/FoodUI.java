@@ -9,7 +9,11 @@ import foodmood.controller.NavigationCntl;
 import foodprofile.controller.FoodCntl;
 import foodprofile.model.Food;
 import foodprofile.model.FoodProfileModel;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import javax.swing.*;
 
 /**
@@ -30,6 +34,8 @@ public class FoodUI extends JFrame{
     private JLabel time;
     private JTextField timeInput;
     private JButton submit;
+    private JComboBox monthsBox;
+    private JComboBox daysBox;
 
     
     /**
@@ -38,12 +44,14 @@ public class FoodUI extends JFrame{
      */
    
     public FoodUI(FoodCntl foodController) {
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         this.parentCntl = foodController;
         initializeComponents();
         
     }
     
     private void initializeComponents() {
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         frame.setSize(400,400); 
         frame.setLayout(null);
         
@@ -51,9 +59,32 @@ public class FoodUI extends JFrame{
         date.setBounds(100, 75, 80, 25);
         frame.add(date);
         
-        dateInput = new JTextField(50);
-        dateInput.setBounds(200, 75, 80, 25);
-        frame.add(dateInput);
+        //The text field option for date
+//        dateInput = new JTextField(50);
+//        dateInput.setBounds(200, 75, 80, 25);
+//        frame.add(dateInput);
+        
+        //Makes the date drop downs to elliminate user entering error
+        String[] months = new String[12];
+        for (int i = 0; i < 12; i++) {
+            months[i] = (i+1)+"";
+        }
+        String[] days = new String[31];
+        for (int i = 0; i < 31; i++) {
+            days[i] = (i+1)+"";
+        }
+        
+        JPanel dateInputPanel = new JPanel();
+        dateInputPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+        monthsBox = new JComboBox(months);
+        dateInputPanel.add(monthsBox);
+        JLabel slash = new JLabel("/");
+        dateInputPanel.add(slash);
+        daysBox = new JComboBox(days);
+        dateInputPanel.add(daysBox);
+        dateInputPanel.setBounds(200, 75, 180, 25);
+        frame.add(dateInputPanel);
+        
         
         time = new JLabel("Time:");
         time.setBounds(100, 100, 80, 25);
@@ -86,9 +117,9 @@ public class FoodUI extends JFrame{
         
         frame.setVisible(true);
         
-        dateInput.addActionListener((ActionEvent ae) -> { 
-            System.out.println("DateInput event triggered.");
-	});
+//        dateInput.addActionListener((ActionEvent ae) -> { 
+//            System.out.println("DateInput event triggered.");
+//	});
         timeInput.addActionListener((ActionEvent ae) -> { 
             System.out.println("TimeInput event triggered.");
 	});
@@ -99,7 +130,12 @@ public class FoodUI extends JFrame{
             System.out.println("foodInput event triggered.");
 	});
         submit.addActionListener((ActionEvent ae) -> { 
-            System.out.println("submit click event triggered.");
+            String name = foodInput.getText();
+            String category = foodGroupInput.getSelectedItem().toString();
+            int month = Integer.parseInt(monthsBox.getSelectedItem().toString());
+            int day = Integer.parseInt(daysBox.getSelectedItem().toString());
+            GregorianCalendar time = new GregorianCalendar(2017, month, day);
+            parentCntl.addFood(name, category, time);
 	});
         
     }
