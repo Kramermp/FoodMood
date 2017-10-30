@@ -58,6 +58,7 @@ public class FoodList {
     public void addFood(Food foodToAdd) {
         Connection conn = null;
         PreparedStatement stmt;
+        listOfFoods.add(foodToAdd);
         try {
             // db parameters
             String url = "jdbc:sqlite:foodmood.db";
@@ -138,5 +139,9 @@ public class FoodList {
      */
     public int size() {
         return listOfFoods.size();
+    }
+    
+    public Food getFood(int i){
+        return listOfFoods.get(i);
     }
 }
