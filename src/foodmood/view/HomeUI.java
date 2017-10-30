@@ -27,6 +27,7 @@ public class HomeUI extends JFrame {
     public HomeUI(NavigationCntl theNavigationCntl){
         this.parentCntl = theNavigationCntl;
 		initializeComponents();
+        this.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
                 
     }
     
