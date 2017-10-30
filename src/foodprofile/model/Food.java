@@ -61,6 +61,10 @@ public class Food {
      * @return the foodCategories
      */
     public ArrayList<String> getFoodCategories() {
+        if(foodCategories == null || foodCategories.size()==0){
+            foodCategories = new ArrayList();
+            foodCategories.add("Dairy");
+        }
         return foodCategories;
     }
 
@@ -70,6 +74,10 @@ public class Food {
      */
     public void setFoodCategories(ArrayList<String> foodCategories) {
         this.foodCategories = foodCategories;
+    }
+    public void setFoodCategory(String foodCategory){
+        foodCategories = new ArrayList();
+        foodCategories.add(foodCategory);
     }
     
     /**
