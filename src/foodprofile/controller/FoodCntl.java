@@ -7,6 +7,7 @@ package foodprofile.controller;
 
 import foodprofile.model.FoodList;
 import foodprofile.model.Food;
+import foodprofile.view.FoodListUI;
 import foodprofile.view.FoodUI;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -25,6 +26,7 @@ public class FoodCntl {
     private FoodList foodList;
     private Connection theConnection = null;
     private Statement theStatement = null;
+    private FoodListUI foodListUI;
         
     public FoodCntl(User currentUser){
         readFoods();
@@ -54,6 +56,15 @@ public class FoodCntl {
         this.foodList.addFood(food);
     }
     
+    public void viewFood(Food food){
+        FoodUI foodUI = new FoodUI(this, food);
+        foodUI.setVisible(true);
+    }
+    
+    public void newFood(){
+        FoodUI foodUI = new FoodUI(this);
+        foodUI.setVisible(true);
+    }
 
     public void addFood(String name, String foodCategory, GregorianCalendar time){
         if(foodList == null){
@@ -63,6 +74,7 @@ public class FoodCntl {
         Food theFood = new Food(id, name, foodCategory, time);
         foodList.addFood(theFood);
         System.out.println("Food created: "+theFood.getName()+" "+theFood.getTime().getTime().getMonth()+"/"+theFood.getTime().getTime().getDate());
+        System.out.println(foodList.size());
     }
     
     /**
@@ -73,6 +85,12 @@ public class FoodCntl {
         //this.foodList.updateFood(food);
     }
     
+    public void goListView(){
+        foodListUI = new FoodListUI(this);
+        foodListUI.setVisible(true);
+    }
+    
+     
     /**
      * This deletes the food from the current user's FoodList
      * @param foodID the food to delete
