@@ -34,7 +34,7 @@ public class MoodController {
      * This sets the MoodList for the current user
      * @param moodList the moodList to set
      */
-    public void setMoodList(MoodList moodList) {
+    private void setMoodList(MoodList moodList) {
         this.moodList = moodList;
     }
     /**
@@ -116,18 +116,12 @@ public class MoodController {
     
     public void addMood(String name, GregorianCalendar time){
         System.out.println("adding mood");
-        if(moodList==null){
-            System.out.println("mood list null");
-            moodList = new MoodList();
-        }
         moodList.add(name, time);
+        System.out.println("Mood list "+moodList.size());
     }
     
     public MoodList getMoodList(){
-        if(moodList == null){
-            System.out.println("mood list null");
-            moodList = new MoodList();
-        }
+
         return moodList;
     }
     
