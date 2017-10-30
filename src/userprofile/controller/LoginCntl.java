@@ -52,6 +52,7 @@ public class LoginCntl {
     public void submitUserCredentials(String username, char[] password) {
         if(authenticateUserCredentials(username, password)) {
             login();
+            childUI.setVisible(false);
         } else {
             loginInvalid();
         }
