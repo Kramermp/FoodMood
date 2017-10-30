@@ -50,24 +50,28 @@ public class HomeUI extends JFrame {
         goFoodScreenButton.addActionListener((ActionEvent ae) -> { 
             System.out.println("goFoodScreenBtn click event triggered.");
             parentCntl.goFoodScreen();
+            this.setVisible(false);
 	});
 		
         
 	goMoodScreenButton.addActionListener((ActionEvent ae) -> { 
             System.out.println("goMoodScreenBtn click event triggered.");
             parentCntl.goMoodScreen();
+            this.setVisible(false);
 	});
 		
        
 	goNotificationScreenButton.addActionListener((ActionEvent ae) -> { 
             System.out.println("goNotificationBtn click event triggered.");
             parentCntl.goNotifcationScreen();
+            this.setVisible(false);
 	});
 		
         
         goUserProfile.addActionListener((ActionEvent ae) -> {
             System.out.println("goUserProfile click event triggered.");
             parentCntl.goUserProfile();
+            this.setVisible(false);
         });
                 
         goHistoryScreen.addActionListener((ActionEvent ae) -> {
@@ -77,6 +81,7 @@ public class HomeUI extends JFrame {
         
         logoutButton.addActionListener((ActionEvent ae) -> { 
             System.out.println("logoutBtn click event triggered.");
+            this.setVisible(false);
             parentCntl.logout();
 	});
 		
