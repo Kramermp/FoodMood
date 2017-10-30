@@ -38,6 +38,7 @@ public class FoodUI extends JFrame{
     private JComboBox daysBox;
     private JButton listButton;
     private JButton homeButton;
+    private JButton deleteButton;
 
     
     /**
@@ -118,7 +119,7 @@ public class FoodUI extends JFrame{
         frame.add(submit);
         
         listButton = new JButton("Food List");
-        listButton.setBounds(300, 250, 80, 25);
+        listButton.setBounds(300, 250, 180, 25);
         frame.add(listButton);
         
         frame.setVisible(true);
@@ -147,6 +148,7 @@ public class FoodUI extends JFrame{
             this.setVisible(false);
             parentCntl.goListView();
 	});
+        
         
     }
       
@@ -238,8 +240,12 @@ public class FoodUI extends JFrame{
         frame.add(submit);
         
         listButton = new JButton("Food List");
-        listButton.setBounds(300, 250, 80, 25);
+        listButton.setBounds(300, 250, 180, 25);
         frame.add(listButton);
+        
+        deleteButton = new JButton("Delete");
+        deleteButton.setBounds(50, 250, 80, 25);
+        frame.add(deleteButton);
         
         frame.setVisible(true);
         
@@ -268,6 +274,11 @@ public class FoodUI extends JFrame{
 	});
         listButton.addActionListener((ActionEvent ae) -> { 
             this.setVisible(false);
+            parentCntl.goListView();
+	});
+        deleteButton.addActionListener((ActionEvent ae) -> { 
+            this.setVisible(false);
+            parentCntl.deleteFood(theFoodModel);
             parentCntl.goListView();
 	});
     }
