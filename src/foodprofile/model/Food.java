@@ -22,6 +22,10 @@ public class Food {
         this.time = time;
     }
     
+    public Food(){
+        System.out.println("New Food Created //TODO impelement default constructor");
+    }
+    
     //TODO: Add other constructors for food
     
     /**
