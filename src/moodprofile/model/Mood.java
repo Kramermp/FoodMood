@@ -18,6 +18,12 @@ public class Mood {
         
     }
     
+    public Mood(int id, String name, GregorianCalendar time){
+        this.id = id;
+        this.name = name;
+        this.time = time;
+    }
+    
     /**
      * Get the id of the mood
      * @return the id
