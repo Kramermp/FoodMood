@@ -216,7 +216,7 @@ public class LoginUI extends JFrame {
         } else {
             //If both username and Password fields have values entered into them
             parentController.submitUserCredentials(usernameTxtFld.getValue(),
-                passwordFld.getValue());
+            passwordFld.getValue());
         }  
     }
 
