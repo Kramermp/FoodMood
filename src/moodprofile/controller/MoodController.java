@@ -66,7 +66,7 @@ public class MoodController {
      * @param mood the mood to delete
      */
     public void deleteMood(Mood mood){
-        moodList.removeMoodProfile(mood);
+        moodList.deleteMood(mood.getID());
     }
     /**
      * Links foods and moods based on the time the food was consumed
