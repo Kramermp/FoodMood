@@ -234,15 +234,11 @@ public class MoodUI extends JFrame{
         timeInput.addActionListener((ActionEvent ae) -> { 
             System.out.println("TimeInput event triggered.");
 	});
-        moodGroupInput.addActionListener((ActionEvent ae) -> { 
-            System.out.println("moodGroupInput event triggered.");
-	});
         moodInput.addActionListener((ActionEvent ae) -> { 
             System.out.println("moodInput event triggered.");
 	});
         submit.addActionListener((ActionEvent ae) -> { 
             String name = moodInput.getText();
-            String category = moodGroupInput.getSelectedItem().toString();
             int month = Integer.parseInt(monthsBox.getSelectedItem().toString());
             int day = Integer.parseInt(daysBox.getSelectedItem().toString());
             GregorianCalendar time = new GregorianCalendar(2017, month, day);
