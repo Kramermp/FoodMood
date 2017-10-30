@@ -205,7 +205,9 @@ public class UserProfileUI extends JFrame {
                     JButton submitBtn = new JButton("Submit");
                     submitBtn.addActionListener((ActionEvent ae) -> {
                             System.out.println("submitBtn click registered");
-                            this.parentController.submitUser();
+                            if(this.parentController.submitUser()){
+                                this.setVisible(false);
+                            }
                     });
                     gbc.gridx = 1;
                     gbc.gridy = 0;
