@@ -70,7 +70,12 @@ public class FoodCntl {
         if(foodList == null){
             readFoods();
         }
-        int id = foodList.getFood(foodList.size()-1).getID()+1;
+        int id;
+        if(foodList.size() == 0){
+            id = 1;
+        }else{
+            id = foodList.getFood(foodList.size()-1).getID()+1;
+        }
         Food theFood = new Food(id, name, foodCategory, time);
         foodList.addFood(theFood);
         System.out.println("Food created: "+theFood.getName()+" "+theFood.getTime().getTime().getMonth()+"/"+theFood.getTime().getTime().getDate());
