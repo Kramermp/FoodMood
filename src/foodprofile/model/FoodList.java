@@ -47,6 +47,14 @@ public class FoodList {
         }
     }
     
+    public void updateFood(Food toUpdate){
+        for (int i = 0; i < listOfFoods.size(); i++) {
+            if(listOfFoods.get(i).getID() == toUpdate.getID()){
+                listOfFoods.set(i, toUpdate);
+            }
+        }
+    }
+    
     public FoodList(ArrayList<Food> foods){
         this.listOfFoods = foods;
     }
@@ -95,6 +103,11 @@ public class FoodList {
      * @param foodToRemove Food to be removed from the FoodList
      */
     public void removeFood(Food foodToRemove) {
+        for (int i = 0; i < listOfFoods.size(); i++) {
+            if(listOfFoods.get(i).getID() == foodToRemove.getID()){
+                listOfFoods.remove(i);
+            }
+        }
         Connection conn = null;
         PreparedStatement stmt;
         try {
@@ -142,6 +155,9 @@ public class FoodList {
     }
     
     public Food getFood(int i){
+        if(i>=listOfFoods.size()){
+            i = listOfFoods.size();
+        }
         return listOfFoods.get(i);
     }
 }
