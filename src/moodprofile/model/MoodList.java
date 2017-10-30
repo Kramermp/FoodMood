@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 
 /**
  *
@@ -44,6 +45,17 @@ public class MoodList {
     
     public MoodList(ArrayList<Mood> moods){
         this.listOfMoods = moods;
+    }
+    
+    public void add(String name, GregorianCalendar time){
+        int id;
+        if(listOfMoods.size()==0){
+            id = 1;
+        }else{
+            id = listOfMoods.get(listOfMoods.size()-1).getID() + 1;
+        }
+        Mood toAdd = new Mood(id, name, time);
+        listOfMoods.add(toAdd);
     }
     
     /**
@@ -82,6 +94,10 @@ public class MoodList {
                 System.out.println(ex.getMessage());
             }
         }
+    }
+    
+    public Mood getMood(int i){
+        return listOfMoods.get(i);
     }
     
     /**
