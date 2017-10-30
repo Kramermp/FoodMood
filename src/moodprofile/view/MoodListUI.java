@@ -38,7 +38,7 @@ public class MoodListUI extends javax.swing.JFrame {
     public void initCustomComponents(){
         listPanel = new JPanel();
         listPanel.setLayout(new BoxLayout(listPanel, BoxLayout.Y_AXIS));
-        System.out.println(moodCntl.getMoodList().size());
+        System.out.println("MOODS" +moodCntl.getMoodList().size());
         for (int i = 0; i < moodCntl.getMoodList().size(); i++) {
             System.out.println("Mood "+i);
             JPanel singleMoodPanel = new JPanel();
