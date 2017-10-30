@@ -70,7 +70,7 @@ public class FoodCntl {
         if(foodList == null){
             readFoods();
         }
-        int id = foodList.size()+1;
+        int id = foodList.getFood(foodList.size()-1).getID()+1;
         Food theFood = new Food(id, name, foodCategory, time);
         foodList.addFood(theFood);
         System.out.println("Food created: "+theFood.getName()+" "+theFood.getTime().getTime().getMonth()+"/"+theFood.getTime().getTime().getDate());
@@ -82,12 +82,12 @@ public class FoodCntl {
      * @param food  the food to update
      */
     public void updateFood(Food food){
-        //this.foodList.updateFood(food);
+        this.foodList.updateFood(food);
     }
     
     public void goListView(){
         foodListUI = new FoodListUI(this);
-        foodListUI.setVisible(true);
+        foodListUI.setVisible(true); 
     }
     
      
@@ -95,8 +95,8 @@ public class FoodCntl {
      * This deletes the food from the current user's FoodList
      * @param foodID the food to delete
      */
-    public void deleteFood(int foodID){
-        
+    public void deleteFood(Food food){
+        foodList.removeFood(food);
     }
     /**
      * Updates all food mood links based on times
