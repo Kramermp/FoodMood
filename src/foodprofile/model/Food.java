@@ -14,8 +14,12 @@ public class Food {
     /**
      * Default constructor for FoodProfileModel
      */
-    public Food(){
-        
+    public Food(int id, String name, String foodCategory, GregorianCalendar time){
+        this.id = id;
+        this.name = name;
+        this.foodCategories = new ArrayList();
+        foodCategories.add(foodCategory);
+        this.time = time;
     }
     
     //TODO: Add other constructors for food
