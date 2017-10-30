@@ -166,8 +166,6 @@ public class MoodList {
      * @return the size of moodlist
      */
     public int size() {
-        System.err.println("This is a stub.");
-        //TODO: Implment size
-        return 0;
+        return listOfMoods.size();
     }
 }
