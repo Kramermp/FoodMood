@@ -59,7 +59,7 @@ public class MoodController {
      * @param moodID the mood to delete
      */
     public void deleteMood(int moodID){
-        
+        moodList.deleteMood(moodID);
     }
     /**
      * Deletes a mood from the current user's MoodList and the linkages of all foods it was linked to
