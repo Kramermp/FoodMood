@@ -5,6 +5,7 @@
  */
 package moodprofile.controller;
 
+import foodprofile.view.FoodUI;
 import java.sql.Connection;
 import moodprofile.model.Mood;
 import java.sql.DriverManager;
@@ -13,6 +14,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import moodprofile.model.MoodList;
+import moodprofile.view.MoodListUI;
+import moodprofile.view.MoodUI;
 import userprofile.model.User;
 
 /**
@@ -103,5 +106,34 @@ public class MoodController {
         }
         
         
+    }
+    
+    public void goListView(){
+        MoodListUI moodListUI = new MoodListUI(this);
+        moodListUI.setVisible(true);
+    }
+    
+    public void addMood(String name, GregorianCalendar time){
+        if(moodList==null){
+            moodList = new MoodList();
+        }
+        moodList.add(name, time);
+    }
+    
+    public MoodList getMoodList(){
+        if(moodList == null){
+            moodList = new MoodList();
+        }
+        return moodList;
+    }
+    
+    public void newMood(){
+        MoodUI moodUI = new MoodUI(this);
+        moodUI.setVisible(true);
+    }
+    
+    public void viewMood(Mood mood){
+        MoodUI moodUI = new MoodUI(this, mood);
+        moodUI.setVisible(true);
     }
 }
