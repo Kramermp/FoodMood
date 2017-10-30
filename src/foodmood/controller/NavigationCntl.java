@@ -11,6 +11,7 @@ import foodprofile.view.*;
 import moodprofile.controller.MoodController;
 import moodprofile.view.MoodUI;
 import notificationprofile.controller.NotificationCntl;
+import userprofile.controller.LoginCntl;
 import userprofile.model.User;
 /**
  *
@@ -71,7 +72,7 @@ public class NavigationCntl {
 	 * Loads the Login Screen
 	 */
 	public void logout() {
-		theHomeUI.dispose();
+		LoginCntl loginCntl = new LoginCntl();
 	}
 
     public void goUserProfile() {
