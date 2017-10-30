@@ -28,7 +28,7 @@ public class MoodController {
     private Statement theStatement;
     
     public MoodController(User currentUser){
-        
+        moodList = new MoodList();
     }
      /**
      * This sets the MoodList for the current user
@@ -43,6 +43,7 @@ public class MoodController {
      */
     public void addMood(Mood mood){
         moodList.addMoodProfile(mood);
+        System.out.println(moodList.size()+" in c");
     }
     
     /**
@@ -50,7 +51,7 @@ public class MoodController {
      * @param mood the mood to update
      */
     public void updateMood(Mood mood){
-        
+        moodList.updateMood(mood);
     }
     
     /**
@@ -95,7 +96,7 @@ public class MoodController {
                 mood.setMoodScore(score);
                 moods.add(mood);
             }
-            moodList = new MoodList(moods);
+//            moodList = new MoodList(moods);
              
             theStatement.close();
             theConnection.close(); 
@@ -114,7 +115,9 @@ public class MoodController {
     }
     
     public void addMood(String name, GregorianCalendar time){
+        System.out.println("adding mood");
         if(moodList==null){
+            System.out.println("mood list null");
             moodList = new MoodList();
         }
         moodList.add(name, time);
@@ -122,6 +125,7 @@ public class MoodController {
     
     public MoodList getMoodList(){
         if(moodList == null){
+            System.out.println("mood list null");
             moodList = new MoodList();
         }
         return moodList;
