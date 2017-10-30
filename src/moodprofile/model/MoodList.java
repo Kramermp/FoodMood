@@ -18,10 +18,10 @@ import java.util.GregorianCalendar;
  * @author Micahel Kramer
  */
 public class MoodList {
-    private ArrayList<Mood> listOfMoods = 
-            new ArrayList<Mood>();
-    
+    private ArrayList<Mood> listOfMoods;
     public MoodList(){
+        System.out.println("New Mood List");
+        listOfMoods = new ArrayList();
         Statement theStatement = null;
         Connection theConnection = null;
         System.out.println("creating mood table \n");
@@ -47,6 +47,22 @@ public class MoodList {
         this.listOfMoods = moods;
     }
     
+    public void updateMood(Mood mood){
+        for (int i = 0; i < listOfMoods.size(); i++) {
+            if(listOfMoods.get(i).getID()==mood.getID()){
+                listOfMoods.set(i, mood);
+            }
+        }
+    }
+    
+    public void deleteMood(int id){
+        for (int i = 0; i < listOfMoods.size(); i++) {
+            if(listOfMoods.get(i).getID() == id){
+                listOfMoods.remove(i)
+;            }
+        }
+    }
+    
     public void add(String name, GregorianCalendar time){
         int id;
         if(listOfMoods.size()==0){
@@ -56,6 +72,8 @@ public class MoodList {
         }
         Mood toAdd = new Mood(id, name, time);
         listOfMoods.add(toAdd);
+        System.out.println("added");
+        System.out.println(listOfMoods.size());
     }
     
     /**
