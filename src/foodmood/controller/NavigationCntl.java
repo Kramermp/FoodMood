@@ -12,23 +12,30 @@ import moodprofile.controller.MoodController;
 import moodprofile.view.MoodUI;
 import notificationprofile.controller.NotificationCntl;
 import userprofile.controller.LoginCntl;
+import userprofile.controller.*;
 import userprofile.model.User;
 /**
  *
  * @author Michael Kramer
  */
 public class NavigationCntl {
-		private User activeUser;
+	private User activeUser;
         private HomeUI theHomeUI;
+        private UserCntl userCntl;
+        private LoginCntl loginCntl;
 	/**
 	 * Creates a default NavigationController Constructor
 	 */
-	public NavigationCntl () {
-		//This needs to get the acutal User from login or get it
-		activeUser = new User("TempUser", "pass".toCharArray());
-		goHomeScreen();
+	public NavigationCntl (LoginCntl loginCntl, User user) {
+            this.loginCntl = loginCntl;
+            activeUser = user;
+            goHomeScreen();
 	}
 	
+        public NavigationCntl(LoginCntl loginCntl){
+            this.loginCntl = loginCntl;
+        }
+        
 	/**
 	 * Loads the default Screen
 	 */
@@ -65,7 +72,7 @@ public class NavigationCntl {
 	 * Loads the Notification Screen
 	 */
 	public void goNotifcationScreen() {
-		NotificationCntl notificationController = new NotificationCntl(activeUser);
+		NotificationCntl notificationController = new NotificationCntl(activeUser, this);
 	}
 	
 	/**
@@ -76,6 +83,11 @@ public class NavigationCntl {
 	}
 
     public void goUserProfile() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        UserCntl userCntl = new UserCntl(this);
+        userCntl.goUserProfile();
+    }
+    
+    public User getActiveUser(){
+        return activeUser;
     }
 }
