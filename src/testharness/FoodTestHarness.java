@@ -133,7 +133,6 @@ class FoodTestHarness {
             Field idField = foodClass.getDeclaredField("id");
             idField.setAccessible(true);
             int newID = 77;
-            testFood.setID(newID);
             int detectedID = (int) idField.get(testFood);
             if(detectedID == newID) {
                 System.out.println("The method Food.setID() successfully"
