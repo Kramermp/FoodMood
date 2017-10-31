@@ -32,6 +32,10 @@ public class UserList {
         return testUserList;
     }
     
+    public int size(){
+        return theListOfUsers.size();
+    }
+    
     /**
      * Goes through the UserList validates the provided credentials
      * @param username The Username to validate
@@ -103,6 +107,14 @@ public class UserList {
             }
         }
         return null;
+    }
+    
+    public void set(int i, User newUser){
+        theListOfUsers.set(i, newUser);
+    }
+    
+    public User get(int i){
+        return theListOfUsers.get(i);
     }
     
     /**
