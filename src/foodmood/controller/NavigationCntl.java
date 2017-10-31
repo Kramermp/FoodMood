@@ -44,6 +44,8 @@ public class NavigationCntl {
                 theHomeUI.setVisible(true);
 	}
 	
+        
+//_______________Food Module___________________        
 	/**
 	 * Loads the foodScreen
 	 */
@@ -52,6 +54,8 @@ public class NavigationCntl {
                 FoodUI foodUI = new FoodUI(foodController);
 	}
 	
+        
+//_______________Mood Module___________________  
 	/**
 	 * Loads the Mood Screen
 	 */
@@ -67,7 +71,8 @@ public class NavigationCntl {
 		//I think this referes to the stats screen
 		
 	}
-	
+
+//_______________Notification Module___________________   
 	/**
 	 * Loads the Notification Screen
 	 */
@@ -75,6 +80,7 @@ public class NavigationCntl {
 		NotificationCntl notificationController = new NotificationCntl(activeUser, this);
 	}
 	
+//_______________User Module___________________  
 	/**
 	 * Loads the Login Screen
 	 */
@@ -82,12 +88,12 @@ public class NavigationCntl {
 		LoginCntl loginCntl = new LoginCntl();
 	}
 
-    public void goUserProfile() {
-        UserCntl userCntl = new UserCntl(this);
-        userCntl.goUserProfile();
-    }
-    
-    public User getActiveUser(){
-        return activeUser;
-    }
+        public void goUserProfile() {
+            UserCntl userCntl = new UserCntl(this);
+            userCntl.goUserProfile();
+        }
+
+        public User getActiveUser(){
+            return activeUser;
+        }
 }
