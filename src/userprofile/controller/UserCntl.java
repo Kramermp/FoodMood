@@ -5,6 +5,8 @@
  */
 package userprofile.controller;
 
+import foodmood.ExternalDataCntl;
+import foodmood.controller.NavigationCntl;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -22,14 +24,34 @@ import userprofile.view.UserProfileUI;
 public class UserCntl {
 	private UserList theUserList;
 	private UserProfileUI userProfileUI;
-        
-        Connection theConnection = null;
-        Statement theStatement = null;
+        private NavigationCntl navigationCntl;
+        private ExternalDataCntl externalDataCntl;
+        private User user;
 	
-	public UserCntl (UserList theUserList) {
+	public UserCntl (UserList theUserList, NavigationCntl navigationCntl) {
+            externalDataCntl = new ExternalDataCntl();
             this.theUserList = theUserList;
+            this.navigationCntl = navigationCntl;
+            this.user = navigationCntl.getActiveUser();
             System.out.println("Created a UserController.");
 	}
+        
+        public UserCntl (NavigationCntl navigationCntl) {
+            externalDataCntl = new ExternalDataCntl();
+            this.theUserList = externalDataCntl.readLogins();
+            this.navigationCntl = navigationCntl;
+            this.user = navigationCntl.getActiveUser();
+            System.out.println("Created a UserController.");
+	}
+        
+        public void goHome(){
+            navigationCntl.goHomeScreen();
+        }
+        
+        public void goUserProfile(){
+            UserProfileUI userProfileUI = new UserProfileUI(this, user);
+            userProfileUI.setVisible(true);
+        }
 	
 	public boolean submitUser() {
 		System.out.println("UserCntl.submitUser()");
@@ -63,11 +85,10 @@ public class UserCntl {
 		userProfileUI.pack();
 		//If it passed all the tests
 		if(!failedATest) {
-			theUserList.addUser(userProfileUI.getUsername(), 
-					userProfileUI.getPassword());
-			System.out.println("The user was added to the userlist.");
-                        addUserToDB(userProfileUI.getUsername(), userProfileUI.getPassword());
-                        return true;
+                    theUserList.addUser(userProfileUI.getUsername(), userProfileUI.getPassword());
+                    System.out.println("The user was added to the userlist.");
+                    addUserToDB(userProfileUI.getUsername(), userProfileUI.getPassword());
+                    return true;
                         
 		} else {
 			System.out.println("There were errors with the information entered"
@@ -129,19 +150,12 @@ public class UserCntl {
 			testResults[2] = false;
 		}
 		
-		
-		
 		return testResults;
 	}
 	
-	public void updateUser() {
-		System.err.println("This is a stub.");
-		//TODO: Implement updateUser
-	}
-	
-	public void deleteUser() {
-		System.err.println("This is a stub.");
-		//TODO: Implement deleteUser
+	public void deleteUser(String username, char[] password) {
+            theUserList.deleteUser(username, password);
+            externalDataCntl.deleteUser(username);
 	}
         
         public void registerNewUser() {
@@ -152,77 +166,18 @@ public class UserCntl {
         }
         
         public void addUserToDB(String username, char[] password){
-            createUserTable();
-            System.out.println("adding user to db");
-            try{
-                Class.forName("org.sqlite.JDBC");
-                theConnection = DriverManager.getConnection("jdbc:sqlite:foodmood.db");
-                theStatement = theConnection.createStatement();
-                System.out.println("successfully opened db");
-                
-                String passwordString = "";
-                for (int i = 0; i < password.length; i++) {
-                    passwordString += password[i];
-                }
-
-                String insert = "INSERT INTO login VALUES ('"+username+"', '"+passwordString+"');";
-                theStatement.executeUpdate(insert);
-                
-                theStatement.close();
-                theConnection.close(); 
-                System.out.println("User added to db");
-
-            }catch(Exception e){
-                e.printStackTrace();
-                System.exit(0);
-            }
-    }
+            theUserList.addUser(username, password);
+            externalDataCntl.addUser(username, password);
+        } 
         
         public void updateUser(String oldUsername, User newUser){
-        System.out.println("updating user to db");
-        try{
-            Class.forName("org.sqlite.JDBC");
-            theConnection = DriverManager.getConnection("jdbc:sqlite:foodmood.db");
-            theStatement = theConnection.createStatement();
-            System.out.println("successfully opened db");
-
-            String newPasswordString = "";
-            for (int i = 0; i < newUser.getPassword().length; i++) {
-                newPasswordString += newUser.getPassword()[i];
+            for (int i = 0; i < theUserList.size(); i++) {
+                if(theUserList.get(i).getUsername().equals(oldUsername)){
+                    theUserList.set(i, newUser);
+                }
             }
-
-            String update = "UPDATE login SET username = '"+newUser.getUsername()+"', password = '"+newPasswordString+"' WHERE username = '"+oldUsername+"';";
-            theStatement.executeUpdate(update);
-
-            theStatement.close();
-            theConnection.close(); 
-            System.out.println("User added to db");
-
-        }catch(Exception e){
-            e.printStackTrace();
-            System.exit(0);
+            externalDataCntl.updateUser(oldUsername, newUser);
         }
-    }
 
-            public void createUserTable(){
-        System.out.println("creating user table \n");
-        try{
-            Class.forName("org.sqlite.JDBC");
-            theConnection = DriverManager.getConnection("jdbc:sqlite:foodmood.db");
-            theStatement = theConnection.createStatement();
-            
-            String create = "CREATE TABLE IF NOT EXISTS login (username varchar, password varchar);";
-            theStatement.executeUpdate(create);
-            
-            String insert = "INSERT INTO login VALUES ('user1', 'passworD');";
-                theStatement.executeUpdate(insert);
-            
-            theStatement.close();
-            theConnection.close(); 
-        } catch(Exception e){
-                e.printStackTrace();
-                System.exit(0);
-        }
-    }
         
 }
