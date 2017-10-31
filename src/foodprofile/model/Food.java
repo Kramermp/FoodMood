@@ -6,12 +6,13 @@ import java.util.GregorianCalendar;
 
 public class Food {
     private int id;
-    private String name = "No Name";
-    private ArrayList<String> foodCategories = new ArrayList<String>();
-    private GregorianCalendar time = new GregorianCalendar();
-    private ArrayList<Integer> moods = new ArrayList<Integer>();
+    private String name; //eg milk
+    private ArrayList<String> foodCategories; //eg Dairy
+    private GregorianCalendar time;
+    private ArrayList<Integer> moods; //list of id's for moods linked to this mood
     
     /**
+     * Creates food given id, name, foodCategory (single category) and time
      * Default constructor for FoodProfileModel
      */
     public Food(int id, String name, String foodCategory, GregorianCalendar time){
@@ -19,31 +20,30 @@ public class Food {
         this.name = name;
         this.foodCategories = new ArrayList();
         foodCategories.add(foodCategory);
+        moods = new ArrayList();
         this.time = time;
     }
     
+    /**
+     * Creates empty food for easy handling and testing
+     */
     public Food(){
-        System.out.println("New Food Created //TODO impelement default constructor");
+        foodCategories = new ArrayList();
+        moods = new ArrayList();
+        name = "No Name";
     }
     
-    //TODO: Add other constructors for food
     
     /**
+     * get ID for food
      * @return the id
      */
     public int getID() {
         return id;
     }
-    
-    //This agruablly should not be included
+ 
     /**
-     * @param id the id to set
-     */
-    public void setID(int id) {
-        this.id = id;
-    }
-
-    /**
+     * Returns the name of the food eg Milk
      * @return the name
      */
     public String getName() {
@@ -75,6 +75,11 @@ public class Food {
     public void setFoodCategories(ArrayList<String> foodCategories) {
         this.foodCategories = foodCategories;
     }
+    
+    /**
+     * Sets categories
+     * @param foodCategory Sets the list of categories in the food given an arrayList of strings
+     */
     public void setFoodCategory(String foodCategory){
         foodCategories = new ArrayList();
         foodCategories.add(foodCategory);
@@ -125,7 +130,7 @@ public class Food {
      * @param toDelete mood to be delete
      */
     public void deleteMood(int toDelete){
-        
+      
     }
     
     /**
@@ -137,10 +142,18 @@ public class Food {
         return moods.get(index);
     }
     
+    /**
+     * Given a food category, removes it from the list of categories
+     * @param foodCategory food category to be added
+     */
     public void deleteFoodCategory(String foodCategory) {
         foodCategories.remove(foodCategory);
     }
     
+    /**
+     * Adds the id of a mood to this food
+     * @param mood Mood to be added
+     */
     public void addMood(Integer mood) {
         moods.add(mood);
     }
