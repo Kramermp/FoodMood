@@ -30,7 +30,7 @@ public class NotificationTest {
         
         user.setNotificationList(theNotificationList);
         System.out.println("Notification Test set Notification List in User.");
-                
+                /*
         NotificationCntl theNotificationCntl = new NotificationCntl(user);
         System.out.println("NotificationCntl created.");
         
@@ -52,6 +52,7 @@ public class NotificationTest {
         
         theNotificationCntl.goHome();
         System.out.println("The NotificationCntl went home.\n");
+*/
         
     }
     
