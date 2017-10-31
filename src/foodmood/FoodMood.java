@@ -13,11 +13,11 @@ import userprofile.controller.LoginCntl;
  */
 public class FoodMood {
 
-	/**
-	 * @param args the command line arguments
-	 */
-	public static void main(String[] args) {
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
             LoginCntl logingCntl = new LoginCntl();
         }
-	
+    
 }

@@ -16,11 +16,11 @@ import javax.swing.JTextField;
  */
 public class JTextHint extends JTextField {
         private HintListener listener;
-	private Color textColor = Color.BLACK;
-	private Color hintColor = Color.GRAY;
-	private String hint = "";
-	private String value = "";
-	
+    private Color textColor = Color.BLACK;
+    private Color hintColor = Color.GRAY;
+    private String hint = "";
+    private String value = "";
+    
         /**
          * Creates a JTextField that displays a text hint there is no value
          * @param hint The String to display as a hint
@@ -29,11 +29,11 @@ public class JTextHint extends JTextField {
         public JTextHint(String hint, int width) {
             super(width);
             this.hint = hint;
-            this.listener = new HintListener();
+            this.listener = new HintListener(this);
             this.addFocusListener(listener);
             this.setForeground(hintColor);
             this.setText(hint);
-	}
+    }
         
         /**
          * Creates a JTextField that displays a text hint if there is no value
@@ -41,7 +41,7 @@ public class JTextHint extends JTextField {
          */
         public JTextHint(String hint) {
             this.hint = hint;
-            this.addFocusListener(new HintListener());
+            this.addFocusListener(new HintListener(this));
             this.setForeground(hintColor);
             this.setText(hint);
         }
@@ -50,24 +50,33 @@ public class JTextHint extends JTextField {
          * Sets the color of the text after values have been input
          * @param textColor The color to be displayed
          */
-	public void setTextColor(Color textColor) {
+    public void setTextColor(Color textColor) {
             this.textColor = textColor;
-	}
-	
+    }
+    
         /**
          * Sets the color of the hint
          * @param hintColor 
          */
-	public void setHintColor(Color hintColor) {
-		this.hintColor = hintColor;
-	}
-	
+    public void setHintColor(Color hintColor) {
+        this.hintColor = hintColor;
+    }
+    
         /** 
          * Gets the actual value of the field ignoring the hint
          * @return the value of the hint
          */
         public String getValue() {
             return value;
+        }
+        
+        /**
+         * 
+         */
+        public void setValue(String value) {
+            this.value = value;
+            setText(value);
+            setForeground(textColor); 
         }
         
         /**
@@ -78,7 +87,7 @@ public class JTextHint extends JTextField {
             setForeground(JTextHint.this.textColor);
         }
         public void prepareInput() {
-            if(value.isEmpty()) {
+            if(value == null || value.isEmpty()) {
                 System.out.println("There is no value to the JTextHint");
                 clear();
             } else {
@@ -87,10 +96,9 @@ public class JTextHint extends JTextField {
                 System.out.println("The value is " + value);  
             }  
         }
+        
         public void validateInput() {
-            if(getText() == hint) {
-                System.out.println("bvomm");
-            }
+            System.out.println("Validating Input");
             if(getText().isEmpty()) {
                 System.out.println("Input is empty");
                 setText(hint);
@@ -101,22 +109,26 @@ public class JTextHint extends JTextField {
                 value = getText();
             }
         }
-	
+    
         /**
          * This class is used to detect when the value of the field has changed
          */
-	private class HintListener implements FocusListener {
-
+    private static class HintListener implements FocusListener {
+            private JTextHint test;
+            
+            public HintListener(JTextHint a) {
+                test = a;
+            }
             @Override
             public void focusGained(FocusEvent fe) {
                 System.out.println("JTextHint gained Focus");
-                prepareInput();
+                test.prepareInput();
             }
 
             @Override
             public void focusLost(FocusEvent fe) {
                 System.out.println("JTextHint Focus Lost");
-                validateInput();
+                test.validateInput();
             }
-	}
+    }
 }

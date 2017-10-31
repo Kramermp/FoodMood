@@ -19,74 +19,74 @@ import userprofile.model.User;
  * @author Michael Kramer
  */
 public class NavigationCntl {
-	private User activeUser;
+    private User activeUser;
         private HomeUI theHomeUI;
         private UserCntl userCntl;
         private LoginCntl loginCntl;
-	/**
-	 * Creates a default NavigationController Constructor
-	 */
-	public NavigationCntl (LoginCntl loginCntl, User user) {
+    /**
+     * Creates a default NavigationController Constructor
+     */
+    public NavigationCntl (LoginCntl loginCntl, User user) {
             this.loginCntl = loginCntl;
             activeUser = user;
             goHomeScreen();
-	}
-	
+    }
+    
         public NavigationCntl(LoginCntl loginCntl){
             this.loginCntl = loginCntl;
         }
         
-	/**
-	 * Loads the default Screen
-	 */
-	public void goHomeScreen() {
-		theHomeUI = new HomeUI(this);
+    /**
+     * Loads the default Screen
+     */
+    public void goHomeScreen() {
+        theHomeUI = new HomeUI(this);
                 theHomeUI.setVisible(true);
-	}
-	
+    }
+    
         
 //_______________Food Module___________________        
-	/**
-	 * Loads the foodScreen
-	 */
-	public void goFoodScreen() {
-		FoodCntl foodController = new FoodCntl(this, activeUser);
+    /**
+     * Loads the foodScreen
+     */
+    public void goFoodScreen() {
+        FoodCntl foodController = new FoodCntl(this, activeUser);
                 FoodUI foodUI = new FoodUI(foodController);
-	}
-	
+    }
+    
         
 //_______________Mood Module___________________  
-	/**
-	 * Loads the Mood Screen
-	 */
-	public void goMoodScreen() {
-		MoodCntl moodController = new MoodCntl(this, activeUser);
+    /**
+     * Loads the Mood Screen
+     */
+    public void goMoodScreen() {
+        MoodCntl moodController = new MoodCntl(this, activeUser);
                 MoodUI moodUI = new MoodUI(moodController);
-	}
-	
-	/**
-	 * Loads Food Mood Screen
-	 */
-	public void goFoodMoodScreen() {
-		//I think this referes to the stats screen
-		
-	}
+    }
+    
+    /**
+     * Loads Food Mood Screen
+     */
+    public void goFoodMoodScreen() {
+        //I think this referes to the stats screen
+        
+    }
 
 //_______________Notification Module___________________   
-	/**
-	 * Loads the Notification Screen
-	 */
-	public void goNotifcationScreen() {
-		NotificationCntl notificationController = new NotificationCntl(activeUser, this);
-	}
-	
+    /**
+     * Loads the Notification Screen
+     */
+    public void goNotifcationScreen() {
+        NotificationCntl notificationController = new NotificationCntl(activeUser, this);
+    }
+    
 //_______________User Module___________________  
-	/**
-	 * Loads the Login Screen
-	 */
-	public void logout() {
-		LoginCntl loginCntl = new LoginCntl();
-	}
+    /**
+     * Loads the Login Screen
+     */
+    public void logout() {
+        LoginCntl loginCntl = new LoginCntl();
+    }
 
         public void goUserProfile() {
             UserCntl userCntl = new UserCntl(this);

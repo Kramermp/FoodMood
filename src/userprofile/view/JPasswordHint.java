@@ -77,6 +77,18 @@ public class JPasswordHint extends JPasswordField {
         return value;
     }
     
+    public void validateInput() {
+        if (getPassword().length == 0) {
+            //If it loses focus and there is no data
+            displayHint();
+            value = new char[0]; //Clear old value
+        } else {
+            //If it loses focus and there is values is there
+            value = getPassword();
+            setForeground(textColor);
+        }
+    }
+    
     /***
      * This class is used to track when the PasswordField is actually updated
      * and to ensure valid info.
@@ -98,15 +110,7 @@ public class JPasswordHint extends JPasswordField {
         @Override
         public void focusLost(FocusEvent fe) {
             System.out.println("Password Field Lost Focus");
-            if (getPassword().length == 0) {
-                //If it loses focus and there is no data
-                displayHint();
-                value = new char[0]; //Clear old value
-            } else {
-                //If it loses focus and there is values is there
-                value = getPassword();
-                setForeground(textColor);
-            }
+            validateInput();
         }
     }
     

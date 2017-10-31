@@ -62,16 +62,16 @@ public class LoginUI extends JFrame {
     private void buildWindow() {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLayout(new GridBagLayout());
-		this.setSize(new Dimension( 500, 700));
+        this.setSize(new Dimension( 500, 700));
     }
     
     private void addComponents() {
-	setLayout(new GridBagLayout());
+    setLayout(new GridBagLayout());
         // The labelInset will be the standard inset used by the label objects
         Insets labelInset = new Insets(15, 0, 0, 0);
         // The fieldInset will be the standard inset used by the field objects
         Insets fieldInset = new Insets(5, 0, 0, 0);
-		
+        
         JLabel usernameLbl = new JLabel("USERNAME");
         GridBagConstraints c = new GridBagConstraints();
         c.insets = labelInset;
@@ -81,7 +81,7 @@ public class LoginUI extends JFrame {
         c.gridy = 0;
         c.weighty = .75;
         add(usernameLbl, c);
-		
+        
         usernameTxtFld = new JTextHint("Username", 25);
         usernameTxtFld.setHorizontalAlignment(JTextField.CENTER);
         usernameTxtFld.addActionListener((ActionEvent ae) -> { 
@@ -96,7 +96,7 @@ public class LoginUI extends JFrame {
         c.gridwidth = 2;
         c.gridy = 3;
         add(usernameTxtFld, c);
-		
+        
         JLabel passwordLbl = new JLabel("PASSWORD");
         c = new GridBagConstraints();
         c.insets = labelInset;
@@ -118,7 +118,7 @@ public class LoginUI extends JFrame {
         c.gridwidth = 2;
         c.gridy = 5;
         add(passwordFld, c);
-		
+        
         errorMessage = new JPanel();
         errorText = new JLabel("The Username or Password was"
                 + " incorrect.");
@@ -132,8 +132,8 @@ public class LoginUI extends JFrame {
         c.anchor = GridBagConstraints.NORTH;
         c.gridx = 0;
         c.gridwidth = 2;
-        c.gridy = 6;	
-        add(errorMessage, c);	
+        c.gridy = 6;    
+        add(errorMessage, c);   
 
         JButton cancelBtn = new JButton("Cancel");
         cancelBtn.addActionListener((ActionEvent) -> { 
@@ -149,7 +149,7 @@ public class LoginUI extends JFrame {
         c.weightx = 1;
         c.gridy = 6;
         add(cancelBtn, c);
-		
+        
         submitBtn = new JButton("Submit");
         submitBtn.addActionListener((ActionEvent -> { 
             submitUserCredentials();
@@ -162,7 +162,7 @@ public class LoginUI extends JFrame {
         c.weightx = 1;
         c.gridy = 6;
         add(submitBtn, c);
-		
+        
         JButton signupBtn = new JButton("Sign Up");
         signupBtn.addActionListener((ActionEvent) -> { 
             this.parentController.signup();
@@ -221,5 +221,5 @@ public class LoginUI extends JFrame {
     }
 
 
-	
+    
 }

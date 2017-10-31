@@ -42,7 +42,7 @@ public class MoodUI extends JFrame{
     
     /**
      * Default Constructor for empty MoodView
-	 * @param parentController the parentController
+     * @param parentController the parentController
      */
    
     public MoodUI(MoodCntl moodController) {
@@ -121,24 +121,24 @@ public class MoodUI extends JFrame{
         
 //        dateInput.addActionListener((ActionEvent ae) -> { 
 //            System.out.println("DateInput event triggered.");
-//	});
+//  });
         timeInput.addActionListener((ActionEvent ae) -> { 
             System.out.println("TimeInput event triggered.");
-	});
+    });
         moodInput.addActionListener((ActionEvent ae) -> { 
             System.out.println("moodInput event triggered.");
-	});
+    });
         submit.addActionListener((ActionEvent ae) -> { 
             String name = moodInput.getText();
             int month = Integer.parseInt(monthsBox.getSelectedItem().toString());
             int day = Integer.parseInt(daysBox.getSelectedItem().toString());
             GregorianCalendar time = new GregorianCalendar(2017, month, day);
             parentCntl.addMood(name, time);
-	});
+    });
         listButton.addActionListener((ActionEvent ae) -> { 
             this.setVisible(false);
             parentCntl.goListView();
-	});
+    });
         homeButton.addActionListener((ActionEvent ae) -> {
            this.setVisible(false);
            parentCntl.goHome();
@@ -154,7 +154,7 @@ public class MoodUI extends JFrame{
     /**
      * Creates a MoodView of the provided MoodProfile
      * @param moodProfile the source moodprofile
-	 * @param parentController the parent controller
+     * @param parentController the parent controller
      */
     public MoodUI(MoodCntl parentController, Mood mood) {
         this.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -237,13 +237,13 @@ public class MoodUI extends JFrame{
         
 //        dateInput.addActionListener((ActionEvent ae) -> { 
 //            System.out.println("DateInput event triggered.");
-//	});
+//  });
         timeInput.addActionListener((ActionEvent ae) -> { 
             System.out.println("TimeInput event triggered.");
-	});
+    });
         moodInput.addActionListener((ActionEvent ae) -> { 
             System.out.println("moodInput event triggered.");
-	});
+    });
         submit.addActionListener((ActionEvent ae) -> { 
             String name = moodInput.getText();
             int month = Integer.parseInt(monthsBox.getSelectedItem().toString());
@@ -252,16 +252,16 @@ public class MoodUI extends JFrame{
             theMoodModel.setName(name);
             theMoodModel.setTime(time);
             parentCntl.updateMood(theMoodModel);
-	});
+    });
         listButton.addActionListener((ActionEvent ae) -> { 
             this.setVisible(false);
             parentCntl.goListView();
-	});
+    });
         deleteButton.addActionListener((ActionEvent ae) -> { 
             this.setVisible(false);
             parentCntl.deleteMood(theMoodModel);
             parentCntl.goListView();
-	});
+    });
     }
     
 }

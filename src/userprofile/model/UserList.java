@@ -28,7 +28,7 @@ public class UserList {
     public static UserList createTestUserList() {
         UserList testUserList = new UserList();
         testUserList.theListOfUsers = new ArrayList<User>();
-		testUserList.theListOfUsers.add(new User("TestUser", "pass".toCharArray()));
+        testUserList.theListOfUsers.add(new User("TestUser", "pass".toCharArray()));
         return testUserList;
     }
     

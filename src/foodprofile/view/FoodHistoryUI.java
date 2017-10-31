@@ -10,11 +10,11 @@ package foodprofile.view;
  * @author Michael Kramer
  */
 public class FoodHistoryUI {
-	
-	/**
-	 * The Default Constructor for the FoodHistoryUI
-	 */
-	public FoodHistoryUI () {
-		
-	}
+    
+    /**
+     * The Default Constructor for the FoodHistoryUI
+     */
+    public FoodHistoryUI () {
+        
+    }
 }

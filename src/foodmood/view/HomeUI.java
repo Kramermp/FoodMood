@@ -22,31 +22,31 @@ public class HomeUI extends JFrame {
     private JButton logoutButton;
     private JButton goHistoryScreen;
     private JButton goUserProfile;
-    private JFrame frame = new JFrame("Home Menu");
+//    private JFrame this = new JFrame("Home Menu");
     
     public HomeUI(NavigationCntl theNavigationCntl){
         this.parentCntl = theNavigationCntl;
-		initializeComponents();
-        this.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-                
+        initializeComponents();
+        this.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);           
     }
     
     private void initializeComponents(){
-        frame.setSize(400,400); 
-        frame.setLayout(new GridLayout(2,3));
+        this.setTitle("Home Menu");
+        this.setSize(400,400); 
+        this.setLayout(new GridLayout(2,3));
         goFoodScreenButton = new JButton("Food");
-        frame.add(goFoodScreenButton);
+        this.add(goFoodScreenButton);
         goMoodScreenButton = new JButton("Mood");
-        frame.add(goMoodScreenButton);
+        this.add(goMoodScreenButton);
 	goNotificationScreenButton = new JButton("Notifications");
-        frame.add(goNotificationScreenButton);
+        this.add(goNotificationScreenButton);
         goUserProfile = new JButton("User Profile");
-        frame.add(goUserProfile);
+        this.add(goUserProfile);
         goHistoryScreen = new JButton("History");
-        frame.add(goHistoryScreen);
+        this.add(goHistoryScreen);
         logoutButton = new JButton("Logout");
-        frame.add(logoutButton);
-        frame.setVisible(true);
+        this.add(logoutButton);
+        this.setVisible(true);
        
         goFoodScreenButton.addActionListener((ActionEvent ae) -> { 
             System.out.println("goFoodScreenBtn click event triggered.");

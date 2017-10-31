@@ -10,12 +10,12 @@ package foodprofile.view;
  * @author Michael Kramer
  */
 public class FoodRecommendationUI {
-	
-	/**
-	 * The Default Constructor for the FoodRecommendationUI
-	 */
-	public FoodRecommendationUI () {
-		System.err.println("This is a stub.");
-		//TODO: Implement FoodRecommendationUIs
-	}
+    
+    /**
+     * The Default Constructor for the FoodRecommendationUI
+     */
+    public FoodRecommendationUI () {
+        System.err.println("This is a stub.");
+        //TODO: Implement FoodRecommendationUIs
+    }
 }
