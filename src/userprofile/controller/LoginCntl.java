@@ -5,6 +5,8 @@
  */
 package userprofile.controller;
 
+import foodmood.ExternalDataCntl;
+import foodmood.controller.NavigationCntl;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -20,23 +22,21 @@ import userprofile.view.UserProfileUI;
  * @author Michael Kramer
  */
 public class LoginCntl {
-    private UserList theUserList = new UserList();
+    private UserList theUserList;
     private LoginUI childUI;
     private UserCntl userCntl;
-    
-    
-    Connection theConnection = null;
-    Statement theStatement = null;
-    
+    private User user;
+    private ExternalDataCntl externalDataCntl;
     /**
      * Creates a LoginController
      */
     public LoginCntl() {
-        createUserTable();
-        readLogins();
+        externalDataCntl = new ExternalDataCntl();
+        theUserList = externalDataCntl.readLogins();
         this.childUI = new LoginUI(this);
         this.childUI.setVisible(true);
         this.childUI.requestFocus();
+        
     }
     
     /**
@@ -51,15 +51,16 @@ public class LoginCntl {
     
     public void submitUserCredentials(String username, char[] password) {
         if(authenticateUserCredentials(username, password)) {
-            login();
+            user = theUserList.getUser(username);
+            login(user);
             childUI.setVisible(false);
         } else {
             loginInvalid();
         }
     }
     
-    public void login(){
-        foodmood.controller.NavigationCntl theNavigationCntl = new foodmood.controller.NavigationCntl();
+    public void login(User user){
+        foodmood.controller.NavigationCntl theNavigationCntl = new foodmood.controller.NavigationCntl(this, user);
         
     }
     
@@ -69,7 +70,7 @@ public class LoginCntl {
     }
     
     public void signup() {
-        userCntl = new UserCntl(theUserList);
+        userCntl = new UserCntl(theUserList, new NavigationCntl(this));
         userCntl.registerNewUser();
     }
     
@@ -80,62 +81,5 @@ public class LoginCntl {
         System.exit(0);
     }
     
-    public void createUserTable(){
-        System.out.println("creating user table \n");
-        try{
-            Class.forName("org.sqlite.JDBC");
-            theConnection = DriverManager.getConnection("jdbc:sqlite:foodmood.db");
-            theStatement = theConnection.createStatement();
-            
-            String create = "CREATE TABLE IF NOT EXISTS login (username varchar, password varchar)";
-            theStatement.executeUpdate(create);
-            
-            String delete = "DELETE FROM login WHERE username = 'User1';";
-            theStatement.executeUpdate(delete);
-            delete = "DELETE FROM login WHERE username = 'user1';";
-            theStatement.executeUpdate(delete);
-            
-            String insert = "INSERT INTO login VALUES ('User1', 'password');";
-            theStatement.executeUpdate(insert);
-            
-            theStatement.close();
-            theConnection.close(); 
-        } catch(Exception e){
-            e.printStackTrace();
-            System.exit(0);
-        }
-    }
-        
-    public void readLogins(){
-        System.out.println("Reading logins");
-        try{
-            Class.forName("org.sqlite.JDBC");
-            theConnection = DriverManager.getConnection("jdbc:sqlite:foodmood.db");
-            theStatement = theConnection.createStatement();
-            
-            ResultSet set = theStatement.executeQuery("SELECT * FROM login");
-            ArrayList<User> users = new ArrayList();
-            while(set.next()){
-                String username = set.getString("username");
-                char[] password = set.getString("password").toCharArray();
-                System.out.println(username);
-                for (int i = 0; i < password.length; i++) {
-                    System.out.println(password[i]);
-                }
-                
-                User user = new User(username, password);
-                users.add(user);
-            }
-            theUserList = new UserList(users);
-             
-            theStatement.close();
-            theConnection.close(); 
-            
-        }catch(Exception e){
-            e.printStackTrace();
-            System.exit(0);
-        }
-        
-        
-    }
+    
 }
