@@ -37,15 +37,15 @@ public class FoodListUI extends javax.swing.JFrame {
     public void initCustomComponents(){
         listPanel = new JPanel();
         listPanel.setLayout(new BoxLayout(listPanel, BoxLayout.Y_AXIS));
-        System.out.println(foodCntl.getFoodList().size());
+        
         for (int i = 0; i < foodCntl.getFoodList().size(); i++) {
-            System.out.println("Food "+i);
             JPanel singleFoodPanel = new JPanel();
             JLabel foodName = new JLabel(foodCntl.getFoodList().getFood(i).getName());
             singleFoodPanel.add(foodName);
             final Food food = foodCntl.getFoodList().getFood(i);
             listPanel.add(singleFoodPanel);
             
+            //Allows user to click on a food to view it
             singleFoodPanel.addMouseListener(new MouseListener() {
                 
                 public void mouseClicked(MouseEvent e){
