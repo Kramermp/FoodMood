@@ -32,7 +32,7 @@ public class MoodTestHarness {
     }
 
     private static void testConstructors() {
-        Mood testMood = new Mood();
+        Mood testMood = new Mood(1);
         if(testMood != null) {
             System.out.println("The Mood() constructor successfully created the"
                 + " Mood object.");
@@ -43,7 +43,7 @@ public class MoodTestHarness {
     }
 
     private static void testAccessors() {
-        Mood testMood = new Mood();
+        Mood testMood = new Mood(1);
         Class moodClass = testMood.getClass();
         try {
             //Test getID
