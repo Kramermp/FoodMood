@@ -6,6 +6,7 @@
 package foodmood;
 
 import foodprofile.model.Food;
+import foodprofile.model.FoodList;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -181,6 +182,37 @@ public class ExternalDataCntl {
             e.printStackTrace();
             System.exit(0);
         }
+    }
+    
+    public FoodList readFoods(){
+        FoodList foodList = null;
+        try{
+            Class.forName("org.sqlite.JDBC");
+            theConnection = DriverManager.getConnection("jdbc:sqlite:foodmood.db");
+            theStatement = theConnection.createStatement();
+            
+            ResultSet set = theStatement.executeQuery("SELECT * FROM food");
+            ArrayList<Food> foods = new ArrayList();
+            while(set.next()){
+                //Commented out as there's no such column
+//                int id = set.getInt("id");
+                String name = set.getString("name");
+                Food food = new Food();
+                //commented out as there's no such column
+//                food.setID(id);
+                food.setName(name);
+                foods.add(food);
+            }
+            foodList = new FoodList(foods);
+             
+            theStatement.close();
+            theConnection.close(); 
+            
+        }catch(Exception e){
+            e.printStackTrace();
+            System.exit(0);
+        }
+        return foodList;
     }
     
     public void addFood(Food foodToAdd){
