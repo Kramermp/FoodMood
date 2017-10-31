@@ -17,10 +17,12 @@ public class NotificationCntl {
     
     User theUser;
     NotificationList theNotificationList;
+    NavigationCntl navigationCntl;
     
-    public NotificationCntl(User user){
+    public NotificationCntl(User user, NavigationCntl navigationCntl){
         theUser = user;
         theNotificationList = user.getNotificationList();
+        this.navigationCntl = navigationCntl;
         viewNotificationList();
     }
     
@@ -47,7 +49,7 @@ public class NotificationCntl {
     }
     
     public void goHome(){
-        NavigationCntl theNavigationCntl = new NavigationCntl();
+        navigationCntl.goHomeScreen();
     }
     
     public void next(int id){
