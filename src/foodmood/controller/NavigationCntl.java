@@ -48,7 +48,7 @@ public class NavigationCntl {
 	 * Loads the foodScreen
 	 */
 	public void goFoodScreen() {
-		FoodCntl foodController = new FoodCntl(activeUser);
+		FoodCntl foodController = new FoodCntl(this, activeUser);
                 FoodUI foodUI = new FoodUI(foodController);
 	}
 	
