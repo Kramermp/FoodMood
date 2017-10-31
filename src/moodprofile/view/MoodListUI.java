@@ -38,15 +38,16 @@ public class MoodListUI extends javax.swing.JFrame {
     public void initCustomComponents(){
         listPanel = new JPanel();
         listPanel.setLayout(new BoxLayout(listPanel, BoxLayout.Y_AXIS));
-        System.out.println("MOODS" +moodCntl.getMoodList().size());
+        
         for (int i = 0; i < moodCntl.getMoodList().size(); i++) {
-            System.out.println("Mood "+i);
+            
             JPanel singleMoodPanel = new JPanel();
             JLabel moodName = new JLabel(moodCntl.getMoodList().getMood(i).getName());
             singleMoodPanel.add(moodName);
             final Mood mood = moodCntl.getMoodList().getMood(i);
             listPanel.add(singleMoodPanel);
             
+            //Allows user to click on a mood to view its detail
             singleMoodPanel.addMouseListener(new MouseListener() {
                 
                 public void mouseClicked(MouseEvent e){
