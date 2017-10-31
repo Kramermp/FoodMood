@@ -6,7 +6,7 @@
 package moodprofile.view;
 
 import foodmood.controller.NavigationCntl;
-import moodprofile.controller.MoodController;
+import moodprofile.controller.MoodCntl;
 import moodprofile.model.Mood;
 import moodprofile.model.MoodProfileModel;
 import java.awt.FlowLayout;
@@ -24,7 +24,7 @@ public class MoodUI extends JFrame{
     private Mood theMoodModel;
     
     private JFrame frame = new JFrame("Mood");
-    private MoodController parentCntl;
+    private MoodCntl parentCntl;
     private JLabel moodName;
     private JTextField moodInput;
     private JLabel moodGroup;
@@ -46,7 +46,7 @@ public class MoodUI extends JFrame{
 	 * @param parentController the parentController
      */
    
-    public MoodUI(MoodController moodController) {
+    public MoodUI(MoodCntl moodController) {
         this.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         this.parentCntl = moodController;
         initializeComponents();
@@ -55,8 +55,12 @@ public class MoodUI extends JFrame{
     
     private void initializeComponents() {
         frame.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        frame.setSize(400,400); 
+        frame.setSize(500,500); 
         frame.setLayout(null);
+        
+        homeButton = new JButton("Home");
+        homeButton.setBounds(50, 50, 80, 25);
+        frame.add(homeButton);
         
         date = new JLabel("Date:");
         date.setBounds(100, 75, 80, 25);
@@ -136,6 +140,10 @@ public class MoodUI extends JFrame{
             this.setVisible(false);
             parentCntl.goListView();
 	});
+        homeButton.addActionListener((ActionEvent ae) -> {
+           this.setVisible(false);
+           parentCntl.goHome();
+        });
         
         
     }
@@ -149,7 +157,7 @@ public class MoodUI extends JFrame{
      * @param moodProfile the source moodprofile
 	 * @param parentController the parent controller
      */
-    public MoodUI(MoodController parentController, Mood mood) {
+    public MoodUI(MoodCntl parentController, Mood mood) {
         this.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         this.parentCntl = parentController;
         this.theMoodModel = mood;
