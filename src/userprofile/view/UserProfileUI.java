@@ -198,6 +198,7 @@ public class UserProfileUI extends JFrame {
                     JButton cancelBtn = new JButton("Cancel");
                     cancelBtn.addActionListener((ActionEvent ae) -> { 
                             System.out.println("cancelBtn click registered");
+                            parentController.goHome();
                     });
                     gbc.gridx = 0;
                     gbc.gridy = 0;
