@@ -5,8 +5,7 @@
  */
 package foodmood;
 
-import foodprofile.model.Food;
-import foodprofile.model.FoodList;
+import foodprofile.model.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -14,9 +13,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import moodprofile.model.Mood;
-import userprofile.model.User;
-import userprofile.model.UserList;
+import moodprofile.model.*;
+import userprofile.model.*;
 
 /**
  *
@@ -362,5 +360,36 @@ public class ExternalDataCntl {
                 System.out.println(ex.getMessage());
             }
         }
+    }
+    
+    public MoodList readMoods(){
+        MoodList moodList = null;
+        try{
+            Class.forName("org.sqlite.JDBC");
+            theConnection = DriverManager.getConnection("jdbc:sqlite:foodmood.db");
+            theStatement = theConnection.createStatement();
+            
+            ResultSet set = theStatement.executeQuery("SELECT * FROM mood");
+            ArrayList<Mood> moods = new ArrayList();
+            while(set.next()){
+                int id = set.getInt("id");
+                String name = set.getString("name");
+                int score = set.getInt("score");
+                Mood mood = new Mood();
+                mood.setId(id);
+                mood.setName(name);
+                mood.setMoodScore(score);
+                moods.add(mood);
+            }
+//            moodList = new MoodList(moods);
+             
+            theStatement.close();
+            theConnection.close(); 
+            
+        }catch(Exception e){
+            e.printStackTrace();
+            System.exit(0);
+        }
+        return moodList;
     }
 }
