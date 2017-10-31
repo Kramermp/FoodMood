@@ -375,11 +375,8 @@ public class ExternalDataCntl {
                 int id = set.getInt("id");
                 String name = set.getString("name");
                 int score = set.getInt("score");
-                Mood mood = new Mood();
-                mood.setId(id);
-                mood.setName(name);
-                mood.setMoodScore(score);
-                moods.add(mood);
+                Mood mood = new Mood(id, name, score);
+
             }
 //            moodList = new MoodList(moods);
              
