@@ -8,7 +8,6 @@ package moodprofile.view;
 import foodmood.controller.NavigationCntl;
 import moodprofile.controller.MoodCntl;
 import moodprofile.model.Mood;
-import moodprofile.model.MoodProfileModel;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.util.Calendar;
