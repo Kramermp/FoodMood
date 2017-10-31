@@ -22,21 +22,18 @@ public class FoodList {
 
     
     /**
+     * Creates FoodList without an existing list of foods
      * Default Constructor
      */
     public FoodList() {
-        System.out.println("TODO foodList");
-        
+        listOfFoods = new ArrayList();
     }
     
-    public void updateFood(Food toUpdate){
-        for (int i = 0; i < listOfFoods.size(); i++) {
-            if(listOfFoods.get(i).getID() == toUpdate.getID()){
-                listOfFoods.set(i, toUpdate);
-            }
-        }
-    }
     
+    /**
+     * Creates FoodList with an existing arrayList of foods
+     * @param foods ArrayList of food
+     */
     public FoodList(ArrayList<Food> foods){
         this.listOfFoods = foods;
     }
@@ -49,6 +46,17 @@ public class FoodList {
         System.out.println("TODO add food");
     }
     
+    /**
+     * Takes a food, finds it in the list based on the ID and updates it in the list
+     * @param toUpdate the food that is to be updated
+     */
+    public void updateFood(Food toUpdate){
+        for (int i = 0; i < listOfFoods.size(); i++) {
+            if(listOfFoods.get(i).getID() == toUpdate.getID()){
+                listOfFoods.set(i, toUpdate);
+            }
+        }
+    }
     /**
      * Removes the provided from the FoodList
      * @param foodToRemove Food to be removed from the FoodList
@@ -81,6 +89,11 @@ public class FoodList {
         return listOfFoods.size();
     }
     
+    /**
+     * Returns a Food given its index in the list
+     * @param i the index
+     * @return 
+     */
     public Food getFood(int i){
         if(i>=listOfFoods.size()){
             i = listOfFoods.size();
