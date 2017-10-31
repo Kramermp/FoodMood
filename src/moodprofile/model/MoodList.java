@@ -18,17 +18,30 @@ import java.util.GregorianCalendar;
  * @author Micahel Kramer
  */
 public class MoodList {
+    
     private ArrayList<Mood> listOfMoods;
+    
+    /**
+     * Constructor for externalDataCntl
+     */
     public MoodList(){
         System.out.println("New Mood List");
         listOfMoods = new ArrayList();
         
     }
     
+    /**
+     * Default constructor for taking a list of foods and creating the MoodList
+     * @param moods list of moods
+     */
     public MoodList(ArrayList<Mood> moods){
         this.listOfMoods = moods;
     }
     
+    /**
+     * Takes a mood, finds it in the list, and updates it
+     * @param mood mood to update
+     */
     public void updateMood(Mood mood){
         for (int i = 0; i < listOfMoods.size(); i++) {
             if(listOfMoods.get(i).getID()==mood.getID()){
@@ -37,6 +50,10 @@ public class MoodList {
         }
     }
     
+    /**
+     * Deletes all moods from the list with a given id (should be singular)
+     * @param id id of the mood
+     */
     public void deleteMood(int id){
         for (int i = 0; i < listOfMoods.size(); i++) {
             if(listOfMoods.get(i).getID() == id){
@@ -45,6 +62,11 @@ public class MoodList {
         }
     }
     
+    /**
+     * Takes a name and a time, creates a mood, and adds it to the list
+     * @param name eg Happy
+     * @param time time mood was entered
+     */
     public void add(String name, GregorianCalendar time){
         int id;
         if(listOfMoods.size()==0){
@@ -52,7 +74,7 @@ public class MoodList {
         }else{
             id = listOfMoods.get(listOfMoods.size()-1).getID() + 1;
         }
-        Mood toAdd = new Mood(id, name, time);
+        Mood toAdd = new Mood(id, name, 1);
         listOfMoods.add(toAdd);
         System.out.println("added");
         System.out.println(listOfMoods.size());
@@ -66,6 +88,11 @@ public class MoodList {
         System.out.println("TODO addMood");
     }
     
+    /**
+     * Return a mood for a given index
+     * @param i index of the mood
+     * @return 
+     */
     public Mood getMood(int i){
         return listOfMoods.get(i);
     }
