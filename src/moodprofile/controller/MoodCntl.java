@@ -29,11 +29,18 @@ public class MoodCntl {
     private NavigationCntl navigationCntl;
     private ExternalDataCntl externalDataCntl;
     
+    
+    /**
+     * Default constructor, takes NavigationCntl for goHome and User to link entered moods to user
+     * @param navigationCntl 
+     * @param currentUser 
+     */
     public MoodCntl(NavigationCntl navigationCntl, User currentUser){
         this.navigationCntl = navigationCntl;
         this.externalDataCntl = externalDataCntl;
         readMoods();
     }
+    
      /**
      * This sets the MoodList for the current user
      * @param moodList the moodList to set
@@ -41,6 +48,7 @@ public class MoodCntl {
     private void setMoodList(MoodList moodList) {
         this.moodList = moodList;
     }
+    
     /**
      * Adds a Mood to the current user's FoodList
      * @param mood the mood to add
@@ -65,6 +73,7 @@ public class MoodCntl {
     public void deleteMood(int moodID){
         moodList.deleteMood(moodID);
     }
+    
     /**
      * Deletes a mood from the current user's MoodList and the linkages of all foods it was linked to
      * @param mood the mood to delete
@@ -72,6 +81,7 @@ public class MoodCntl {
     public void deleteMood(Mood mood){
         moodList.deleteMood(mood.getID());
     }
+    
     /**
      * Links foods and moods based on the time the food was consumed
      * @param moodID the ID of the mood
@@ -81,14 +91,12 @@ public class MoodCntl {
         
     }
     
+    /**
+     * Sends call to the externalDataCntl to read moods table
+     */
     public void readMoods(){
         System.out.println("Reading moods");
         moodList = externalDataCntl.readMoods();
-    }
-    
-    public void goListView(){
-        MoodListUI moodListUI = new MoodListUI(this);
-        moodListUI.setVisible(true);
     }
     
     public void addMood(String name, GregorianCalendar time){
@@ -104,15 +112,35 @@ public class MoodCntl {
         return moodList;
     }
     
+//_________________Views___________________
+    
+    /**
+     * Goes to NavigationCntl for goHome
+     */
     public void goHome(){
         navigationCntl.goHomeScreen();
     }
     
+    /**
+     * Creates a blank MoodUI
+     */
     public void newMood(){
         MoodUI moodUI = new MoodUI(this);
         moodUI.setVisible(true);
     }
     
+    /**
+     * Goes to a list view of the moodList
+     */
+    public void goListView(){
+        MoodListUI moodListUI = new MoodListUI(this);
+        moodListUI.setVisible(true);
+    }
+    
+    /**
+     * Takes a mood and creates a MoodUI
+     * @param mood the mood to view
+     */
     public void viewMood(Mood mood){
         MoodUI moodUI = new MoodUI(this, mood);
         moodUI.setVisible(true);
