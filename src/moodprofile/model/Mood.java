@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 public class Mood {
+    
     private int id;
     private String name;
     private int moodScore;
@@ -14,14 +15,22 @@ public class Mood {
     /**
      * Default constructor for MoodProfileModel
      */
-    public Mood(){
-        
+    public Mood(int id){
+        this.id = id;
+        foodIDs = new ArrayList();
+        name = "No Name";
     }
     
-    public Mood(int id, String name, GregorianCalendar time){
+    /**
+     * 
+     * @param id the id
+     * @param name the name eg Happy
+     * @param time the time entered
+     */
+    public Mood(int id, String name, int score){
         this.id = id;
         this.name = name;
-        this.time = time;
+        this.time = null;
     }
     
     /**
@@ -87,7 +96,6 @@ public class Mood {
     public void setTime(GregorianCalendar time) {
         this.time = time;
     }
-    
     
     /**
      * returns all foods linked to this mood
