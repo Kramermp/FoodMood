@@ -30,8 +30,8 @@ public class UserProfileUI extends JFrame {
     private UserCntl parentController;
     private User sourceUser;
 
-    JPanel inputPanel = new JPanel();
-    JPanel buttonPanel = new JPanel();
+    private JPanel inputPanel = new JPanel();
+    private JPanel buttonPanel = new JPanel();
     private JTextField usernameTxtFld;
     private JLabel usernameTakenErrLbl;
     private JPasswordField passwordTxtFld;
@@ -44,10 +44,10 @@ public class UserProfileUI extends JFrame {
      * Creates a blank UserProfileUI
      */
     public UserProfileUI() {
-            System.out.println("UserProfileUI()");
-            addComponents();
-            buildInputPanel();
-            buildButtonPanel();
+        System.out.println("UserProfileUI()");
+        addComponents();
+        buildInputPanel();
+        buildButtonPanel();
 
     }
 
@@ -57,12 +57,12 @@ public class UserProfileUI extends JFrame {
      * @param parentController the parentController
      */
     public UserProfileUI(UserCntl parentController, User sourceUser) {
-            System.out.println("UserProfileUI(UserCntl, User);");
-            this.parentController = parentController;
-            this.sourceUser = sourceUser;
-            addComponents();
-            buildInputPanel();
-            buildButtonPanel();
+        System.out.println("UserProfileUI(UserCntl, User);");
+        this.parentController = parentController;
+        this.sourceUser = sourceUser;
+        addComponents();
+        buildInputPanel();
+        buildButtonPanel();
     }
 
             /**
@@ -70,119 +70,79 @@ public class UserProfileUI extends JFrame {
      * @param parentController the parentController
      */
     public UserProfileUI(UserCntl parentController) {
-            System.out.println("UserProfileUI(UserCntl, User);");
-            this.parentController = parentController;
-            addComponents();
-            buildInputPanel();
-            buildButtonPanel();
+        System.out.println("UserProfileUI(UserCntl, User);");
+        this.parentController = parentController;
+        addComponents();
+        buildInputPanel();
+        buildButtonPanel();
     }
 
     private void addComponents() {
-            this.setLayout(new GridBagLayout());
-            GridBagConstraints gbc = new GridBagConstraints();
-            gbc.gridx = 0;
-            gbc.gridy = 0;
-            gbc.fill = GridBagConstraints.BOTH;
-            gbc.weightx = 1;
-            gbc.weighty = 1;
-            this.add(inputPanel, gbc);
-            gbc.gridx = 0;
-            gbc.gridy = 1;
-            gbc.fill = GridBagConstraints.HORIZONTAL;
-            gbc.weightx = 1;
-            gbc.weighty = 0;
-            gbc.anchor = GridBagConstraints.SOUTH;
-            this.add(buttonPanel, gbc);
+        this.setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.fill = GridBagConstraints.BOTH;
+        gbc.weightx = 1;
+        gbc.weighty = 1;
+        this.add(inputPanel, gbc);
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.weightx = 1;
+        gbc.weighty = 0;
+        gbc.anchor = GridBagConstraints.SOUTH;
+        this.add(buttonPanel, gbc);
     }
 
     private void buildInputPanel() {
-            inputPanel.setBackground(Color.black);
-            inputPanel.setLayout(new GridBagLayout());
-            GridBagConstraints gbc = new GridBagConstraints();
-            if(sourceUser != null) {
-                    //If there is a source User
+        inputPanel.setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        if(sourceUser != null) {
 
-            } else {
-                    //If there is not a source user
-                    //This implies that this UI is fpr creating a new user
-                    usernameTxtFld = new JTextField("Username");
-                    gbc.gridx = 0;
-                    gbc.gridy = 0;
-                    inputPanel.add(usernameTxtFld, gbc);
-                    usernameTakenErrLbl = new JLabel("The entered username is already taken.");
-                    usernameTakenErrLbl.setForeground(Color.RED);
-                    usernameTakenErrLbl.setVisible(false);
-                    gbc.gridx = 1;
-                    gbc.gridy = 0;
-                    inputPanel.add(usernameTakenErrLbl, gbc);
-                    passwordStrength = new JProgressBar(0, 16);
-                    passwordTxtFld = new JPasswordField("Password");
-                    passwordTxtFld.getDocument().addDocumentListener(new DocumentListener(){
-                        @Override
-                        public void changedUpdate(DocumentEvent e) {
-                            updateLabel(e);
-                        }
+            usernameTxtFld = new JTextHint("Username");
+            
 
-                        @Override
-                        public void insertUpdate(DocumentEvent e) {
-                            updateLabel(e);
-                        }
-
-                        @Override
-                        public void removeUpdate(DocumentEvent e) {
-                            updateLabel(e);
-                        }
-
-                        private void updateLabel(DocumentEvent e) {
-                            char[] text = passwordTxtFld.getPassword(); //get the pass as a char array
-                            if (text.length > -1 && text.length < 8) {
-                                passwordStrength.setValue(text.length);
-                                System.out.println("Value is "+text.length);
-                            } else if (text.length >= 8) {
-                                boolean[] strengths = {false, false, false};
-                                for(char c: text){
-                                    if(Character.isDigit(c))
-                                        strengths[0] = true;
-                                    if(Character.isLowerCase(c))
-                                        strengths[1] = true;
-                                    if(Character.isUpperCase(c))
-                                        strengths[2] = true;
-                                }
-                                if(strengths[0] && strengths[1] && strengths[2]){
-                                    passwordStrength.setValue(16);
-                                } else if((strengths[1] && strengths[2]) || (strengths[0] && (strengths[1] || strengths[2]))){
-                                    passwordStrength.setValue(12);
-                                } else if(strengths[0] || strengths[1] || strengths[2]){
-                                    passwordStrength.setValue(10);
-                                } else {
-                                    passwordStrength.setValue(8);
-                                }
-                            }
-                        }
-                    });
-                    gbc.gridx = 0;
-                    gbc.gridy = 1;
-                    inputPanel.add(passwordTxtFld, gbc);
-                    gbc.gridx = 0;
-                    gbc.gridy = 3;
-                    inputPanel.add(passwordStrength, gbc);
-                    passwordRequirementsErrLbl = new JLabel("The password does not meet the password requirements.");
-                    passwordRequirementsErrLbl.setForeground(Color.red);
-                    passwordRequirementsErrLbl.setVisible(false);
-                    gbc.gridx = 1;
-                    gbc.gridy = 1;
-                    inputPanel.add(passwordRequirementsErrLbl, gbc);
-                    confirmPasswordTxtFld = new JPasswordField("Verify Password");
-                    gbc.gridx = 0;
-                    gbc.gridy = 2;
-                    inputPanel.add(confirmPasswordTxtFld, gbc);
-                    passwordMatchErrLbl = new JLabel("The entered passwords do not match.");
-                    passwordMatchErrLbl.setForeground(Color.RED);
-                    passwordMatchErrLbl.setVisible(false);
-                    gbc.gridx = 1;
-                    gbc.gridy = 2;
-                    inputPanel.add(passwordMatchErrLbl, gbc);
-            }
+        } else {
+            //If there is not a source user
+            //This implies that this UI is fpr creating a new user
+            usernameTxtFld = new JTextField("Username");
+            gbc.gridx = 0;
+            gbc.gridy = 0;
+            inputPanel.add(usernameTxtFld, gbc);
+            usernameTakenErrLbl = new JLabel("The entered username is already taken.");
+            usernameTakenErrLbl.setForeground(Color.RED);
+            usernameTakenErrLbl.setVisible(false);
+            gbc.gridx = 1;
+            gbc.gridy = 0;
+            inputPanel.add(usernameTakenErrLbl, gbc);
+            passwordStrength = new JProgressBar(0, 16);
+            passwordTxtFld = new JPasswordField("Password");
+            DocumentListener test = new PasswordStrengthListener(passwordTxtFld, passwordStrength);
+            passwordTxtFld.getDocument().addDocumentListener(test);
+            gbc.gridx = 0;
+            gbc.gridy = 1;
+            inputPanel.add(passwordTxtFld, gbc);
+            gbc.gridx = 0;
+            gbc.gridy = 3;
+            inputPanel.add(passwordStrength, gbc);
+            passwordRequirementsErrLbl = new JLabel("The password does not meet the password requirements.");
+            passwordRequirementsErrLbl.setForeground(Color.red);
+            passwordRequirementsErrLbl.setVisible(false);
+            gbc.gridx = 1;
+            gbc.gridy = 1;
+            inputPanel.add(passwordRequirementsErrLbl, gbc);
+            confirmPasswordTxtFld = new JPasswordField("Verify Password");
+            gbc.gridx = 0;
+            gbc.gridy = 2;
+            inputPanel.add(confirmPasswordTxtFld, gbc);
+            passwordMatchErrLbl = new JLabel("The entered passwords do not match.");
+            passwordMatchErrLbl.setForeground(Color.RED);
+            passwordMatchErrLbl.setVisible(false);
+            gbc.gridx = 1;
+            gbc.gridy = 2;
+            inputPanel.add(passwordMatchErrLbl, gbc);
+        }
     }
 
     private void buildButtonPanel() {
