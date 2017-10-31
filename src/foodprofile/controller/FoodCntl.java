@@ -5,6 +5,8 @@
  */
 package foodprofile.controller;
 
+import foodmood.ExternalDataCntl;
+import foodmood.controller.NavigationCntl;
 import foodprofile.model.FoodList;
 import foodprofile.model.Food;
 import foodprofile.view.FoodListUI;
@@ -27,8 +29,12 @@ public class FoodCntl {
     private Connection theConnection = null;
     private Statement theStatement = null;
     private FoodListUI foodListUI;
+    private NavigationCntl navigationCntl;
+    private ExternalDataCntl externalDataCntl;
         
-    public FoodCntl(User currentUser){
+    public FoodCntl(NavigationCntl navigationCntl, User currentUser){
+        this.navigationCntl = navigationCntl;
+        this.externalDataCntl = new ExternalDataCntl();
         readFoods();
     }
         
@@ -110,37 +116,13 @@ public class FoodCntl {
         
     }
     
+    public void goHome(){
+        navigationCntl.goHomeScreen();
+    }
     
     public void readFoods(){
         System.out.println("Reading foods");
-        try{
-            Class.forName("org.sqlite.JDBC");
-            theConnection = DriverManager.getConnection("jdbc:sqlite:foodmood.db");
-            theStatement = theConnection.createStatement();
-            
-            ResultSet set = theStatement.executeQuery("SELECT * FROM food");
-            ArrayList<Food> foods = new ArrayList();
-            while(set.next()){
-                //Commented out as there's no such column
-//                int id = set.getInt("id");
-                String name = set.getString("name");
-                Food food = new Food();
-                //commented out as there's no such column
-//                food.setID(id);
-                food.setName(name);
-                foods.add(food);
-            }
-            foodList = new FoodList(foods);
-             
-            theStatement.close();
-            theConnection.close(); 
-            
-        }catch(Exception e){
-            e.printStackTrace();
-            System.exit(0);
-        }
-        
-        
+        foodList = externalDataCntl.readFoods();
     }
     
 }
