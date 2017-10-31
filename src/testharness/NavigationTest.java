@@ -15,7 +15,7 @@ public class NavigationTest {
     NavigationCntl theNavigationCntl;
     
     public NavigationTest(){
-        theNavigationCntl = new NavigationCntl();
+//        theNavigationCntl = new NavigationCntl();
         System.out.println("\nNavigation Controller instantiated by NavigationTest");
         
         theNavigationCntl.goHomeScreen();
