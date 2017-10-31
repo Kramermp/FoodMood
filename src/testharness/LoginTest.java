@@ -47,7 +47,7 @@ public class LoginTest {
             System.out.println("The Login Controller incorrectly logged a user in.");
         }
         
-        theLoginController.login();
+//        theLoginController.login();
         System.out.println("The Navigation Controller was created by Login Control.");
         
         NavigationTest theNavigationTest = new NavigationTest();
