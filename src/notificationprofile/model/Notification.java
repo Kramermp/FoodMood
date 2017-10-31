@@ -19,7 +19,14 @@ public class Notification {
     private GregorianCalendar timeIssued;
     private boolean read;
 
-    
+    /**
+     * Default constructor
+     * @param id id
+     * @param name title
+     * @param description description
+     * @param timeIssued time
+     * @param read boolean if it's been read
+     */
     public Notification(int id, String name, String description, GregorianCalendar timeIssued, boolean read){
         this.id = id;
         this.name = name;
