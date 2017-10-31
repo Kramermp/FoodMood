@@ -54,13 +54,7 @@ public class FoodCntl {
         this.foodList = foodList;
     }
     
-    /**
-     * Adds a Food to the current user's FoodList
-     * @param food the food to add
-     */
-    public void addFood(Food food){
-        this.foodList.addFood(food);
-    }
+    
     
     public void viewFood(Food food){
         FoodUI foodUI = new FoodUI(this, food);
@@ -72,6 +66,20 @@ public class FoodCntl {
         foodUI.setVisible(true);
     }
 
+    /**
+     * Adds a Food to the current user's FoodList when food exists
+     * @param food the food to add
+     */
+    public void addFood(Food food){
+        this.foodList.addFood(food);
+    }
+    
+    /**
+     * creates a food and adds it to the list
+     * @param name name of the food
+     * @param foodCategory name or csv list of names of food categories
+     * @param time the time the food was entered
+     */
     public void addFood(String name, String foodCategory, GregorianCalendar time){
         if(foodList == null){
             readFoods();
