@@ -6,7 +6,7 @@
 package moodprofile.view;
 
 import moodprofile.view.*;
-import moodprofile.controller.MoodController;
+import moodprofile.controller.MoodCntl;
 import moodprofile.model.Mood;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -22,14 +22,14 @@ import javax.swing.JPanel;
  */
 public class MoodListUI extends javax.swing.JFrame {
 
-    MoodController moodCntl;
+    MoodCntl moodCntl;
     /**
      * Creates new form MoodListUI
      */
     public MoodListUI() {
         initComponents();
     }
-    public MoodListUI(MoodController moodCntl){
+    public MoodListUI(MoodCntl moodCntl){
         this.moodCntl = moodCntl;
         initComponents();
         initCustomComponents();
@@ -115,6 +115,11 @@ public class MoodListUI extends javax.swing.JFrame {
         scrollPane.setViewportView(listPanel);
 
         jButton1.setText("Home");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Create New");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -160,6 +165,11 @@ public class MoodListUI extends javax.swing.JFrame {
         this.setVisible(false);
         moodCntl.newMood();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.setVisible(false);
+        moodCntl.goHome();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
