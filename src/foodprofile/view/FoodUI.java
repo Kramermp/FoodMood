@@ -55,8 +55,12 @@ public class FoodUI extends JFrame{
     
     private void initializeComponents() {
         frame.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        frame.setSize(400,400); 
+        frame.setSize(500,500); 
         frame.setLayout(null);
+        
+        homeButton = new JButton("Home");
+        homeButton.setBounds(50, 50, 80, 25);
+        frame.add(homeButton);
         
         date = new JLabel("Date:");
         date.setBounds(100, 75, 80, 25);
@@ -148,6 +152,10 @@ public class FoodUI extends JFrame{
             this.setVisible(false);
             parentCntl.goListView();
 	});
+        homeButton.addActionListener((ActionEvent ae) -> {
+           this.setVisible(false);
+           parentCntl.goHome();
+        });
         
         
     }
