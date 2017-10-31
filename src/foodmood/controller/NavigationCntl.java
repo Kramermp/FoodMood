@@ -8,7 +8,7 @@ package foodmood.controller;
 import foodmood.view.*;
 import foodprofile.controller.FoodCntl;
 import foodprofile.view.*;
-import moodprofile.controller.MoodController;
+import moodprofile.controller.MoodCntl;
 import moodprofile.view.MoodUI;
 import notificationprofile.controller.NotificationCntl;
 import userprofile.controller.LoginCntl;
@@ -56,7 +56,7 @@ public class NavigationCntl {
 	 * Loads the Mood Screen
 	 */
 	public void goMoodScreen() {
-		MoodController moodController = new MoodController(activeUser);
+		MoodCntl moodController = new MoodCntl(this, activeUser);
                 MoodUI moodUI = new MoodUI(moodController);
 	}
 	
