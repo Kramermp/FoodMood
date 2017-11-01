@@ -29,10 +29,10 @@ public class ExternalDataCntl {
     private FoodList foodList;
     private MoodList moodList;
     
-    private  ExternalDataCntl(){
-        this.userList = getUserList();
-        this.foodList = getFoodList();
-        this.moodList = getMoodList();
+    private ExternalDataCntl(){
+        this.userList = readLogins();
+        this.foodList = readFoods();
+        this.moodList = readMoods();
     }
     
     public void createUserTable(){
@@ -61,9 +61,9 @@ public class ExternalDataCntl {
         }
     }
     
-    public static UserList getUserList() {
+    public UserList getUserList() {
         
-        return externalDataCntl.userList;
+        return this.userList;
     }
         
     private UserList readLogins(){
@@ -194,8 +194,8 @@ public class ExternalDataCntl {
         }
     }
     
-    public static FoodList getFoodList() {
-        return externalDataCntl.foodList;
+    public FoodList getFoodList() {
+        return this.foodList;
     }
             
     
@@ -379,8 +379,8 @@ public class ExternalDataCntl {
         }
     }
     
-    public static MoodList getMoodList() {
-        return externalDataCntl.moodList;
+    public MoodList getMoodList() {
+        return this.moodList;
     }
     
     private MoodList readMoods(){
