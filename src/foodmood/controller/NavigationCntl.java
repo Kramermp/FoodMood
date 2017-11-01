@@ -35,8 +35,7 @@ public class NavigationCntl {
         this.loginCntl = loginCntl;
         this.activeUser = user;
         this.userInterface = new JFrame();
-        configureUserInterface();
-        goUserProfile();
+        goHomeScreen();
     }
     
     private void configureUserInterface() {
@@ -51,6 +50,7 @@ public class NavigationCntl {
      * Loads the default Screen
      */
     public void goHomeScreen() {
+        userInterface.setVisible(false);
         theHomeUI = new HomeUI(this);
         theHomeUI.setVisible(true);
     }
@@ -102,7 +102,7 @@ public class NavigationCntl {
     }
 
     public void goUserProfile() {
-        
+        configureUserInterface();
         UserCntl userCntl = new UserCntl(this);
     }
     
