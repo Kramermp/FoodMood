@@ -5,7 +5,7 @@
  */
 package moodprofile.controller;
 
-import foodmood.ExternalDataCntl;
+import externaldata.controller.ExternalDataCntl;
 import foodmood.controller.NavigationCntl;
 import foodprofile.view.FoodUI;
 import java.sql.Connection;
@@ -27,7 +27,6 @@ import userprofile.model.User;
 public class MoodCntl {
     private MoodList moodList;
     private NavigationCntl navigationCntl;
-    private ExternalDataCntl externalDataCntl;
     
     
     /**
@@ -37,8 +36,7 @@ public class MoodCntl {
      */
     public MoodCntl(NavigationCntl navigationCntl, User currentUser){
         this.navigationCntl = navigationCntl;
-        this.externalDataCntl = externalDataCntl;
-        readMoods();
+        moodList = ExternalDataCntl.getExternalDataCntl().getMoodList();
     }
     
      /**
@@ -91,14 +89,6 @@ public class MoodCntl {
         
     }
     
-    /**
-     * Sends call to the externalDataCntl to read moods table
-     */
-    public void readMoods(){
-        System.out.println("Reading moods");
-        moodList = externalDataCntl.readMoods();
-    }
-    
     public void addMood(String name, GregorianCalendar time){
         System.out.println("adding mood");
         moodList.add(name, time);
@@ -107,7 +97,7 @@ public class MoodCntl {
     
     public MoodList getMoodList(){
         if(moodList == null){
-            moodList = externalDataCntl.readMoods();
+            moodList = ExternalDataCntl.getMoodList();
         }
         return moodList;
     }

@@ -5,7 +5,7 @@
  */
 package foodprofile.controller;
 
-import foodmood.ExternalDataCntl;
+import externaldata.controller.ExternalDataCntl;
 import foodmood.controller.NavigationCntl;
 import foodprofile.model.FoodList;
 import foodprofile.model.Food;
@@ -30,12 +30,10 @@ public class FoodCntl {
     private Statement theStatement = null;
     private FoodListUI foodListUI;
     private NavigationCntl navigationCntl;
-    private ExternalDataCntl externalDataCntl;
         
     public FoodCntl(NavigationCntl navigationCntl, User currentUser){
         this.navigationCntl = navigationCntl;
-        this.externalDataCntl = new ExternalDataCntl();
-        readFoods();
+        foodList = ExternalDataCntl.getExternalDataCntl().getFoodList();
     }
         
      /**
@@ -82,7 +80,7 @@ public class FoodCntl {
      */
     public void addFood(String name, String foodCategory, GregorianCalendar time){
         if(foodList == null){
-            readFoods();
+            foodList = ExternalDataCntl.getExternalDataCntl().getFoodList();
         }
         int id;
         if(foodList.size() == 0){
@@ -126,11 +124,5 @@ public class FoodCntl {
     
     public void goHome(){
         navigationCntl.goHomeScreen();
-    }
-    
-    public void readFoods(){
-        System.out.println("Reading foods");
-        foodList = externalDataCntl.readFoods();
-    }
-    
+    }    
 }
