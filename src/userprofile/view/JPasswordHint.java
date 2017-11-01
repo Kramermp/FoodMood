@@ -16,6 +16,9 @@ import javax.swing.JPasswordField;
  * @author Michael Kramer <mpk5206 @ psu.edu>
  */
 public class JPasswordHint extends JPasswordField {
+    private enum State {EMPTY, DISPLAYHINT, HASVALUE};
+    
+    private State fieldState = State.DISPLAYHINT;
     private Color hintColor = Color.GRAY;
     private Color textColor = Color.BLACK;
     private char echoChar;
@@ -49,25 +52,6 @@ public class JPasswordHint extends JPasswordField {
         setText(String.valueOf(hint));
     }
     
-    /**
-     * This is used internally to display the hint to ensure that the class
-     * consistently makes the same changes
-     */
-    private void displayHint() {
-        setText(hint);
-        setEchoChar((char) 0);
-        setForeground(hintColor);
-    }
-    
-    /**
-     * This is used for when the User gets focus on the field to ensure it
-     * is empty in preparation for them entering their own data.
-     */
-    private void clear() {
-        setText("");
-        setForeground(textColor);
-        setEchoChar(echoChar);
-    }
     
     /**
      * Returns the actual value of the field ignoring the hint
@@ -77,15 +61,66 @@ public class JPasswordHint extends JPasswordField {
         return value;
     }
     
-    public void validateInput() {
-        if (getPassword().length == 0) {
-            //If it loses focus and there is no data
-            displayHint();
-            value = new char[0]; //Clear old value
-        } else {
-            //If it loses focus and there is values is there
-            value = getPassword();
-            setForeground(textColor);
+        /**
+     * 
+     */
+    public void setValue(String value) {
+        this.value = value.toCharArray();
+        fieldState = State.HASVALUE;
+        setText(value);
+        setForeground(textColor); 
+    }
+    
+    public boolean hasValue() {
+        return value.length > 0;
+    }
+
+    /**
+     * Used to empty the field when focus is gained.
+     */
+    private void clear () {
+        fieldState = State.EMPTY;
+        setText("");
+        setForeground(textColor);
+        setEchoChar(echoChar);
+    }
+    
+    private void displayHint() {
+        fieldState = State.DISPLAYHINT;
+        value = new char[0];
+        setText(hint);
+        setEchoChar((char) 0);
+        setForeground(hintColor);
+    }
+    
+    private void prepareForInput() {
+        switch (fieldState)  {
+            case DISPLAYHINT:
+                // Fall Through
+            case EMPTY:
+                clear();
+                break;
+            case HASVALUE:
+                // Do Nothing
+                break;                   
+        }
+    }
+
+    public void processInput() {
+        switch(fieldState) {
+            case DISPLAYHINT:
+                value = new char[0];
+                break;
+            case EMPTY:
+                // Fall Through
+            case HASVALUE:
+                if(getText().isEmpty())
+                    displayHint();
+                else { 
+                    value =  getPassword();
+                    fieldState = State.HASVALUE;
+                }
+                break;     
         }
     }
     
@@ -98,19 +133,13 @@ public class JPasswordHint extends JPasswordField {
         @Override
         public void focusGained(FocusEvent fe) {
             System.out.println("Password Field gained Focus");
-            if(value == null || value.length == 0) {
-                //If it gains focus and there is no value
-                clear();
-            } else {
-                //If it gains focus and there is actual data in the field
-                //Do Nothing
-            }
+            prepareForInput();
         }
 
         @Override
         public void focusLost(FocusEvent fe) {
             System.out.println("Password Field Lost Focus");
-            validateInput();
+            processInput();
         }
     }
     
