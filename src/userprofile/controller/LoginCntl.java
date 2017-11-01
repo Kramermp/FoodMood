@@ -5,7 +5,7 @@
  */
 package userprofile.controller;
 
-import foodmood.ExternalDataCntl;
+import externaldata.controller.ExternalDataCntl;
 import foodmood.controller.NavigationCntl;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import userprofile.view.LoginUI;
 import userprofile.model.UserList;
 import userprofile.model.User;
-import userprofile.view.ViewUserUI;
+import userprofile.view.ViewUserProfileUI;
 import userprofile.view.NewUserUI;
 
 /**
@@ -35,15 +35,18 @@ public class LoginCntl {
      * Creates a LoginController
      */
     public LoginCntl() {
-        this.externalDataCntl = new ExternalDataCntl();
-        this.theUserList = externalDataCntl.readLogins();
-        this.userCntl = new UserCntl(theUserList, this);
+        this.externalDataCntl = ExternalDataCntl.getExternalDataCntl();
+        this.theUserList = externalDataCntl.getUserList();
+        this.userCntl = new UserCntl(this);
         this.loginUi = new LoginUI(this);
         this.loginUi.setVisible(true);
         this.loginUi.requestFocus();
+        
+        //This should be removed at a later time
+        //submitUserCredentials("mpk5206", "pass".toCharArray());
     }
     
-    public void submitUserCredentials(String username, char[] password) {
+    public final void submitUserCredentials(String username, char[] password) {
         if(theUserList.authenticateUserCredentials(username, password)) {
             login(username);
         } else {

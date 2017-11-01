@@ -78,9 +78,9 @@ public class JTextHint extends JTextField {
      */
     public void setValue(String value) {
         this.value = value;
-        setText(value);
         this.fieldState = State.HASVALUE;
         setForeground(textColor); 
+        setText(value);
     }
     
     public boolean hasValue() {

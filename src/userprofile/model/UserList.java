@@ -6,6 +6,7 @@
 package userprofile.model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  *
@@ -18,7 +19,7 @@ public class UserList {
      * Default Constructor of the UserList, creates an empty UserList
      */
     public UserList() {
-        theListOfUsers.add(new User("TestUser", "pass".toCharArray()));
+        
     }
     
     public UserList(ArrayList<User> users){
@@ -69,11 +70,20 @@ public class UserList {
      * @param password The Password of the User to remove 
      */
     public void deleteUser(String username, char[] password) {
+        System.out.println("DeleteUser called");
         for (int i = 0; i < theListOfUsers.size(); i++) {
-            if(theListOfUsers.get(i).getUsername().equals(username)){
-                if(java.util.Arrays.equals(password, theListOfUsers.get(i).getPassword())){
+            if(theListOfUsers.get(i).getUsername().equalsIgnoreCase(username)){
+                System.out.println("There is a user with that name");
+                if(Arrays.equals(password, theListOfUsers.get(i).getPassword())){
+                    System.out.println("Found a Matching User to Delete.");
                     theListOfUsers.remove(i);
+                } else {
+                    System.out.println("Found: " + String.valueOf(theListOfUsers.get(i).getPassword()));
+                    System.out.println("Looking for: " + String.valueOf(password));
                 }
+            } else {
+//                System.out.println("Found: " + theListOfUsers.get(i).getUsername());
+//                System.out.println("Looking for: " + username);
             }
         }
         
