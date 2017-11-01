@@ -17,11 +17,20 @@ import moodprofile.model.*;
 import userprofile.model.*;
 
 /**
- *
- * @author HannahGarthwaite
+ * This is the ExternalDataCtnl and it manages the interaction between
+ * the application and the SQL DataBase.
+ * <p>
+ * This class is structured following the Initialize-On-Demand Holder Idiom,
+ * to ensure that there is only ever one ExternalDataCntl object created in the
+ * application. By enforcing a single instance it helps ensure that the data
+ * That is loaded into memory is the same as the data that is in the database.
+ * <p>
+ * The object is lazily initialized; meaning, the object is not instantiated 
+ * until the first call to getExternalDataCntl().
+ * <p>
+ * @author HannahGarthwaite, Michael Kramer
  */
 public class ExternalDataCntl {
-    private static ExternalDataCntl externalDataCntl;
     
     private Connection theConnection = null;
     private Statement theStatement = null;
@@ -33,6 +42,15 @@ public class ExternalDataCntl {
         this.userList = readLogins();
         this.foodList = readFoods();
         this.moodList = readMoods();
+    }
+    
+    private static class LazyHolder {
+        static final ExternalDataCntl INSTANCE = new ExternalDataCntl();
+    }
+    
+    // This how the to get an ExternalDataCntl, not via a Constructure 
+    public static ExternalDataCntl getExternalDataCntl() {
+        return LazyHolder.INSTANCE;
     }
     
     public void createUserTable(){
@@ -409,13 +427,6 @@ public class ExternalDataCntl {
             System.exit(0);
         }
         return moodList;
-    }
-    
-    public static ExternalDataCntl getExternalDataCntl() {
-        if(externalDataCntl == null) {
-            externalDataCntl = new ExternalDataCntl();
-        }
-        return externalDataCntl;
-    }
+    } 
     
 }
