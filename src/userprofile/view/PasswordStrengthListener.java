@@ -1,5 +1,6 @@
 package userprofile.view;
 
+import java.awt.Color;
 import javax.swing.JPasswordField;
 import javax.swing.JProgressBar;
 import javax.swing.event.DocumentEvent;
@@ -13,6 +14,7 @@ public class PasswordStrengthListener implements DocumentListener {
     public PasswordStrengthListener(JPasswordField passwordField, 
             JProgressBar passwordStrengthBar) {
         this.passwordField = passwordField;
+        this.passwordField.getDocument().addDocumentListener(this);
         this.passwordStrengthBar = passwordStrengthBar;
     }
     
@@ -55,6 +57,11 @@ public class PasswordStrengthListener implements DocumentListener {
             } else {
                 passwordStrengthBar.setValue(8);
             }
+        }
+        if(text.length == 1) {
+            passwordStrengthBar.setForeground(Color.RED);
+        } else {
+            passwordStrengthBar.setForeground(Color.BLUE);
         }
     }
 }

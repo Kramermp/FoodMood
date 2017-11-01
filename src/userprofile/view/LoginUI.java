@@ -20,6 +20,7 @@ import java.awt.Dimension;
 import java.awt.Insets;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import static java.lang.Thread.yield;
 import java.util.Arrays;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
@@ -66,7 +67,7 @@ public class LoginUI extends JFrame {
     }
     
     private void addComponents() {
-    setLayout(new GridBagLayout());
+        setLayout(new GridBagLayout());
         // The labelInset will be the standard inset used by the label objects
         Insets labelInset = new Insets(15, 0, 0, 0);
         // The fieldInset will be the standard inset used by the field objects
@@ -109,7 +110,11 @@ public class LoginUI extends JFrame {
         passwordFld.setHorizontalAlignment(JPasswordField.CENTER);
         passwordFld.addActionListener((ActionEvent ae) -> { 
             System.out.println("An Action occured on Password Field.");
-            submitBtn.requestFocus();
+            if(passwordFld.hasFocus()) {
+                requestFocus();
+            }
+            passwordFld.processInput();
+            submitUserCredentials();
         });
         
         c = new GridBagConstraints();
@@ -165,7 +170,7 @@ public class LoginUI extends JFrame {
         
         JButton signupBtn = new JButton("Sign Up");
         signupBtn.addActionListener((ActionEvent) -> { 
-            this.parentController.signup();
+            this.parentController.signupBtnPressed();
         });
         //registerBtn.addActionListener(new RegisterBtnListener());
         c = new GridBagConstraints();
@@ -219,7 +224,5 @@ public class LoginUI extends JFrame {
             passwordFld.getValue());
         }  
     }
-
-
     
 }
