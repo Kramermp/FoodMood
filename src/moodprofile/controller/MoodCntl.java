@@ -97,7 +97,7 @@ public class MoodCntl {
     
     public MoodList getMoodList(){
         if(moodList == null){
-            moodList = ExternalDataCntl.getMoodList();
+            moodList = ExternalDataCntl.getExternalDataCntl().getMoodList();
         }
         return moodList;
     }
