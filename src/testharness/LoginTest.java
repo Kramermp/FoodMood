@@ -36,16 +36,16 @@ public class LoginTest {
        //theLoginView.submitUserCredentials();
         System.out.println("Correct user credentials sent for login");
         
-        if(theLoginController.authenticateUserCredentials(username, password)){
-            System.out.println("The Login Controller successfully authenticated user.");
-        }else{
-            System.out.println("The Login Controller failed to authenticate user.");
-        }
-        if(theLoginController.authenticateUserCredentials(username, incorrectPassword)){
-            System.out.println("The Login Controller successfully denied access.");
-        }else{
-            System.out.println("The Login Controller incorrectly logged a user in.");
-        }
+//        //if(theLoginController.authenticateUserCredentials(username, password)){
+//            System.out.println("The Login Controller successfully authenticated user.");
+//        }else{
+//            System.out.println("The Login Controller failed to authenticate user.");
+//        }
+//        if(theLoginController.authenticateUserCredentials(username, incorrectPassword)){
+//            System.out.println("The Login Controller successfully denied access.");
+//        }else{
+//            System.out.println("The Login Controller incorrectly logged a user in.");
+//        }
         
 //        theLoginController.login();
         System.out.println("The Navigation Controller was created by Login Control.");
