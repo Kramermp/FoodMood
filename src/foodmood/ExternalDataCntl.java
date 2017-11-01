@@ -22,8 +22,8 @@ import userprofile.model.*;
  */
 public class ExternalDataCntl {
     
-     Connection theConnection = null;
-    Statement theStatement = null;
+    private Connection theConnection = null;
+    private Statement theStatement = null;
     
     public ExternalDataCntl(){
         
