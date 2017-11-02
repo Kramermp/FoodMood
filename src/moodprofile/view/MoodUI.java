@@ -136,11 +136,11 @@ public class MoodUI extends JFrame{
             parentCntl.addMood(name, time);
     });
         listButton.addActionListener((ActionEvent ae) -> { 
-            this.setVisible(false);
+            frame.setVisible(false);
             parentCntl.goListView();
     });
         homeButton.addActionListener((ActionEvent ae) -> {
-           this.setVisible(false);
+           frame.setVisible(false);
            parentCntl.goHome();
         });
         
