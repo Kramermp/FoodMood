@@ -5,6 +5,7 @@
  */
 package moodprofile.model;
 
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -17,7 +18,7 @@ import java.util.GregorianCalendar;
  *
  * @author Micahel Kramer
  */
-public class MoodList {
+public class MoodList implements Serializable {
     
     private ArrayList<Mood> listOfMoods;
     

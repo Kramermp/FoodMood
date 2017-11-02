@@ -7,6 +7,7 @@ package userprofile.model;
 
 import notificationprofile.model.Notification;
 import foodprofile.model.FoodList;
+import java.io.Serializable;
 import java.util.Arrays;
 import moodprofile.model.MoodList;
 import notificationprofile.model.NotificationList;
@@ -15,7 +16,7 @@ import notificationprofile.model.NotificationList;
  *
  * @author Michael Kramer
  */
-public class User {
+public class User implements Serializable {
     private String username;
     private char[] password;
     private FoodList usersFoodList = new FoodList();

@@ -5,6 +5,7 @@
  */
 package userprofile.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -12,7 +13,7 @@ import java.util.Arrays;
  *
  * @author Michael Kramer
  */
-public class UserList {
+public class UserList implements Serializable {
     private ArrayList<User> theListOfUsers = new ArrayList<User>();
     
     /**

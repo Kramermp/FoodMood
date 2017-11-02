@@ -1,9 +1,10 @@
 package moodprofile.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
-public class Mood {
+public class Mood implements Serializable {
     
     private int id;
     private String name;

@@ -5,6 +5,7 @@
  */
 package notificationprofile.model;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
@@ -12,7 +13,7 @@ import java.util.GregorianCalendar;
  *
  * @author HannahGarthwaite
  */
-public class Notification {
+public class Notification implements Serializable {
     private int id;
     private String name;
     private String description;

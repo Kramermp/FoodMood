@@ -6,6 +6,13 @@
 package externaldata.controller;
 
 import foodprofile.model.*;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -39,9 +46,16 @@ public class ExternalDataCntl {
     private MoodList moodList;
     
     private ExternalDataCntl(){
-        this.userList = readLogins();
-        this.foodList = readFoods();
-        this.moodList = readMoods();
+//        this.userList = readLogins();
+//        this.foodList = readFoods();
+//        this.moodList = readMoods();
+
+		readSerializedData();
+		if(userList == null) {
+			userList = new UserList();
+			writeSerializedData();
+			readSerializedData();
+		}
     }
     
     private static class LazyHolder {
@@ -52,9 +66,58 @@ public class ExternalDataCntl {
     public static ExternalDataCntl getExternalDataCntl() {
         return LazyHolder.INSTANCE;
     }
-    
+	
+    public void writeSerializedData() {
+		System.out.println("Executing writeTheSerializedData().");
+		FileOutputStream fos = null;
+		ObjectOutputStream out = null;
+		try {
+			fos = new FileOutputStream("Data.ser");
+			out = new ObjectOutputStream(fos);
+			out.writeObject(userList);
+			out.flush();
+			out.close();
+		} catch(IOException ex) {
+			ex.printStackTrace();
+		} catch (Exception ex) {
+			System.out.println(ex.getMessage());
+		}	
+	}
+	
+	public void readSerializedData() {
+		System.out.println("Executing readTheSerializedData().");
+		String errorType = null;
+		String errorMessage = null;
+		try {
+			FileInputStream fis = null;
+			ObjectInputStream in = null;
+			fis = new FileInputStream("Data.ser");
+			in = new ObjectInputStream(fis);
+			userList = (UserList) in.readObject();
+			in.close();
+		} catch (FileNotFoundException e) {
+			errorType = "FileNotFoundException";
+			errorMessage = e.getMessage();
+		} catch (IOException e) {
+			errorType = "IOException";
+			errorMessage = e.getMessage();
+		} catch (ClassNotFoundException e) {
+			errorType = "ClassNameNotFoundException";
+			errorMessage = e.getMessage();
+		} catch (Exception e) {
+			errorType = e.getClass().getName();
+			errorMessage = e.getMessage();
+		} finally {
+			if(errorType != null) {
+				System.out.println(errorType + " occurred while executing"
+					+ " readTheSerializedData().");
+				System.out.println(errorMessage);
+			}
+		}
+	}
+	
     public void createUserTable(){
-        System.out.println("creating user table \n");
+        System.out.println("creating user table");
         try{
             Class.forName("org.sqlite.JDBC");
             theConnection = DriverManager.getConnection("jdbc:sqlite:foodmood.db");
@@ -142,33 +205,35 @@ public class ExternalDataCntl {
             e.printStackTrace();
             System.exit(0);
         }
+		writeSerializedData();
     }
     
     public void addUser(String username, char[] password){
         createUserTable();
-            System.out.println("adding user to db");
-            try{
-                Class.forName("org.sqlite.JDBC");
-                theConnection = DriverManager.getConnection("jdbc:sqlite:foodmood.db");
-                theStatement = theConnection.createStatement();
-                System.out.println("successfully opened db");
-                
-                String passwordString = "";
-                for (int i = 0; i < password.length; i++) {
-                    passwordString += password[i];
-                }
+		System.out.println("adding user to db");
+		try{
+			Class.forName("org.sqlite.JDBC");
+			theConnection = DriverManager.getConnection("jdbc:sqlite:foodmood.db");
+			theStatement = theConnection.createStatement();
+			System.out.println("successfully opened db");
 
-                String insert = "INSERT INTO login VALUES ('"+username+"', '"+passwordString+"');";
-                theStatement.executeUpdate(insert);
-                
-                theStatement.close();
-                theConnection.close(); 
-                System.out.println("User added to db");
+			String passwordString = "";
+			for (int i = 0; i < password.length; i++) {
+				passwordString += password[i];
+			}
 
-            }catch(Exception e){
-                e.printStackTrace();
-                System.exit(0);
-            }
+			String insert = "INSERT INTO login VALUES ('"+username+"', '"+passwordString+"');";
+			theStatement.executeUpdate(insert);
+
+			theStatement.close();
+			theConnection.close(); 
+			System.out.println("User added to db");
+
+		}catch(Exception e){
+			e.printStackTrace();
+			System.exit(0);
+		}
+		writeSerializedData();
     }
     
     public void deleteUser(String username){
@@ -284,6 +349,7 @@ public class ExternalDataCntl {
                 System.out.println(ex.getMessage());
             }
         }
+		writeSerializedData();
     }
     
     public void removeFood(Food foodToRemove){
@@ -312,6 +378,7 @@ public class ExternalDataCntl {
                 System.out.println(ex.getMessage());
             }
         }
+		writeSerializedData();
     }
     
     public void createMoodTable(){
@@ -368,6 +435,7 @@ public class ExternalDataCntl {
                 System.out.println(ex.getMessage());
             }
         }
+		writeSerializedData();
     }
     
     public void deleteMood(Mood moodToRemove){
@@ -396,6 +464,7 @@ public class ExternalDataCntl {
                 System.out.println(ex.getMessage());
             }
         }
+		writeSerializedData();
     }
     
     public MoodList getMoodList() {

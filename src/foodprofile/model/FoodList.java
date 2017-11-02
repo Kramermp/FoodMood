@@ -5,6 +5,7 @@
  */
 package foodprofile.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -17,7 +18,7 @@ import java.sql.Statement;
  *
  * @author Michael Kramer
  */
-public class FoodList {
+public class FoodList implements Serializable {
     private ArrayList<Food> listOfFoods = new ArrayList<Food>();  
 
     

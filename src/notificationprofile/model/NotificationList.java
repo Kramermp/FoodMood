@@ -5,13 +5,14 @@
  */
 package notificationprofile.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author HannahGarthwaite
  */
-public class NotificationList {
+public class NotificationList implements Serializable {
     private ArrayList<Notification> notificationList;
     
     /**

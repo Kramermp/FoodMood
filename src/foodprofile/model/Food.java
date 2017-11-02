@@ -1,10 +1,11 @@
 package foodprofile.model;
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
-public class Food {
+public class Food implements Serializable {
     private int id;
     private String name; //eg milk
     private ArrayList<String> foodCategories; //eg Dairy
