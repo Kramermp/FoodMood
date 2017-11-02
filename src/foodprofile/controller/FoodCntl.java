@@ -33,7 +33,7 @@ public class FoodCntl {
         
     public FoodCntl(NavigationCntl navigationCntl, User currentUser){
         this.navigationCntl = navigationCntl;
-        foodList = ExternalDataCntl.getExternalDataCntl().getFoodList();
+        foodList = navigationCntl.getActiveUser().getFoodList();
     }
         
      /**
@@ -104,7 +104,7 @@ public class FoodCntl {
     
     public void goListView(){
         foodListUI = new FoodListUI(this);
-        foodListUI.setVisible(true); 
+        foodListUI.setVisible(true);
     }
     
      

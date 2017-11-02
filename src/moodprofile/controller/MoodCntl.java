@@ -36,7 +36,7 @@ public class MoodCntl {
      */
     public MoodCntl(NavigationCntl navigationCntl, User currentUser){
         this.navigationCntl = navigationCntl;
-        moodList = ExternalDataCntl.getExternalDataCntl().getMoodList();
+        moodList = navigationCntl.getActiveUser().getMoodList();
     }
     
      /**

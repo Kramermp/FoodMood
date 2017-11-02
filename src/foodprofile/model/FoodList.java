@@ -44,7 +44,7 @@ public class FoodList implements Serializable {
      * @param foodToAdd the foodToAdd 
      */
     public void addFood(Food foodToAdd) {
-        System.out.println("TODO add food");
+        this.listOfFoods.add(foodToAdd);
     }
     
     /**
