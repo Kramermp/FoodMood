@@ -85,6 +85,7 @@ public class ExternalDataCntl {
     }
         
     private UserList readLogins(){
+        createUserTable();
         System.out.println("Reading logins");
         UserList theUserList = null;
         try{
