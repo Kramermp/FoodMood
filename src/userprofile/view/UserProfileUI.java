@@ -153,26 +153,26 @@ public class UserProfileUI extends JFrame {
                     //If there is a source User
 
             } else {
-                    //If there is not a source user
-                    //This implies that this UI is fpr creating a new user
-                    JButton cancelBtn = new JButton("Cancel");
-                    cancelBtn.addActionListener((ActionEvent ae) -> { 
-                            System.out.println("cancelBtn click registered");
-                            parentController.goHome();
-                    });
-                    gbc.gridx = 0;
-                    gbc.gridy = 0;
-                    buttonPanel.add(cancelBtn, gbc);
-                    JButton submitBtn = new JButton("Submit");
-                    submitBtn.addActionListener((ActionEvent ae) -> {
-                            System.out.println("submitBtn click registered");
-                            if(this.parentController.submitUser()){
-                                this.setVisible(false);
-                            }
-                    });
-                    gbc.gridx = 1;
-                    gbc.gridy = 0;
-                    buttonPanel.add(submitBtn, gbc);	
+				//If there is not a source user
+				//This implies that this UI is fpr creating a new user
+				JButton cancelBtn = new JButton("Cancel");
+				cancelBtn.addActionListener((ActionEvent ae) -> { 
+//						System.out.println("cancelBtn click registered");
+//						parentController.goHome();
+				});
+				gbc.gridx = 0;
+				gbc.gridy = 0;
+				buttonPanel.add(cancelBtn, gbc);
+				JButton submitBtn = new JButton("Submit");
+				submitBtn.addActionListener((ActionEvent ae) -> {
+						System.out.println("submitBtn click registered");
+//						if(this.parentController.submitUser()){
+//							this.setVisible(false);
+//						}
+				});
+				gbc.gridx = 1;
+				gbc.gridy = 0;
+				buttonPanel.add(submitBtn, gbc);	
             }
 
     }

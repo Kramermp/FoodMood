@@ -218,6 +218,7 @@ public class ExternalDataCntl {
             
     
     private FoodList readFoods(){
+		createFoodTable();
         FoodList foodList = null;
         try{
             Class.forName("org.sqlite.JDBC");
@@ -402,6 +403,7 @@ public class ExternalDataCntl {
     }
     
     private MoodList readMoods(){
+		createMoodTable();
         MoodList moodList = null;
         try{
             Class.forName("org.sqlite.JDBC");
