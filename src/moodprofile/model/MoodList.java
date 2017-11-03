@@ -5,6 +5,7 @@
  */
 package moodprofile.model;
 
+import externaldata.controller.ExternalDataCntl;
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -79,14 +80,16 @@ public class MoodList implements Serializable {
         listOfMoods.add(toAdd);
         System.out.println("added");
         System.out.println(listOfMoods.size());
+        ExternalDataCntl.getExternalDataCntl().writeSerializedData();
     }
     
     /**
      * Adds the provided MoodProfile to the MoodList
      * @param moodProfileToAdd the mood to add
      */
-    public void addMoodProfile(Mood moodToAdd) {
-        System.out.println("TODO addMood");
+    public void addMood(Mood moodToAdd) {
+        this.listOfMoods.add(moodToAdd);
+        ExternalDataCntl.getExternalDataCntl().writeSerializedData();
     }
     
     /**
@@ -103,7 +106,8 @@ public class MoodList implements Serializable {
      * @param moodProfileToRemove the mood to remove
      */
     public void removeMoodProfile(Mood moodToRemove) {
-        System.out.println("TODO removeMood");
+        this.listOfMoods.remove(moodToRemove);
+        ExternalDataCntl.getExternalDataCntl().writeSerializedData();
     }
     
     /**
@@ -112,9 +116,8 @@ public class MoodList implements Serializable {
      * @return boolean if it has the specified food
      */
     public boolean hasMoodProfile(Mood moodProfile) {
-        System.err.println("This is a stub.");
-        //TODO: Implment hasMoodProfile
-        return false;
+        System.err.println("I'm not sure that this works.");
+        return listOfMoods.contains(moodProfile);
     }
     
     /**

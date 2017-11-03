@@ -5,6 +5,7 @@
  */
 package foodprofile.model;
 
+import externaldata.controller.ExternalDataCntl;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.sql.Connection;
@@ -44,7 +45,8 @@ public class FoodList implements Serializable {
      * @param foodToAdd the foodToAdd 
      */
     public void addFood(Food foodToAdd) {
-        System.out.println("TODO add food");
+        this.listOfFoods.add(foodToAdd);
+        ExternalDataCntl.getExternalDataCntl().writeSerializedData();
     }
     
     /**
@@ -57,6 +59,7 @@ public class FoodList implements Serializable {
                 listOfFoods.set(i, toUpdate);
             }
         }
+        ExternalDataCntl.getExternalDataCntl().writeSerializedData();
     }
     /**
      * Removes the provided from the FoodList
@@ -68,7 +71,7 @@ public class FoodList implements Serializable {
                 listOfFoods.remove(i);
             }
         }
-        System.out.println("TODO remove food");
+        ExternalDataCntl.getExternalDataCntl().writeSerializedData();
     }
     
     /**
@@ -77,9 +80,9 @@ public class FoodList implements Serializable {
      * @return the food to check for
      */
     public boolean hasFood(Food foodProfile) {
-        System.err.println("This is a stub.");
-        //TODO: Implment hasFoodProfile
-        return false;
+        //I'm not sure if this actually works
+        System.err.println("I'm not sure if this would actually work.");
+        return (this.listOfFoods.contains(foodProfile));
     }
     
     /**
