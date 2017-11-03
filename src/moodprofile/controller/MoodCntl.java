@@ -8,6 +8,7 @@ package moodprofile.controller;
 import externaldata.controller.ExternalDataCntl;
 import foodmood.controller.NavigationCntl;
 import foodprofile.view.FoodUI;
+import java.awt.Dimension;
 import java.sql.Connection;
 import moodprofile.model.Mood;
 import java.sql.DriverManager;
@@ -15,6 +16,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import javax.swing.JFrame;
 import moodprofile.model.MoodList;
 import moodprofile.view.MoodListUI;
 import moodprofile.view.MoodUI;
@@ -36,15 +38,8 @@ public class MoodCntl {
      */
     public MoodCntl(NavigationCntl navigationCntl, User currentUser){
         this.navigationCntl = navigationCntl;
-        moodList = ExternalDataCntl.getExternalDataCntl().getMoodList();
-    }
-    
-     /**
-     * This sets the MoodList for the current user
-     * @param moodList the moodList to set
-     */
-    private void setMoodList(MoodList moodList) {
-        this.moodList = moodList;
+        this.moodList = navigationCntl.getActiveUser().getMoodList();
+        this.newMood();
     }
     
     /**
@@ -52,7 +47,7 @@ public class MoodCntl {
      * @param mood the mood to add
      */
     public void addMood(Mood mood){
-        moodList.addMoodProfile(mood);
+        moodList.addMood(mood);
         System.out.println(moodList.size()+" in c");
     }
     
@@ -91,14 +86,15 @@ public class MoodCntl {
     
     public void addMood(String name, GregorianCalendar time){
         System.out.println("adding mood");
+        if(moodList == null){
+            System.out.println("was null");
+        }
         moodList.add(name, time);
         System.out.println("Mood list "+moodList.size());
     }
     
     public MoodList getMoodList(){
-        if(moodList == null){
-            moodList = ExternalDataCntl.getExternalDataCntl().getMoodList();
-        }
+        
         return moodList;
     }
     
@@ -116,7 +112,12 @@ public class MoodCntl {
      */
     public void newMood(){
         MoodUI moodUI = new MoodUI(this);
-        moodUI.setVisible(true);
+        navigationCntl.getUserInterface().getContentPane().removeAll();
+        navigationCntl.getUserInterface().setContentPane(moodUI);
+        navigationCntl.getUserInterface().setSize(new Dimension(500, 700));
+        navigationCntl.getUserInterface().repaint();
+        navigationCntl.getUserInterface().revalidate();
+        navigationCntl.getUserInterface().setVisible(true);
     }
     
     /**
@@ -124,7 +125,12 @@ public class MoodCntl {
      */
     public void goListView(){
         MoodListUI moodListUI = new MoodListUI(this);
-        moodListUI.setVisible(true);
+        navigationCntl.getUserInterface().getContentPane().removeAll();
+        navigationCntl.getUserInterface().setContentPane(moodListUI);
+        navigationCntl.getUserInterface().setSize(new Dimension(500, 700));
+        navigationCntl.getUserInterface().repaint();
+        navigationCntl.getUserInterface().revalidate();
+        navigationCntl.getUserInterface().setVisible(true);
     }
     
     /**
@@ -133,6 +139,14 @@ public class MoodCntl {
      */
     public void viewMood(Mood mood){
         MoodUI moodUI = new MoodUI(this, mood);
-        moodUI.setVisible(true);
+        navigationCntl.getUserInterface().getContentPane().removeAll();
+        navigationCntl.getUserInterface().setContentPane(moodUI);
+        navigationCntl.getUserInterface().repaint();
+        navigationCntl.getUserInterface().revalidate();
+        navigationCntl.getUserInterface().setVisible(true);
+    }
+    
+    public JFrame getUserInterface() {
+        return navigationCntl.getUserInterface();
     }
 }
