@@ -6,6 +6,7 @@
 package moodprofile.model;
 
 import externaldata.controller.ExternalDataCntl;
+import foodprofile.model.Food;
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -39,6 +40,27 @@ public class MoodList implements Serializable {
     public MoodList(ArrayList<Mood> moods){
         this.listOfMoods = moods;
     }
+    
+    /**
+     * Sorts Moodlist by date of mood
+     */
+    public void sortByDate(){
+        Mood temp; 
+        
+        for (int i = 0; i < listOfMoods.size()-1; i++) {
+            for (int j = 0; j < listOfMoods.size()-i-1; j++) {
+                if(listOfMoods.get(j+1) != null && listOfMoods.get(j) != null){
+                    long difference = listOfMoods.get(j).getTime().getTimeInMillis() - listOfMoods.get(j+1).getTime().getTimeInMillis();
+                    if(difference >= 0){
+                        temp = listOfMoods.get(j+1);
+                        listOfMoods.set(j+1, listOfMoods.get(j));
+                        listOfMoods.set(j, temp);
+                    }
+                }
+            }
+        }
+    }
+    
     
     /**
      * Takes a mood, finds it in the list, and updates it
