@@ -104,4 +104,24 @@ public class FoodList implements Serializable {
         }
         return listOfFoods.get(i);
     }
+    
+    /**
+     * sorts the FoodList by date
+     */
+    public void sortByDate(){
+        Food temp; 
+        
+        for (int i = 0; i < listOfFoods.size()-1; i++) {
+            for (int j = 0; j < listOfFoods.size()-i-1; j++) {
+                if(listOfFoods.get(j+1) != null && listOfFoods.get(j) != null){
+                    long difference = listOfFoods.get(j).getTime().getTimeInMillis() - listOfFoods.get(j+1).getTime().getTimeInMillis();
+                    if(difference >= 0){
+                        temp = listOfFoods.get(j+1);
+                        listOfFoods.set(j+1, listOfFoods.get(j));
+                        listOfFoods.set(j, temp);
+                    }
+                }
+            }
+        }
+    }
 }
