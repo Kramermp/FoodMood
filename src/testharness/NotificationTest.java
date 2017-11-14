@@ -22,7 +22,7 @@ public class NotificationTest {
         NotificationList theNotificationList = new NotificationList();
         System.out.println("Notification Test created NotificationList.");
         
-        Notification theNotification = new Notification(0, "Test Notification", "This is a test.", new GregorianCalendar(), false);
+        Notification theNotification = new Notification(0, "Test Notification", "This is a test.", new java.util.Date(), false);
         System.out.println("Notification Test created a test notification "+theNotification.getId());
         
         theNotificationList.addNotification(theNotification);
