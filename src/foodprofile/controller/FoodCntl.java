@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import userprofile.model.User;
 import java.sql.Connection;
 import java.sql.Statement;
+import java.util.Date;
 import java.util.GregorianCalendar;
 
 /**
@@ -33,9 +34,18 @@ public class FoodCntl {
         
     public FoodCntl(NavigationCntl navigationCntl, User currentUser){
         this.navigationCntl = navigationCntl;
-        foodList = ExternalDataCntl.getExternalDataCntl().getFoodList();
+        foodList = navigationCntl.getActiveUser().getFoodList();
     }
         
+    /**
+     * sort list chronologically, return date of the last
+     * @return Date of last food
+     */
+    public Date getDateOfLastFood(){
+        System.out.println("get date of last food");
+        return null;
+    }
+    
      /**
      * This returns the FoodList for the current user
      * @return the foodList
@@ -80,6 +90,7 @@ public class FoodCntl {
      */
     public void addFood(String name, String foodCategory, GregorianCalendar time){
         if(foodList == null){
+            System.out.println("list null");
             foodList = ExternalDataCntl.getExternalDataCntl().getFoodList();
         }
         int id;
