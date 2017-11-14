@@ -48,8 +48,12 @@ public class MoodCntl {
      * @return Date of last mood
      */
     public Date getDateOfLastMood(){
-        System.out.println("get date of last food");
-        return null;
+        moodList.sortByDate();
+        if(moodList.size() > 0){
+            return moodList.getMood(moodList.size()-1).getTime().getTime();
+        }else{
+            return new Date();
+        }
     }
     
     /**
