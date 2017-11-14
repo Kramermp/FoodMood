@@ -15,6 +15,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import javax.swing.JFrame;
 import moodprofile.model.MoodList;
@@ -40,6 +41,15 @@ public class MoodCntl {
         this.navigationCntl = navigationCntl;
         this.moodList = navigationCntl.getActiveUser().getMoodList();
         this.newMood();
+    }
+    
+    /**
+     * sort list chronologically, return date of the last
+     * @return Date of last mood
+     */
+    public Date getDateOfLastMood(){
+        System.out.println("get date of last food");
+        return null;
     }
     
     /**
