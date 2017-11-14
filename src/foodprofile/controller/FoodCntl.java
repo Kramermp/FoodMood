@@ -42,8 +42,12 @@ public class FoodCntl {
      * @return Date of last food
      */
     public Date getDateOfLastFood(){
-        System.out.println("get date of last food");
-        return null;
+        foodList.sortByDate();
+        if(foodList.size() > 0){
+            return foodList.getFood(foodList.size()-1).getTime().getTime();
+        }else{
+            return new Date();
+        }
     }
     
      /**
