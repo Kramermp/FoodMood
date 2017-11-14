@@ -86,7 +86,7 @@ public class NavigationCntl {
      * Loads the Notification Screen
      */
     public void goNotifcationScreen() {
-        NotificationCntl notificationController = new NotificationCntl(activeUser, this);
+        NotificationCntl notificationController = new NotificationCntl(activeUser, this, new FoodCntl(this, activeUser), new MoodCntl(this,activeUser));
     }
     
     //_______________User Module___________________  
