@@ -28,12 +28,14 @@ public class NotificationCntl {
      * @param user currentUser
      * @param navigationCntl 
      */
-    public NotificationCntl(User user, NavigationCntl navigationCntl, FoodCntl foodCntl, MoodCntl moodCntl){
+    public NotificationCntl(User user, NavigationCntl navigationCntl, FoodCntl foodCntl, MoodCntl moodCntl, boolean showView){
         theUser = user;
         theNotificationList = user.getNotificationList();
         this.navigationCntl = navigationCntl;
         checkForNotifications(foodCntl, moodCntl);
-        viewNotificationList();
+        if(showView){
+            viewNotificationList();
+        }
     }
     
     /**
@@ -59,7 +61,7 @@ public class NotificationCntl {
         long timeInHoursMood = timeInMillisecondsMood / (60 * 60 * 1000)%24;
         System.out.println("Time difference: "+timeInHoursMood);
         if(timeInHoursMood > 3){
-            addMoodReminder();
+            addMoodReminder(now);
         }
         
         //in milliseconds
@@ -69,15 +71,26 @@ public class NotificationCntl {
         long timeInHoursFood = timeInMillisecondsFood / (60 * 60 * 1000)%24;
         System.out.println("Time difference: "+timeInHoursFood);
         if(timeInHoursFood > 3){
-            addFoodReminder();
+            addFoodReminder(now);
         }
     }
     
-    public void addFoodReminder(){
-        System.out.println("ADD FOOD REMINDER");
+    /**
+     * Adds a reminder to the notification list to enter food
+     * @param date time the reminder was made
+     */
+    public void addFoodReminder(Date date){
+        Notification foodReminder = new Notification(1, "Have you eaten?", "It has been a while since you entered a food!", date, false);
+        theNotificationList.addNotification(foodReminder);
     }
-    public void addMoodReminder(){
-        System.out.println("ADD MOOD REMINDER");
+    
+    /**
+     * Adds a reminder to the notification list to enter mood
+     * @param date time the reminder is made
+     */
+    public void addMoodReminder(Date date){
+        Notification moodReminder = new Notification(1, "How are you?", "It has been a while since you entered a mood!", date, false);
+        theNotificationList.addNotification(moodReminder);
     }
     
     /**
@@ -150,5 +163,12 @@ public class NotificationCntl {
         theNotificationList.markNotificationAsRead(theNotificationToView.getId());
     }
     
+    /**
+     * Tests if all notifications have been read to display warning on home
+     * @return if an unread notification exists
+     */
+    public boolean hasUnreadNotifications(){
+        return theNotificationList.hasUnreadNotification();
+    }
     
 }
