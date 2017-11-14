@@ -5,6 +5,7 @@
  */
 package foodmood.view;
 import foodmood.controller.NavigationCntl;
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import javax.swing.JButton;
@@ -39,6 +40,9 @@ public class HomeUI extends JFrame {
         goMoodScreenButton = new JButton("Mood");
         this.add(goMoodScreenButton);
 	goNotificationScreenButton = new JButton("Notifications");
+        if(parentCntl.unreadNotificaiton()){
+            goNotificationScreenButton.setForeground(Color.red);
+        }
         this.add(goNotificationScreenButton);
         goUserProfile = new JButton("User Profile");
         this.add(goUserProfile);
