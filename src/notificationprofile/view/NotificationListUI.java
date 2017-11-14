@@ -45,7 +45,11 @@ public class NotificationListUI extends javax.swing.JFrame {
         for (int i = 0; i < notificationList.size(); i++) {
             JPanel singleNotificationPanel = new JPanel();
             JLabel singleNotificationName = new JLabel(notificationList.getNotification(i).getName());
-            singleNotificationName.setFont(new java.awt.Font("Lucida Grande", 1, 18));
+            if(notificationList.getNotification(i).isRead()){
+                singleNotificationName.setFont(new java.awt.Font("Lucida Grande", 1, 18));
+            }else{
+                singleNotificationName.setFont(new java.awt.Font("Lucida Grande", java.awt.Font.BOLD, 18));
+            }
             singleNotificationPanel.add(singleNotificationName);
             final int id = notificationList.getNotification(i).getId();
             singleNotificationPanel.addMouseListener(new MouseListener() {

@@ -20,14 +20,16 @@ public class NotificationList implements Serializable {
      */
     public NotificationList(){
         notificationList = new ArrayList();
-        populateTestData();
     }
     
+    /**
+     * populates test data
+     */
     public void populateTestData(){
         //public Notification(int id, String name, String description, GregorianCalendar timeIssued, boolean read){
-        Notification notification1 = new Notification(1, "Have you eaten?", "It has been a while since you entered a food!", new java.util.GregorianCalendar(), false);
-        Notification notification2 = new Notification(2, "Sociopath?", "It has been a while since you entered a mood!", new java.util.GregorianCalendar(), false);
-        Notification notification3 = new Notification(3, "Where have you been?", "It has been a while since we saw you!", new java.util.GregorianCalendar(), false);
+        Notification notification1 = new Notification(1, "Have you eaten?", "It has been a while since you entered a food!", new java.util.Date(), false);
+        Notification notification2 = new Notification(2, "Sociopath?", "It has been a while since you entered a mood!", new java.util.Date(), false);
+        Notification notification3 = new Notification(3, "Where have you been?", "It has been a while since we saw you!", new java.util.Date(), false);
         notificationList.add(notification1);
         notificationList.add(notification2);
         notificationList.add(notification3);
@@ -41,10 +43,18 @@ public class NotificationList implements Serializable {
         return notificationList;
     }
     
+    /**
+     * @return size of notification list
+     */
     public int size(){
         return notificationList.size();
     }
     
+    /**
+     * next notification in list
+     * @param id id of current notification
+     * @return next notification
+     */
     public Notification next(int id){
         int index = 0;
         for (int i = 0; i < notificationList.size(); i++) {
@@ -60,6 +70,11 @@ public class NotificationList implements Serializable {
         return notificationList.get(index);
     }
     
+    /**
+     * previous notification
+     * @param id id of current notification
+     * @return previous notification
+     */
     public Notification previous(int id){
         int index = 0;
         for (int i = 0; i < notificationList.size(); i++) {
@@ -142,6 +157,11 @@ public class NotificationList implements Serializable {
         return notificationList.get(index);
     }
     
+    /**
+     * Gets a notificaiton by the id
+     * @param id id of the notification
+     * @return the notification
+     */
     public Notification getNotificationByID(int id){
         for (int i = 0; i < notificationList.size(); i++) {
             if (notificationList.get(i).getId() == id) {
@@ -149,6 +169,21 @@ public class NotificationList implements Serializable {
             }
         }
         return null;
+    }
+    
+    /**
+     * Test if all notifications have been read, to display warning on home
+     * @return boolean if there is an unread notification
+     */
+    public boolean hasUnreadNotification(){
+        boolean read = false;
+        for (int i = 0; i < notificationList.size(); i++) {
+            if(!notificationList.get(i).isRead()){
+                read = true; 
+                break;
+            }
+        }
+        return read;
     }
     
     /**

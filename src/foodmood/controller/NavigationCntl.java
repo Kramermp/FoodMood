@@ -27,6 +27,7 @@ public class NavigationCntl {
     private UserCntl userCntl;
     private LoginCntl loginCntl;
     private JFrame userInterface;
+    private NotificationCntl notificationCntl;
     
     /**
      * Creates a default NavigationController Constructor
@@ -86,7 +87,7 @@ public class NavigationCntl {
      * Loads the Notification Screen
      */
     public void goNotifcationScreen() {
-        NotificationCntl notificationController = new NotificationCntl(activeUser, this);
+        NotificationCntl notificationController = new NotificationCntl(activeUser, this, new FoodCntl(this, activeUser), new MoodCntl(this,activeUser), true);
     }
     
     //_______________User Module___________________  
@@ -112,5 +113,10 @@ public class NavigationCntl {
     
     public User getActiveUser(){
         return activeUser;
+    }
+    
+    public boolean unreadNotificaiton(){
+        notificationCntl = new NotificationCntl(activeUser, this, new FoodCntl(this, activeUser), new MoodCntl(this,activeUser), false);
+        return notificationCntl.hasUnreadNotifications();
     }
 }

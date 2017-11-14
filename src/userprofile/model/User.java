@@ -101,6 +101,9 @@ public class User implements Serializable {
     *@return NotificationList 
     */
     public NotificationList getNotificationList(){
+        if(usersNotificationList == null){
+            usersNotificationList = new NotificationList();
+        }
         return usersNotificationList;
     }
     

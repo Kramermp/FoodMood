@@ -19,10 +19,9 @@ import javax.swing.*;
  *
  * @author mpk5206
  */
-public class MoodUI extends JFrame{
+public class MoodUI extends JPanel {
     private Mood theMoodModel;
     
-    private JFrame frame = new JFrame("Mood");
     private MoodCntl parentCntl;
     private JLabel moodName;
     private JTextField moodInput;
@@ -46,29 +45,29 @@ public class MoodUI extends JFrame{
      */
    
     public MoodUI(MoodCntl moodController) {
-        this.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        //this.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         this.parentCntl = moodController;
         initializeComponents();
         
     }
     
     private void initializeComponents() {
-        frame.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        frame.setSize(500,500); 
-        frame.setLayout(null);
+        //this.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        this.setSize(500,500); 
+        this.setLayout(null);
         
         homeButton = new JButton("Home");
         homeButton.setBounds(50, 50, 80, 25);
-        frame.add(homeButton);
+        this.add(homeButton);
         
         date = new JLabel("Date:");
         date.setBounds(100, 75, 80, 25);
-        frame.add(date);
+        this.add(date);
         
         //The text field option for date
 //        dateInput = new JTextField(50);
 //        dateInput.setBounds(200, 75, 80, 25);
-//        frame.add(dateInput);
+//        this.add(dateInput);
         
         //Makes the date drop downs to elliminate user entering error
         String[] months = new String[12];
@@ -89,35 +88,35 @@ public class MoodUI extends JFrame{
         daysBox = new JComboBox(days);
         dateInputPanel.add(daysBox);
         dateInputPanel.setBounds(200, 75, 180, 25);
-        frame.add(dateInputPanel);
+        this.add(dateInputPanel);
         
         
         time = new JLabel("Time:");
         time.setBounds(100, 100, 80, 25);
-        frame.add(time);
+        this.add(time);
         
         timeInput = new JTextField(50);
         timeInput.setBounds(200, 100, 80, 25);
-        frame.add(timeInput);
+        this.add(timeInput);
 
         
         moodName = new JLabel("Mood:");
         moodName.setBounds(100, 150, 80, 25);
-        frame.add(moodName);
+        this.add(moodName);
         
         moodInput = new JTextField(50);
         moodInput.setBounds(200, 150, 100, 50);
-        frame.add(moodInput);
+        this.add(moodInput);
         
         submit = new JButton("Submit");
         submit.setBounds(150, 250, 80, 25);
-        frame.add(submit);
+        this.add(submit);
         
         listButton = new JButton("Mood List");
         listButton.setBounds(300, 250, 180, 25);
-        frame.add(listButton);
+        this.add(listButton);
         
-        frame.setVisible(true);
+        this.setVisible(true);
         
 //        dateInput.addActionListener((ActionEvent ae) -> { 
 //            System.out.println("DateInput event triggered.");
@@ -136,11 +135,11 @@ public class MoodUI extends JFrame{
             parentCntl.addMood(name, time);
     });
         listButton.addActionListener((ActionEvent ae) -> { 
-            frame.setVisible(false);
+            this.setVisible(false);
             parentCntl.goListView();
     });
         homeButton.addActionListener((ActionEvent ae) -> {
-           frame.setVisible(false);
+           this.setVisible(false);
            parentCntl.goHome();
         });
         
@@ -157,7 +156,7 @@ public class MoodUI extends JFrame{
      * @param parentController the parent controller
      */
     public MoodUI(MoodCntl parentController, Mood mood) {
-        this.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        //this.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         this.parentCntl = parentController;
         this.theMoodModel = mood;
         initView();
@@ -166,18 +165,18 @@ public class MoodUI extends JFrame{
     }
     
     public void initView(){
-        frame.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        frame.setSize(400,400); 
-        frame.setLayout(null);
+        //this.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        this.setSize(400,400); 
+        this.setLayout(null);
         
         date = new JLabel("Date:");
         date.setBounds(100, 75, 80, 25);
-        frame.add(date);
+        this.add(date);
         
         //The text field option for date
 //        dateInput = new JTextField(50);
 //        dateInput.setBounds(200, 75, 80, 25);
-//        frame.add(dateInput);
+//        this.add(dateInput);
         
         //Makes the date drop downs to elliminate user entering error
         String[] months = new String[13];
@@ -199,41 +198,41 @@ public class MoodUI extends JFrame{
         daysBox = new JComboBox(days);
         dateInputPanel.add(daysBox);
         dateInputPanel.setBounds(200, 75, 180, 25);
-        frame.add(dateInputPanel);
+        this.add(dateInputPanel);
         
         
         time = new JLabel("Time:");
         time.setBounds(100, 100, 80, 25);
-        frame.add(time);
+        this.add(time);
         
         timeInput = new JTextField(50);
         timeInput.setBounds(200, 100, 80, 25);
-        frame.add(timeInput);
+        this.add(timeInput);
         
         moodName = new JLabel("Mood:");
         
         moodName.setBounds(100, 150, 80, 25);
-        frame.add(moodName);
+        this.add(moodName);
         
         moodInput = new JTextField(50);
         moodInput.setText(theMoodModel.getName());
         moodInput.setBounds(200, 150, 100, 50);
-        frame.add(moodInput);
+        this.add(moodInput);
         
         
         submit = new JButton("Update");
         submit.setBounds(150, 250, 80, 25);
-        frame.add(submit);
+        this.add(submit);
         
         listButton = new JButton("Mood List");
         listButton.setBounds(300, 250, 180, 25);
-        frame.add(listButton);
+        this.add(listButton);
         
         deleteButton = new JButton("Delete");
         deleteButton.setBounds(50, 250, 80, 25);
-        frame.add(deleteButton);
+        this.add(deleteButton);
         
-        frame.setVisible(true);
+        this.setVisible(true);
         
 //        dateInput.addActionListener((ActionEvent ae) -> { 
 //            System.out.println("DateInput event triggered.");

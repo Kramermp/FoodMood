@@ -5,6 +5,7 @@
  */
 package foodprofile.model;
 
+import externaldata.controller.ExternalDataCntl;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.sql.Connection;
@@ -45,6 +46,7 @@ public class FoodList implements Serializable {
      */
     public void addFood(Food foodToAdd) {
         this.listOfFoods.add(foodToAdd);
+        ExternalDataCntl.getExternalDataCntl().writeSerializedData();
     }
     
     /**
@@ -57,6 +59,7 @@ public class FoodList implements Serializable {
                 listOfFoods.set(i, toUpdate);
             }
         }
+        ExternalDataCntl.getExternalDataCntl().writeSerializedData();
     }
     /**
      * Removes the provided from the FoodList
@@ -68,7 +71,7 @@ public class FoodList implements Serializable {
                 listOfFoods.remove(i);
             }
         }
-        System.out.println("TODO remove food");
+        ExternalDataCntl.getExternalDataCntl().writeSerializedData();
     }
     
     /**
@@ -77,9 +80,9 @@ public class FoodList implements Serializable {
      * @return the food to check for
      */
     public boolean hasFood(Food foodProfile) {
-        System.err.println("This is a stub.");
-        //TODO: Implment hasFoodProfile
-        return false;
+        //I'm not sure if this actually works
+        System.err.println("I'm not sure if this would actually work.");
+        return (this.listOfFoods.contains(foodProfile));
     }
     
     /**
@@ -100,5 +103,25 @@ public class FoodList implements Serializable {
             i = listOfFoods.size();
         }
         return listOfFoods.get(i);
+    }
+    
+    /**
+     * sorts the FoodList by date
+     */
+    public void sortByDate(){
+        Food temp; 
+        
+        for (int i = 0; i < listOfFoods.size()-1; i++) {
+            for (int j = 0; j < listOfFoods.size()-i-1; j++) {
+                if(listOfFoods.get(j+1) != null && listOfFoods.get(j) != null){
+                    long difference = listOfFoods.get(j).getTime().getTimeInMillis() - listOfFoods.get(j+1).getTime().getTimeInMillis();
+                    if(difference >= 0){
+                        temp = listOfFoods.get(j+1);
+                        listOfFoods.set(j+1, listOfFoods.get(j));
+                        listOfFoods.set(j, temp);
+                    }
+                }
+            }
+        }
     }
 }

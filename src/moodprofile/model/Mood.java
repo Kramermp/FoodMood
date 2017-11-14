@@ -87,6 +87,9 @@ public class Mood implements Serializable {
      * @return the calendar
      */
     public GregorianCalendar getTime() {
+        if(this.time==null){
+            time = new GregorianCalendar();
+        }
         return this.time;
     }
     
