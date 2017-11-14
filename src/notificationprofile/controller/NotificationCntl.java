@@ -28,10 +28,11 @@ public class NotificationCntl {
      * @param user currentUser
      * @param navigationCntl 
      */
-    public NotificationCntl(User user, NavigationCntl navigationCntl){
+    public NotificationCntl(User user, NavigationCntl navigationCntl, FoodCntl foodCntl, MoodCntl moodCntl){
         theUser = user;
         theNotificationList = user.getNotificationList();
         this.navigationCntl = navigationCntl;
+        checkForNotifications(foodCntl, moodCntl);
         viewNotificationList();
     }
     
