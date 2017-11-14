@@ -17,7 +17,7 @@ public class Notification implements Serializable {
     private int id;
     private String name;
     private String description;
-    private GregorianCalendar timeIssued;
+    private Date timeIssued;
     private boolean read;
 
     /**
@@ -28,7 +28,7 @@ public class Notification implements Serializable {
      * @param timeIssued time
      * @param read boolean if it's been read
      */
-    public Notification(int id, String name, String description, GregorianCalendar timeIssued, boolean read){
+    public Notification(int id, String name, String description, Date timeIssued, boolean read){
         this.id = id;
         this.name = name;
         this.description = description;
@@ -58,8 +58,7 @@ public class Notification implements Serializable {
     }
     
     public String getTimeString(){
-        Date theDate = timeIssued.getTime();
-        return theDate.getMonth()+"/"+theDate.getDate()+" "+theDate.getHours()+":"+theDate.getMinutes();
+        return timeIssued.getMonth()+"/"+timeIssued.getDate()+" "+timeIssued.getHours()+":"+timeIssued.getMinutes();
     }
 
     /**
@@ -86,14 +85,14 @@ public class Notification implements Serializable {
     /**
      * @return the timeIssued
      */
-    public GregorianCalendar getTimeIssued() {
+    public Date getTimeIssued() {
         return timeIssued;
     }
 
     /**
      * @param timeIssued the timeIssued to set
      */
-    public void setTimeIssued(GregorianCalendar timeIssued) {
+    public void setTimeIssued(Date timeIssued) {
         this.timeIssued = timeIssued;
     }
 
