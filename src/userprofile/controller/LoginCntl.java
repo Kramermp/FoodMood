@@ -7,15 +7,9 @@ package userprofile.controller;
 
 import externaldata.controller.ExternalDataCntl;
 import foodmood.controller.NavigationCntl;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.util.ArrayList;
 import userprofile.view.LoginUI;
 import userprofile.model.UserList;
 import userprofile.model.User;
-import userprofile.view.ViewUserProfileUI;
 import userprofile.view.NewUserUI;
 
 /**
