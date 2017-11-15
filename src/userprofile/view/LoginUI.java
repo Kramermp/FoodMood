@@ -29,8 +29,9 @@ import javax.swing.JTextArea;
  *
  * @author Michael Kramer
  */
-public class LoginUI extends JFrame {
+public class LoginUI extends JPanel {
     private LoginCntl parentController;
+	private JFrame theUserInterface;
     private JTextHint usernameTxtFld;
     private JPasswordHint passwordFld;
     private JPanel errorMessage;
@@ -61,9 +62,7 @@ public class LoginUI extends JFrame {
      * Configures the window of the LoginUI
      */
     private void buildWindow() {
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setLayout(new GridBagLayout());
-        this.setSize(new Dimension( 500, 700));
+        this.setLayout(new GridBagLayout());  
     }
     
     private void addComponents() {

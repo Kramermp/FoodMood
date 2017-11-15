@@ -7,6 +7,8 @@ package userprofile.controller;
 
 import externaldata.controller.ExternalDataCntl;
 import foodmood.controller.NavigationCntl;
+import foodmood.view.UserInterface;
+import javax.swing.JFrame;
 import userprofile.view.LoginUI;
 import userprofile.model.UserList;
 import userprofile.model.User;
@@ -24,6 +26,7 @@ public class LoginCntl {
     private ExternalDataCntl externalDataCntl;
     private NavigationCntl theNavigationCntl;
     private NewUserUI newUserUi;
+	private UserInterface theUserInterface = UserInterface.getInstance();
     
     /**
      * Creates a LoginController
@@ -33,12 +36,22 @@ public class LoginCntl {
         this.theUserList = externalDataCntl.getUserList();
         this.userCntl = new UserCntl(this);
         this.loginUi = new LoginUI(this);
-        this.loginUi.setVisible(true);
-        this.loginUi.requestFocus();
+		this.buildUI();
+		
         
         //This should be removed at a later time
         //submitUserCredentials("mpk5206", "pass".toCharArray());
     }
+	
+	public JFrame getTheUserInterface() {
+		return this.theUserInterface;
+	}
+	
+	private void buildUI() {
+		this.theUserInterface.reset();
+		this.theUserInterface.add(loginUi);
+		this.theUserInterface.setVisible(true);
+	}
     
     public final void submitUserCredentials(String username, char[] password) {
         if(theUserList.authenticateUserCredentials(username, password)) {
