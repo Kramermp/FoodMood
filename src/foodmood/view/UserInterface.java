@@ -5,6 +5,7 @@
  */
 package foodmood.view;
 
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.Toolkit;
@@ -30,13 +31,13 @@ public class UserInterface extends JFrame {
 	}
 	
 	public void reset() {
-		this.empty();
 		this.configureWindow();
+		this.empty();
 	}
 	
 	private void configureWindow() {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setSize(new Dimension (500, 700));
+		this.setSize(new Dimension (500, 800));
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		Point windowLocation = new Point(screenSize.width / 2 - this.getWidth() /2,
 				screenSize.height / 2 - this.getHeight() /2 );
@@ -47,5 +48,14 @@ public class UserInterface extends JFrame {
 		this.getContentPane().removeAll();
 		this.repaint();
 		this.revalidate();
+	}
+	
+	
+	@Override
+	public Component add(Component component) {
+		super.add(component);
+		this.repaint();
+		this.revalidate();
+		return this;
 	}
 }

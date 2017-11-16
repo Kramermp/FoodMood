@@ -9,6 +9,7 @@ import foodmood.view.*;
 import foodprofile.controller.FoodCntl;
 import foodprofile.view.*;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.JFrame;
 import moodprofile.controller.MoodCntl;
@@ -26,16 +27,17 @@ public class NavigationCntl {
     private HomeUI theHomeUI;
     private UserCntl userCntl;
     private LoginCntl loginCntl;
-    private JFrame userInterface;
+    private UserInterface userInterface;
     private NotificationCntl notificationCntl;
     
     /**
      * Creates a default NavigationController Constructor
      */
-    public NavigationCntl (LoginCntl loginCntl, User user) {
+    public NavigationCntl (LoginCntl loginCntl, UserInterface userInterface, User user) {
+		System.out.println("NavigationCntl created");
         this.loginCntl = loginCntl;
         this.activeUser = user;
-        this.userInterface = new JFrame();
+        this.userInterface = userInterface;
         goHomeScreen();
     }
     
@@ -51,9 +53,10 @@ public class NavigationCntl {
      * Loads the default Screen
      */
     public void goHomeScreen() {
-        userInterface.setVisible(false);
+		userInterface.reset();
         theHomeUI = new HomeUI(this);
-        theHomeUI.setVisible(true);
+		userInterface.add(theHomeUI);
+        //theHomeUI.setVisible(true);
     }
         
     //_______________Food Module___________________        
@@ -62,7 +65,7 @@ public class NavigationCntl {
      */
     public void goFoodScreen() {
         FoodCntl foodController = new FoodCntl(this, activeUser);
-        FoodUI foodUI = new FoodUI(foodController);
+        FoodUI foodUI = new FoodUI(foodController, userInterface);
     }
         
     //_______________Mood Module___________________  
@@ -70,6 +73,7 @@ public class NavigationCntl {
      * Loads the Mood Screen
      */
     public void goMoodScreen() {
+		System.out.println("Going to MoodUI");
         MoodCntl moodController = new MoodCntl(this, activeUser);
         MoodUI moodUI = new MoodUI(moodController);
     }
@@ -95,10 +99,6 @@ public class NavigationCntl {
      * Loads the Login Screen
      */
     public void logout() {
-        if(theHomeUI != null)
-            theHomeUI.dispose();
-        if(this.userInterface != null)
-            userInterface.dispose();
         loginCntl.logout();
     }
 
@@ -107,7 +107,7 @@ public class NavigationCntl {
         UserCntl userCntl = new UserCntl(this);
     }
     
-    public JFrame getUserInterface() {
+    public UserInterface getUserInterface() {
         return this.userInterface;
     }
     
@@ -116,7 +116,9 @@ public class NavigationCntl {
     }
     
     public boolean unreadNotificaiton(){
-        notificationCntl = new NotificationCntl(activeUser, this, new FoodCntl(this, activeUser), new MoodCntl(this,activeUser), false);
+		//This right here is causing a bug where the UI is being turned into the
+		//Incorrect UI
+        //notificationCntl = new NotificationCntl(activeUser, this, new FoodCntl(this, activeUser), new MoodCntl(this,activeUser), false);
         return notificationCntl.hasUnreadNotifications();
     }
 }

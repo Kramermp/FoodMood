@@ -6,6 +6,7 @@
 package foodprofile.view;
 
 import foodmood.controller.NavigationCntl;
+import foodmood.view.UserInterface;
 import foodprofile.controller.FoodCntl;
 import foodprofile.model.Food;
 import java.awt.FlowLayout;
@@ -19,10 +20,10 @@ import javax.swing.*;
  *
  * @author mpk5206
  */
-public class FoodUI extends JFrame{
+public class FoodUI extends JPanel {
     private Food theFoodModel;
-    
-    private JFrame frame = new JFrame("Food");
+    private UserInterface userInterface;
+	
     private FoodCntl parentCntl;
     private JLabel foodName;
     private JTextField foodInput;
@@ -45,30 +46,32 @@ public class FoodUI extends JFrame{
 	 * @param parentController the parentController
      */
    
-    public FoodUI(FoodCntl foodController) {
-        this.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+    public FoodUI(FoodCntl foodController, UserInterface userInterface) {
+		System.out.println("Creating FoodUI");
         this.parentCntl = foodController;
+		this.userInterface = userInterface;
+		this.userInterface.reset();
         initializeComponents();
+		this.userInterface.add(this);
+		this.userInterface.repaint();
+		this.userInterface.revalidate();
         
     }
     
     private void initializeComponents() {
-        frame.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        frame.setSize(500,500); 
-        frame.setLayout(null);
         
         homeButton = new JButton("Home");
         homeButton.setBounds(50, 50, 80, 25);
-        frame.add(homeButton);
+        add(homeButton);
         
         date = new JLabel("Date:");
         date.setBounds(100, 75, 80, 25);
-        frame.add(date);
+        add(date);
         
         //The text field option for date
 //        dateInput = new JTextField(50);
 //        dateInput.setBounds(200, 75, 80, 25);
-//        frame.add(dateInput);
+//        add(dateInput);
         
         //Makes the date drop downs to elliminate user entering error
         String[] months = new String[12];
@@ -89,43 +92,43 @@ public class FoodUI extends JFrame{
         daysBox = new JComboBox(days);
         dateInputPanel.add(daysBox);
         dateInputPanel.setBounds(200, 75, 180, 25);
-        frame.add(dateInputPanel);
+        add(dateInputPanel);
         
         
         time = new JLabel("Time:");
         time.setBounds(100, 100, 80, 25);
-        frame.add(time);
+        add(time);
         
         timeInput = new JTextField(50);
         timeInput.setBounds(200, 100, 80, 25);
-        frame.add(timeInput);
+        add(timeInput);
         
         foodGroup = new JLabel("Food Group:");
         foodGroup.setBounds(100, 125, 80, 25);
-        frame.add(foodGroup);
+        add(foodGroup);
         
         String[] foodGroupOptions = {"Dairy", "Fruits", "Grains", "Protein", "Vegetables"};
         foodGroupInput = new JComboBox(foodGroupOptions);
         foodGroupInput.setBounds(200, 125, 100, 25);
-        frame.add(foodGroupInput);
+        add(foodGroupInput);
         
         foodName = new JLabel("Food:");
         foodName.setBounds(100, 150, 80, 25);
-        frame.add(foodName);
+        add(foodName);
         
         foodInput = new JTextField(50);
         foodInput.setBounds(200, 150, 100, 50);
-        frame.add(foodInput);
+        add(foodInput);
         
         submit = new JButton("Submit");
         submit.setBounds(150, 250, 80, 25);
-        frame.add(submit);
+        add(submit);
         
         listButton = new JButton("Food List");
         listButton.setBounds(300, 250, 180, 25);
-        frame.add(listButton);
+        add(listButton);
         
-        frame.setVisible(true);
+        setVisible(true);
         
 //        dateInput.addActionListener((ActionEvent ae) -> { 
 //            System.out.println("DateInput event triggered.");
@@ -148,11 +151,9 @@ public class FoodUI extends JFrame{
             parentCntl.addFood(name, category, time);
 	});
         listButton.addActionListener((ActionEvent ae) -> { 
-            frame.setVisible(false);
             parentCntl.goListView();
 	});
         homeButton.addActionListener((ActionEvent ae) -> {
-           frame.setVisible(false);
            parentCntl.goHome();
         });
         
@@ -169,7 +170,6 @@ public class FoodUI extends JFrame{
 	 * @param parentController the parent controller
      */
     public FoodUI(FoodCntl parentController, Food food) {
-        this.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         this.parentCntl = parentController;
         this.theFoodModel = food;
         initView();
@@ -178,18 +178,16 @@ public class FoodUI extends JFrame{
     }
     
     public void initView(){
-        frame.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        frame.setSize(400,400); 
-        frame.setLayout(null);
+        //setLayout(null);
         
         date = new JLabel("Date:");
         date.setBounds(100, 75, 80, 25);
-        frame.add(date);
+        add(date);
         
         //The text field option for date
 //        dateInput = new JTextField(50);
 //        dateInput.setBounds(200, 75, 80, 25);
-//        frame.add(dateInput);
+//        add(dateInput);
         
         //Makes the date drop downs to elliminate user entering error
         String[] months = new String[13];
@@ -211,50 +209,50 @@ public class FoodUI extends JFrame{
         daysBox = new JComboBox(days);
         dateInputPanel.add(daysBox);
         dateInputPanel.setBounds(200, 75, 180, 25);
-        frame.add(dateInputPanel);
+        add(dateInputPanel);
         
         
         time = new JLabel("Time:");
         time.setBounds(100, 100, 80, 25);
-        frame.add(time);
+        add(time);
         
         timeInput = new JTextField(50);
         timeInput.setBounds(200, 100, 80, 25);
-        frame.add(timeInput);
+        add(timeInput);
         
         foodGroup = new JLabel("Food Group:");
         foodGroup.setBounds(100, 125, 80, 25);
-        frame.add(foodGroup);
+        add(foodGroup);
         
         String[] foodGroupOptions = {theFoodModel.getFoodCategories().get(0), "Dairy", "Fruits", "Grains", "Protein", "Vegetables"};
         foodGroupInput = new JComboBox(foodGroupOptions);
         foodGroupInput.setBounds(200, 125, 100, 25);
-        frame.add(foodGroupInput);
+        add(foodGroupInput);
         
         foodName = new JLabel("Food:");
         
         foodName.setBounds(100, 150, 80, 25);
-        frame.add(foodName);
+        add(foodName);
         
         foodInput = new JTextField(50);
         foodInput.setText(theFoodModel.getName());
         foodInput.setBounds(200, 150, 100, 50);
-        frame.add(foodInput);
+        add(foodInput);
         
         
         submit = new JButton("Update");
         submit.setBounds(150, 250, 80, 25);
-        frame.add(submit);
+        add(submit);
         
         listButton = new JButton("Food List");
         listButton.setBounds(300, 250, 180, 25);
-        frame.add(listButton);
+        add(listButton);
         
         deleteButton = new JButton("Delete");
         deleteButton.setBounds(50, 250, 80, 25);
-        frame.add(deleteButton);
+        add(deleteButton);
         
-        frame.setVisible(true);
+        setVisible(true);
         
 //        dateInput.addActionListener((ActionEvent ae) -> { 
 //            System.out.println("DateInput event triggered.");

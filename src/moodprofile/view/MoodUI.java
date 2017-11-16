@@ -45,6 +45,7 @@ public class MoodUI extends JPanel {
      */
    
     public MoodUI(MoodCntl moodController) {
+		//System.out.println("Creating MoodUI");
         //this.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         this.parentCntl = moodController;
         initializeComponents();

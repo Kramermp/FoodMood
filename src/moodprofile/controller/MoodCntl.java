@@ -7,6 +7,7 @@ package moodprofile.controller;
 
 import externaldata.controller.ExternalDataCntl;
 import foodmood.controller.NavigationCntl;
+import foodmood.view.UserInterface;
 import foodprofile.view.FoodUI;
 import java.awt.Dimension;
 import java.sql.Connection;
@@ -28,6 +29,7 @@ import userprofile.model.User;
  * @author Michael Kramer
  */
 public class MoodCntl {
+	private UserInterface userInterface;
     private MoodList moodList;
     private NavigationCntl navigationCntl;
     
@@ -40,6 +42,7 @@ public class MoodCntl {
     public MoodCntl(NavigationCntl navigationCntl, User currentUser){
         this.navigationCntl = navigationCntl;
         this.moodList = navigationCntl.getActiveUser().getMoodList();
+		this.userInterface = navigationCntl.getUserInterface();
         this.newMood();
     }
     
@@ -126,12 +129,7 @@ public class MoodCntl {
      */
     public void newMood(){
         MoodUI moodUI = new MoodUI(this);
-        navigationCntl.getUserInterface().getContentPane().removeAll();
-        navigationCntl.getUserInterface().setContentPane(moodUI);
-        navigationCntl.getUserInterface().setSize(new Dimension(500, 700));
-        navigationCntl.getUserInterface().repaint();
-        navigationCntl.getUserInterface().revalidate();
-        navigationCntl.getUserInterface().setVisible(true);
+		userInterface.add(moodUI);
     }
     
     /**

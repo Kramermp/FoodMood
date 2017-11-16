@@ -68,7 +68,7 @@ public class LoginCntl {
     
     public void login(String username){
         User selectedUser = theUserList.getUser(username);
-        theNavigationCntl = new NavigationCntl(this, selectedUser);
+        theNavigationCntl = new NavigationCntl(this, theUserInterface, selectedUser);
         loginUi.setVisible(false);
     }
     
