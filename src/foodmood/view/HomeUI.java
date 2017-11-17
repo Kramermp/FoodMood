@@ -40,44 +40,38 @@ public class HomeUI extends JPanel {
         goMoodScreenButton = new JButton("Mood");
         add(goMoodScreenButton);
 		goNotificationScreenButton = new JButton("Notifications");
-//        if(parentCntl.unreadNotificaiton()){
-//            goNotificationScreenButton.setForeground(Color.red);
-//        }
+        if(parentCntl.unreadNotificaiton()){
+            goNotificationScreenButton.setForeground(Color.red);
+        }
         add(goNotificationScreenButton);
         goUserProfile = new JButton("User Profile");
         add(goUserProfile);
-        goHistoryScreen = new JButton("History");
-        add(goHistoryScreen);
+        
         logoutButton = new JButton("Logout");
         add(logoutButton);
        
         goFoodScreenButton.addActionListener((ActionEvent ae) -> { 
             System.out.println("goFoodScreenBtn click event triggered.");
-            parentCntl.goFoodScreen();
+            parentCntl.goToScreen(NavigationCntl.ScreenOption.FOOD);
             this.setVisible(false);
 		});
         
 		goMoodScreenButton.addActionListener((ActionEvent ae) -> { 
             System.out.println("goMoodScreenBtn click event triggered.");
-            parentCntl.goMoodScreen();
+            parentCntl.goToScreen(NavigationCntl.ScreenOption.MOOD);
             this.setVisible(false);
 		});	
        
 		goNotificationScreenButton.addActionListener((ActionEvent ae) -> { 
             System.out.println("goNotificationBtn click event triggered.");
-            parentCntl.goNotifcationScreen();
+            parentCntl.goToScreen(NavigationCntl.ScreenOption.NOTIFICATIONLIST);
             this.setVisible(false);
 		});
         
         goUserProfile.addActionListener((ActionEvent ae) -> {
             System.out.println("goUserProfile click event triggered.");
-            parentCntl.goUserProfile();
+            parentCntl.goToScreen(NavigationCntl.ScreenOption.USERPROFILE);
             this.setVisible(false);
-        });
-                
-        goHistoryScreen.addActionListener((ActionEvent ae) -> {
-            System.out.println("goHistoryScreen click event triggered.");
-            //parentCntl.goHistoryScreen();
         });
         
         logoutButton.addActionListener((ActionEvent ae) -> { 

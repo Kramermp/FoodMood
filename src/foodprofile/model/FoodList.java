@@ -53,10 +53,10 @@ public class FoodList implements Serializable {
      * Takes a food, finds it in the list based on the ID and updates it in the list
      * @param toUpdate the food that is to be updated
      */
-    public void updateFood(Food toUpdate){
+    public void updateFood(Food originalFood, Food newFood){
         for (int i = 0; i < listOfFoods.size(); i++) {
-            if(listOfFoods.get(i).getID() == toUpdate.getID()){
-                listOfFoods.set(i, toUpdate);
+            if(listOfFoods.get(i) == originalFood){
+                listOfFoods.set(i, newFood);
             }
         }
         ExternalDataCntl.getExternalDataCntl().writeSerializedData();
@@ -67,8 +67,8 @@ public class FoodList implements Serializable {
      */
     public void removeFood(Food foodToRemove) {
         for (int i = 0; i < listOfFoods.size(); i++) {
-            if(listOfFoods.get(i).getID() == foodToRemove.getID()){
-                listOfFoods.remove(i);
+            if(listOfFoods.get(i) == foodToRemove){
+               listOfFoods.remove(i);
             }
         }
         ExternalDataCntl.getExternalDataCntl().writeSerializedData();

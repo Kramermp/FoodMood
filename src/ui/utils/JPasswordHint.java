@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package userprofile.view;
+package ui.utils;
 
 import java.awt.Color;
 import java.awt.event.FocusEvent;

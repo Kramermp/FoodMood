@@ -7,209 +7,163 @@ package foodprofile.view;
 
 import foodprofile.controller.FoodCntl;
 import foodprofile.model.Food;
-import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 /**
  *
- * @author HannahGarthwaite
+ * @author HannahGarthwaite, Michael Kramer
  */
-public class FoodListUI extends javax.swing.JFrame {
+public class FoodListUI extends JPanel {
 
-    FoodCntl foodCntl;
+    private FoodCntl parentCntl;
+    private JScrollPane scrollPane;
+    
     /**
      * Creates new form FoodListUI
+     * @param foodCntl
      */
-    public FoodListUI() {
-        initComponents();
-    }
     public FoodListUI(FoodCntl foodCntl){
-        this.foodCntl = foodCntl;
-        initComponents();
-        initCustomComponents();
+        this.parentCntl = foodCntl;
+        addComponents();
     }
     
-    public void initCustomComponents(){
-        listPanel = new JPanel();
-        listPanel.setLayout(new BoxLayout(listPanel, BoxLayout.Y_AXIS));
+    private void addComponents() {
+        setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
         
-        for (int i = 0; i < foodCntl.getFoodList().size(); i++) {
+        JPanel leftMargin = new JPanel();
+        //leftMargin.setBackground(Color.BLUE); // For Debugging Purposes
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridheight = 2;
+        gbc.fill = GridBagConstraints.BOTH;
+        gbc.weightx = .25;
+        gbc.weighty = .5;
+        this.add(leftMargin, gbc);
+        
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        gbc.gridheight = 1;
+        gbc.fill = GridBagConstraints.BOTH;
+        gbc.weightx = .5;
+        gbc.weighty = 1;
+        this.add(buildInputPanel(), gbc);
+        
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+        gbc.gridheight = 1;
+        gbc.fill = GridBagConstraints.BOTH;
+        gbc.weightx = .5;
+        gbc.weighty = .5;
+        this.add(buildButtonPanel(), gbc);
+        
+        JPanel rightMargin = new JPanel();
+        //rightMargin.setBackground(Color.MAGENTA); // For Debugging Purposes
+        gbc.gridx = 2;
+        gbc.gridy = 0;
+        gbc.gridheight = 2;
+        gbc.fill = GridBagConstraints.BOTH;
+        gbc.weightx = .25;
+        gbc.weighty = .5;
+        this.add(rightMargin, gbc);
+    }
+    
+    private JPanel buildInputPanel() {
+        JPanel inputPanel = new JPanel();
+        inputPanel.setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
+        
+        // inputPanel.setBackground(Color.PINK); // For Debuggin Purposes
+        JButton homeBtn = new JButton("HOME");
+        homeBtn.addActionListener((ActionEvent ae) -> { 
+            System.out.println("homeBtn Click Event Registered");
+            parentCntl.requestHomeView();
+        });
+        c.gridx = 0;
+        c.gridy = 0;
+        c.weighty = .25;
+        c.weightx = 1;
+        c.anchor = GridBagConstraints.WEST;
+        inputPanel.add(homeBtn, c);
+        
+        scrollPane = new JScrollPane(buildListPanel());
+        c.gridx = 0;
+        c.gridy = 1;
+        c.weightx = 1;
+        c.weighty = 1;
+        c.fill = GridBagConstraints.BOTH;
+        c.anchor = GridBagConstraints.CENTER;
+        inputPanel.add(scrollPane, c);
+        
+        return inputPanel;
+    }
+    
+    private JPanel buildListPanel() {
+        JPanel listPanel = new JPanel();
+        // listPanel.setBackground(Color.yellow); // For Debugging Purposes
+        listPanel.setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
+        c.gridx =0;
+        c.weightx = 1;
+        c.weighty = 1;
+        c.fill = GridBagConstraints.BOTH;
+        for (int i = 0; i < parentCntl.getFoodList().size(); i++) {
             JPanel singleFoodPanel = new JPanel();
-            JLabel foodName = new JLabel(foodCntl.getFoodList().getFood(i).getName());
+            JLabel foodName = new JLabel(parentCntl.getFoodList().getFood(i).getName());
             singleFoodPanel.add(foodName);
-            final Food food = foodCntl.getFoodList().getFood(i);
+            final Food food = parentCntl.getFoodList().getFood(i);
             listPanel.add(singleFoodPanel);
             
             //Allows user to click on a food to view it
             singleFoodPanel.addMouseListener(new MouseListener() {
                 
+                @Override
                 public void mouseClicked(MouseEvent e){
-                    viewFood(food);
+                    parentCntl.setSelectedFood(food);
+                    parentCntl.requestExtendedFoodView();
                 }
                 
+                @Override
                 public void mousePressed(MouseEvent e){
-                    
+                    // Do Nothing
                 }
                 
+                @Override
                 public void mouseReleased(MouseEvent e){
-                    
+                    // Do Nothing
                 }
                 
+                @Override
                 public void mouseEntered(MouseEvent e){
                     singleFoodPanel.setBackground(Color.lightGray);
                 }
                 
+                @Override
                 public void mouseExited(MouseEvent e){
                     singleFoodPanel.setBackground(new Color(238,238,238));
                 }
             });
-            listPanel.add(singleFoodPanel);
-            scrollPane.getViewport().add(listPanel, BorderLayout.NORTH);
+            c.gridy = i;
+            listPanel.add(singleFoodPanel, c);
+            //scrollPane.getViewport().add(listPanel, BorderLayout.NORTH);
         }
-        scrollPane.getViewport().add(listPanel, BorderLayout.NORTH);
-            
+ 
+        return listPanel;
     }
     
-    public void viewFood(Food food){
-        this.setVisible(false);
-        foodCntl.viewFood(food);
-    }
-
-    /**
-     * This method is called from within the constructor to initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is always
-     * regenerated by the Form Editor.
-     */
-    @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
-
-        jLabel1 = new javax.swing.JLabel();
-        scrollPane = new javax.swing.JScrollPane();
-        listPanel = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
-        jLabel1.setText("Foods");
-
-        javax.swing.GroupLayout listPanelLayout = new javax.swing.GroupLayout(listPanel);
-        listPanel.setLayout(listPanelLayout);
-        listPanelLayout.setHorizontalGroup(
-            listPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 534, Short.MAX_VALUE)
-        );
-        listPanelLayout.setVerticalGroup(
-            listPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 397, Short.MAX_VALUE)
-        );
-
-        scrollPane.setViewportView(listPanel);
-
-        jButton1.setText("Home");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        jButton2.setText("Create New");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton2)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(scrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 538, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jButton1)
-                            .addGap(133, 133, 133)
-                            .addComponent(jLabel1))))
-                .addContainerGap(33, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1)
-                    .addComponent(jButton1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(scrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 401, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2)
-                .addContainerGap())
-        );
-
-        pack();
-    }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        this.setVisible(false);
-        foodCntl.newFood();
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        this.setVisible(false);
-        foodCntl.goHome();
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FoodListUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FoodListUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FoodListUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FoodListUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new FoodListUI().setVisible(true);
-            }
-        });
-    }
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel listPanel;
-    private javax.swing.JScrollPane scrollPane;
-    // End of variables declaration//GEN-END:variables
+    private JPanel buildButtonPanel() {
+        JPanel buttonPanel = new JPanel();
+        //buttonPanel.setBackground(Color.RED); // For Debuggin Purposes
+        
+        return buttonPanel;
+    }                                                                                    
 }

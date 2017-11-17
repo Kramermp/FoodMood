@@ -8,6 +8,7 @@ package userprofile.controller;
 import externaldata.controller.ExternalDataCntl;
 import foodmood.controller.NavigationCntl;
 import foodmood.view.UserInterface;
+import java.awt.Color;
 import javax.swing.JFrame;
 import userprofile.view.LoginUI;
 import userprofile.model.UserList;
@@ -40,7 +41,7 @@ public class LoginCntl {
 		
         
         //This should be removed at a later time
-        //submitUserCredentials("mpk5206", "pass".toCharArray());
+        submitUserCredentials("mpk5206", "pass".toCharArray());
     }
 	
 	public JFrame getTheUserInterface() {
@@ -63,13 +64,13 @@ public class LoginCntl {
     
     public void logout() {
         theNavigationCntl = null;
-        loginUi.setVisible(true);
+        theUserInterface.reset();
+        theUserInterface.add(loginUi);
     }
     
     public void login(String username){
         User selectedUser = theUserList.getUser(username);
         theNavigationCntl = new NavigationCntl(this, theUserInterface, selectedUser);
-        loginUi.setVisible(false);
     }
     
     public void loginInvalid() {
@@ -86,26 +87,13 @@ public class LoginCntl {
     
     public void signupBtnPressed() {
         newUserUi = new NewUserUI(this, userCntl);
-        newUserUi.setSize(loginUi.getSize());
-        newUserUi.setLocation(loginUi.getLocation());
-        newUserUi.setVisible(true);
-        newUserUi.requestFocus();
-        userCntl.setNewUserUi(newUserUi);
-        loginUi.setVisible(false);
+        theUserInterface.reset();
+        theUserInterface.add(newUserUi);
     }
     
-    public void closeNewUserUI() {
-        if(newUserUi != null) {
-            loginUi.setSize(newUserUi.getSize());
-            loginUi.setLocation(newUserUi.getLocation());
-            newUserUi.setVisible(false);
-            newUserUi.dispose();
-            newUserUi = null;
-            loginUi.setVisible(true);
-        } else {
-            // Do Nothing
-        }  
+    public void displayLogin() {
+        theUserInterface.reset();
+        theUserInterface.add(loginUi);
     }
-    
     
 }

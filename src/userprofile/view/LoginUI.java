@@ -5,6 +5,8 @@
  */
 package userprofile.view;
 
+import ui.utils.JPasswordHint;
+import ui.utils.JTextHint;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;

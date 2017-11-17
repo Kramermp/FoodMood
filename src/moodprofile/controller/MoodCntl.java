@@ -29,7 +29,7 @@ import userprofile.model.User;
  * @author Michael Kramer
  */
 public class MoodCntl {
-	private UserInterface userInterface;
+    private Mood selectedMood;
     private MoodList moodList;
     private NavigationCntl navigationCntl;
     
@@ -39,11 +39,9 @@ public class MoodCntl {
      * @param navigationCntl 
      * @param currentUser 
      */
-    public MoodCntl(NavigationCntl navigationCntl, User currentUser){
+    public MoodCntl(NavigationCntl navigationCntl){
         this.navigationCntl = navigationCntl;
         this.moodList = navigationCntl.getActiveUser().getMoodList();
-		this.userInterface = navigationCntl.getUserInterface();
-        this.newMood();
     }
     
     /**
@@ -66,14 +64,6 @@ public class MoodCntl {
     public void addMood(Mood mood){
         moodList.addMood(mood);
         System.out.println(moodList.size()+" in c");
-    }
-    
-    /**
-     * This updates a mood, using the id stored within the mood class. Also updates linkages
-     * @param mood the mood to update
-     */
-    public void updateMood(Mood mood){
-        moodList.updateMood(mood);
     }
     
     /**
@@ -111,54 +101,47 @@ public class MoodCntl {
     }
     
     public MoodList getMoodList(){
-        
         return moodList;
     }
-    
-//_________________Views___________________
-    
-    /**
-     * Goes to NavigationCntl for goHome
-     */
-    public void goHome(){
-        navigationCntl.goHomeScreen();
+
+    public void requestHomeView() {
+     this.navigationCntl.goToScreen(NavigationCntl.ScreenOption.HOME);  
+    }
+
+    public void requestListView() {
+        this.navigationCntl.goToScreen(NavigationCntl.ScreenOption.MOODLIST);
     }
     
-    /**
-     * Creates a blank MoodUI
-     */
-    public void newMood(){
-        MoodUI moodUI = new MoodUI(this);
-		userInterface.add(moodUI);
+    public void addMood(MoodUI moodUi) {
+        System.out.println("Adding Mood from the moodUi");
+        moodList.addMood(getMoodUIMood(moodUi));   
+    }
+    public void deleteMood(MoodUI moodUi) {
+        System.out.println("Deleting mood");
+        moodList.deleteMood(selectedMood);
+        selectedMood = null;
     }
     
-    /**
-     * Goes to a list view of the moodList
-     */
-    public void goListView(){
-        MoodListUI moodListUI = new MoodListUI(this);
-        navigationCntl.getUserInterface().getContentPane().removeAll();
-        navigationCntl.getUserInterface().setContentPane(moodListUI);
-        navigationCntl.getUserInterface().setSize(new Dimension(500, 700));
-        navigationCntl.getUserInterface().repaint();
-        navigationCntl.getUserInterface().revalidate();
-        navigationCntl.getUserInterface().setVisible(true);
+    public void updateMood(MoodUI moodUi) {
+        System.out.println("Updating Mood");
+        moodList.updateMood(selectedMood, getMoodUIMood(moodUi));
+        selectedMood = null;
+        
     }
     
-    /**
-     * Takes a mood and creates a MoodUI
-     * @param mood the mood to view
-     */
-    public void viewMood(Mood mood){
-        MoodUI moodUI = new MoodUI(this, mood);
-        navigationCntl.getUserInterface().getContentPane().removeAll();
-        navigationCntl.getUserInterface().setContentPane(moodUI);
-        navigationCntl.getUserInterface().repaint();
-        navigationCntl.getUserInterface().revalidate();
-        navigationCntl.getUserInterface().setVisible(true);
+    private Mood getMoodUIMood(MoodUI moodUi) {
+        return new Mood(moodUi.getMoodName(), moodUi.getTime());
     }
-    
-    public JFrame getUserInterface() {
-        return navigationCntl.getUserInterface();
+
+    public void setSelectedMood(Mood mood) {
+        this.selectedMood = mood;
+    }
+
+    public void requestExtendedMoodScreen() {
+        navigationCntl.goToScreen(NavigationCntl.ScreenOption.EXTENDEDMOOD);
+    }
+
+    public Mood getSelectedMood() {
+        return this.selectedMood;
     }
 }

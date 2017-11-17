@@ -66,10 +66,10 @@ public class MoodList implements Serializable {
      * Takes a mood, finds it in the list, and updates it
      * @param mood mood to update
      */
-    public void updateMood(Mood mood){
+    public void updateMood(Mood originalMood, Mood updatedMood){
         for (int i = 0; i < listOfMoods.size(); i++) {
-            if(listOfMoods.get(i).getID()==mood.getID()){
-                listOfMoods.set(i, mood);
+            if(listOfMoods.get(i) == originalMood){
+                listOfMoods.set(i, updatedMood);
             }
         }
     }
@@ -81,8 +81,16 @@ public class MoodList implements Serializable {
     public void deleteMood(int id){
         for (int i = 0; i < listOfMoods.size(); i++) {
             if(listOfMoods.get(i).getID() == id){
-                listOfMoods.remove(i)
-;            }
+                listOfMoods.remove(i);
+            }
+        }
+    }
+    
+    public void deleteMood(Mood moodToDelete) {
+        for (int i = 0; i < listOfMoods.size(); i++) {
+            if(listOfMoods.get(i) == moodToDelete){
+                listOfMoods.remove(i);
+            }
         }
     }
     

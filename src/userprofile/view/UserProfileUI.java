@@ -5,6 +5,7 @@
  */
 package userprofile.view;
 
+import ui.utils.JTextHint;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;

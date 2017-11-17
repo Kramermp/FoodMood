@@ -9,7 +9,7 @@ import externaldata.controller.ExternalDataCntl;
 import foodmood.controller.NavigationCntl;
 import foodprofile.model.FoodList;
 import foodprofile.model.Food;
-import foodprofile.view.FoodListUI;
+import foodprofile.view.FoodListUIOLD;
 import foodprofile.view.FoodUI;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -29,12 +29,13 @@ public class FoodCntl {
     private FoodList foodList;
     private Connection theConnection = null;
     private Statement theStatement = null;
-    private FoodListUI foodListUI;
+    private FoodListUIOLD foodListUI;
     private NavigationCntl navigationCntl;
+    private Food selectedFood;
         
-    public FoodCntl(NavigationCntl navigationCntl, User currentUser){
+    public FoodCntl(NavigationCntl navigationCntl) {
         this.navigationCntl = navigationCntl;
-        foodList = navigationCntl.getActiveUser().getFoodList();
+        this.foodList = navigationCntl.getActiveUser().getFoodList();
     }
         
     /**
@@ -55,7 +56,7 @@ public class FoodCntl {
      * @return the foodList
      */
     public FoodList getFoodList() {
-        return foodList;
+        return this.foodList;
     }
 
     /**
@@ -65,8 +66,6 @@ public class FoodCntl {
     public void setFoodList(FoodList foodList) {
         this.foodList = foodList;
     }
-    
-    
     
     public void viewFood(Food food){
         FoodUI foodUI = new FoodUI(this, food);
@@ -109,19 +108,23 @@ public class FoodCntl {
         System.out.println(foodList.size());
     }
     
-    /**
-     * This updates a food, using the id stored within the food class
-     * @param food  the food to update
-     */
-    public void updateFood(Food food){
-        this.foodList.updateFood(food);
+    public void updateFood(FoodUI foodUi) {
+        this.foodList.updateFood(selectedFood, getFoodUIFood(foodUi));
     }
     
     public void goListView(){
-        foodListUI = new FoodListUI(this);
+        foodListUI = new FoodListUIOLD(this);
         foodListUI.setVisible(true);
     }
     
+    public void addFood(FoodUI foodUi) {
+        foodList.addFood(getFoodUIFood(foodUi));
+    }
+    
+    private Food getFoodUIFood(FoodUI foodUi) {
+        return new Food(foodUi.getFoodName(), foodUi.getFoodCategory(),
+                foodUi.getTime());
+    }
      
     /**
      * This deletes the food from the current user's FoodList
@@ -137,7 +140,32 @@ public class FoodCntl {
         
     }
     
-    public void goHome(){
-        navigationCntl.goHomeScreen();
-    }    
+    public void setSelectedFood(Food foodToSelect) {
+        this.selectedFood = foodToSelect;
+    }
+    
+    public Food getSelectedFood() {
+        return this.selectedFood;
+    }
+    
+    public void deleteSelectedFood() {
+        this.foodList.removeFood(selectedFood);
+        selectedFood = null;
+    }
+    
+    public void requestListView() {
+        navigationCntl.goToScreen(NavigationCntl.ScreenOption.FOODLIST);
+    }
+
+    public void requestHomeView() {
+        navigationCntl.goToScreen(NavigationCntl.ScreenOption.HOME);
+    }
+    
+    public void requestFoodView() {
+        navigationCntl.goToScreen(NavigationCntl.ScreenOption.FOOD);
+    }
+    
+    public void requestExtendedFoodView() {
+        navigationCntl.goToScreen(NavigationCntl.ScreenOption.EXTENDEDFOOD);
+    }
 }

@@ -34,6 +34,11 @@ public class Mood implements Serializable {
         this.time = null;
     }
     
+    public Mood(String mood, GregorianCalendar time) {
+        this.name = mood;
+        this.time = time;
+    }
+    
     /**
      * Get the id of the mood
      * @return the id
