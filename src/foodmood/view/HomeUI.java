@@ -23,7 +23,7 @@ public class HomeUI extends JPanel {
     private JButton goMoodScreenButton;
     private JButton goNotificationScreenButton;
     private JButton logoutButton;
-    private JButton goHistoryScreen;
+    private JButton goReccomendationsScreen;
     private JButton goUserProfile;
     
     public HomeUI(NavigationCntl theNavigationCntl){
@@ -34,7 +34,7 @@ public class HomeUI extends JPanel {
     
     private void initializeComponents(){
 		System.out.println("Creating components");
-        setLayout(new GridLayout(2,3));
+        setLayout(new GridLayout(6,1));
         goFoodScreenButton = new JButton("Food");
         add(goFoodScreenButton);
         goMoodScreenButton = new JButton("Mood");
@@ -43,6 +43,8 @@ public class HomeUI extends JPanel {
         if(parentCntl.unreadNotificaiton()){
             goNotificationScreenButton.setForeground(Color.red);
         }
+        goReccomendationsScreen = new JButton ("Reccomendations");
+        add(goReccomendationsScreen);
         add(goNotificationScreenButton);
         goUserProfile = new JButton("User Profile");
         add(goUserProfile);

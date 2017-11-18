@@ -5,17 +5,19 @@
  */
 package foodprofile.view;
 
+import javax.swing.JPanel;
+
 /**
  *
  * @author Michael Kramer
  */
-public class FoodRecommendationUI {
+public class FoodRecommendationUI extends JPanel{
+    JPanel recommendations = new JPanel();
     
     /**
      * The Default Constructor for the FoodRecommendationUI
      */
     public FoodRecommendationUI () {
-        System.err.println("This is a stub.");
-        //TODO: Implement FoodRecommendationUIs
+       
     }
 }

@@ -9,7 +9,7 @@ import externaldata.controller.ExternalDataCntl;
 import foodmood.controller.NavigationCntl;
 import foodprofile.model.FoodList;
 import foodprofile.model.Food;
-import foodprofile.view.FoodListUIOLD;
+import foodprofile.view.FoodListUI;
 import foodprofile.view.FoodUI;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -29,7 +29,7 @@ public class FoodCntl {
     private FoodList foodList;
     private Connection theConnection = null;
     private Statement theStatement = null;
-    private FoodListUIOLD foodListUI;
+    private FoodListUI foodListUI;
     private NavigationCntl navigationCntl;
     private Food selectedFood;
         
@@ -113,7 +113,7 @@ public class FoodCntl {
     }
     
     public void goListView(){
-        foodListUI = new FoodListUIOLD(this);
+        foodListUI = new FoodListUI(this);
         foodListUI.setVisible(true);
     }
     
