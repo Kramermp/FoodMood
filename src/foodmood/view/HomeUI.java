@@ -23,7 +23,7 @@ public class HomeUI extends JPanel {
     private JButton goMoodScreenButton;
     private JButton goNotificationScreenButton;
     private JButton logoutButton;
-    private JButton goReccomendationsScreen;
+    private JButton goReccomendationsScreenButton;
     private JButton goUserProfile;
     
     public HomeUI(NavigationCntl theNavigationCntl){
@@ -43,8 +43,8 @@ public class HomeUI extends JPanel {
         if(parentCntl.unreadNotificaiton()){
             goNotificationScreenButton.setForeground(Color.red);
         }
-        goReccomendationsScreen = new JButton ("Reccomendations");
-        add(goReccomendationsScreen);
+        goReccomendationsScreenButton = new JButton ("Reccomendations");
+        add(goReccomendationsScreenButton);
         add(goNotificationScreenButton);
         goUserProfile = new JButton("User Profile");
         add(goUserProfile);
@@ -56,20 +56,26 @@ public class HomeUI extends JPanel {
             System.out.println("goFoodScreenBtn click event triggered.");
             parentCntl.goToScreen(NavigationCntl.ScreenOption.FOOD);
             this.setVisible(false);
-		});
+        });
         
-		goMoodScreenButton.addActionListener((ActionEvent ae) -> { 
+        goMoodScreenButton.addActionListener((ActionEvent ae) -> { 
             System.out.println("goMoodScreenBtn click event triggered.");
             parentCntl.goToScreen(NavigationCntl.ScreenOption.MOOD);
             this.setVisible(false);
-		});	
+	});	
        
-		goNotificationScreenButton.addActionListener((ActionEvent ae) -> { 
+	goNotificationScreenButton.addActionListener((ActionEvent ae) -> { 
             System.out.println("goNotificationBtn click event triggered.");
             parentCntl.goToScreen(NavigationCntl.ScreenOption.NOTIFICATIONLIST);
             this.setVisible(false);
-		});
+	});
         
+        goReccomendationsScreenButton.addActionListener((ActionEvent ae) -> { 
+            System.out.println("goReccomendationsBtn click event triggered.");
+            parentCntl.goToScreen(NavigationCntl.ScreenOption.NOTIFICATIONLIST);
+            this.setVisible(false);
+	});
+                
         goUserProfile.addActionListener((ActionEvent ae) -> {
             System.out.println("goUserProfile click event triggered.");
             parentCntl.goToScreen(NavigationCntl.ScreenOption.USERPROFILE);
@@ -80,6 +86,6 @@ public class HomeUI extends JPanel {
             System.out.println("logoutBtn click event triggered.");
             setVisible(false);
             parentCntl.logout();
-		});
+	});
     }
 }
