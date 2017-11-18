@@ -50,7 +50,7 @@ public class FoodRecommendationUI extends JPanel{
         gbc.fill = GridBagConstraints.BOTH;
         gbc.weightx = .5;
         gbc.weighty = 10;
-        this.add(displayPanel(), gbc);
+        this.add(buildDisplayPanel(), gbc);
         
         JPanel bottomMargin =  new JPanel();
         gbc.gridx = 1;
@@ -72,7 +72,7 @@ public class FoodRecommendationUI extends JPanel{
         this.add(rightMargin, gbc);
     }
     
-    private JPanel displayPanel() {
+    private JPanel buildDisplayPanel() {
         GridBagConstraints c = new GridBagConstraints();
         recommendations = new JPanel();
         
