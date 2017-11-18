@@ -31,7 +31,7 @@ public class NavigationCntl {
     
     public static enum ScreenOption {HOME, FOOD, FOODLIST, EXTENDEDFOOD, 
             MOOD, MOODLIST, EXTENDEDMOOD, USERPROFILE, NOTIFICATIONLIST,
-            NOTIFICATION, EMPTY}
+            NOTIFICATION, RECOMMENDATION, EMPTY}
     private User activeUser;
     private HomeUI theHomeUI;
     private LoginCntl loginCntl;
@@ -89,6 +89,9 @@ public class NavigationCntl {
                 break;
             case NOTIFICATION:
                 goNotificationScreen();
+                break;
+            case RECOMMENDATION:
+                goRecommendationScreen();
                 break;
                 
         }
@@ -216,6 +219,12 @@ public class NavigationCntl {
         UserCntl userCntl = new UserCntl(this);
         ViewUserProfileUI userUI = new ViewUserProfileUI(userCntl);
         userInterface.add(userUI);
+    }
+    
+    private void goRecommendationScreen() {
+        System.out.println("Going to Reccomendation Screen.");
+        FoodRecommendationUI foodRecommendationUI = new FoodRecommendationUI(this);
+        userInterface.add(foodRecommendationUI);
     }
     
     public UserInterface getUserInterface() {

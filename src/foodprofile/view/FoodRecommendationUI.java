@@ -5,12 +5,14 @@
  */
 package foodprofile.view;
 
+import foodmood.controller.NavigationCntl;
 import foodprofile.controller.FoodCntl;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 /**
  *
@@ -18,29 +20,65 @@ import javax.swing.JPanel;
  */
 public class FoodRecommendationUI extends JPanel{
     private JPanel recommendations;
-    
-    private FoodCntl parentCntl;
     private JButton homeButton;
-    
+    private NavigationCntl parentCntl;
+            
     /**
      * The Default Constructor for the FoodRecommendationUI
      */
-    public FoodRecommendationUI (FoodCntl foodController) {
-        System.out.println("Creating FoodReccomendationsUI");
-        this.parentCntl = foodController;
-        //initializeComponents();
-        setLayout(new GridBagLayout());
-        addComponents(); 
+    public FoodRecommendationUI (NavigationCntl parentCntl) {
+       this.parentCntl = parentCntl;
+       addComponents();
     }
+    
     private void addComponents() {
-    GridBagConstraints gbc = new GridBagConstraints();
+        GridBagConstraints gbc = new GridBagConstraints();
+        
+        JPanel leftMargin = new JPanel();
+        //leftMargin.setBackground(Color.BLUE);
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridheight = 2;
+        gbc.fill = GridBagConstraints.BOTH;
+        gbc.weightx = .25;
+        gbc.weighty = .5;
+        this.add(leftMargin, gbc);
+        
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        gbc.gridheight = 1;
+        gbc.fill = GridBagConstraints.BOTH;
+        gbc.weightx = .5;
+        gbc.weighty = 10;
+        this.add(displayPanel(), gbc);
+        
+        JPanel bottomMargin =  new JPanel();
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+        gbc.gridheight = 1;
+        gbc.fill = GridBagConstraints.BOTH;
+        gbc.weightx = .5;
+        gbc.weighty = .5;
+        this.add(bottomMargin, gbc);
+        
+        JPanel rightMargin = new JPanel();
+        //rightMargin.setBackground(Color.MAGENTA);
+        gbc.gridx = 2;
+        gbc.gridy = 0;
+        gbc.gridheight = 2;
+        gbc.fill = GridBagConstraints.BOTH;
+        gbc.weightx = .25;
+        gbc.weighty = .5;
+        this.add(rightMargin, gbc);
+    }
     
-    recommendations = new JPanel();
-    GridBagConstraints c = new GridBagConstraints(); 
-    
-    homeButton = new JButton("Home");
+    private JPanel displayPanel() {
+        GridBagConstraints c = new GridBagConstraints();
+        recommendations = new JPanel();
+        
+        homeButton = new JButton("Home");
         homeButton.addActionListener((ActionEvent ae) -> {
-           parentCntl.requestHomeView();
+           parentCntl.goToScreen(NavigationCntl.ScreenOption.HOME);
         });
         c.gridx = 0;
         c.gridy = 0;
@@ -48,6 +86,7 @@ public class FoodRecommendationUI extends JPanel{
         c.weighty = .25;
         c.anchor = GridBagConstraints.WEST;
         recommendations.add(homeButton, c);
-    
+ 
+        return recommendations;
     }
 }
