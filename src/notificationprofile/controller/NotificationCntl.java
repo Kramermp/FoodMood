@@ -37,7 +37,6 @@ public final class NotificationCntl {
         this.navigationCntl = navigationCntl;
         this.activeUser = navigationCntl.getActiveUser();
         this.theNotificationList = activeUser.getNotificationList();
-        this.navigationCntl = navigationCntl;
         checkForNotifications(foodCntl, moodCntl);
     }
     
