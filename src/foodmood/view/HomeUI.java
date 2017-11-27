@@ -40,7 +40,7 @@ public class HomeUI extends JPanel {
         goMoodScreenButton = new JButton("Mood");
         add(goMoodScreenButton);
 		goNotificationScreenButton = new JButton("Notifications");
-        if(parentCntl.unreadNotificaiton()){
+        if(parentCntl.unreadNotification()){
             goNotificationScreenButton.setForeground(Color.red);
         }
         goReccomendationsScreenButton = new JButton ("Reccomendations");
