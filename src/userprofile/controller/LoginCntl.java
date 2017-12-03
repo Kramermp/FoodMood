@@ -37,11 +37,8 @@ public class LoginCntl {
         this.theUserList = externalDataCntl.getUserList();
         this.userCntl = new UserCntl(this);
         this.loginUi = new LoginUI(this);
-		this.buildUI();
+	this.buildUI();
 		
-        
-        //This should be removed at a later time
-        submitUserCredentials("mpk5206", "pass".toCharArray());
     }
 	
 	public JFrame getTheUserInterface() {
@@ -73,7 +70,7 @@ public class LoginCntl {
         theNavigationCntl = new NavigationCntl(this, theUserInterface, selectedUser);
     }
     
-    public void loginInvalid() {
+    public void loginInvalid(){
         System.out.println("Error Logging in with those credentials.");
         loginUi.displayLoginFailure();
     }
