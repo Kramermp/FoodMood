@@ -8,6 +8,7 @@ package moodprofile.controller;
 import externaldata.controller.ExternalDataCntl;
 import foodmood.controller.NavigationCntl;
 import foodmood.view.UserInterface;
+import foodprofile.controller.FoodCntl;
 import foodprofile.view.FoodUI;
 import java.awt.Dimension;
 import java.sql.Connection;
@@ -62,8 +63,11 @@ public class MoodCntl {
      * @param mood the mood to add
      */
     public void addMood(Mood mood){
+        mood.setFoodIDs(navigationCntl.getFoodCntl().linkFoods(mood.getTime(), mood.getID(), this));
         moodList.addMood(mood);
+        mood.printLinkedFoods();
         System.out.println(moodList.size()+" in c");
+        ExternalDataCntl.getExternalDataCntl().writeSerializedData();
     }
     
     /**
@@ -114,7 +118,7 @@ public class MoodCntl {
     
     public void addMood(MoodUI moodUi) {
         System.out.println("Adding Mood from the moodUi");
-        moodList.addMood(getMoodUIMood(moodUi));   
+        addMood(getMoodUIMood(moodUi));   
     }
     public void deleteMood(MoodUI moodUi) {
         System.out.println("Deleting mood");
@@ -144,4 +148,5 @@ public class MoodCntl {
     public Mood getSelectedMood() {
         return this.selectedMood;
     }
+    
 }

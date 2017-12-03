@@ -14,6 +14,7 @@ import java.sql.SQLException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.GregorianCalendar;
 
 /**
  *
@@ -123,5 +124,41 @@ public class FoodList implements Serializable {
                 }
             }
         }
+    }
+    
+    /**
+     * walks through the foodList and if the food is within 3 hours of the mood,
+     * adds the mood id to the food
+     * @param dateOfMood the date to test for
+     * @param mood the id to add
+     */
+    public ArrayList<Integer> linkFoods(GregorianCalendar dateOfMood, int mood){
+        ArrayList<Integer> linkedFoods = new ArrayList();
+        for (int i = 0; i < listOfFoods.size()-1; i++) {
+            int monthDifferent = dateOfMood.getTime().getMonth() - 
+                    listOfFoods.get(i).getTime().getTime().getMonth();
+            int dayDifferent = dateOfMood.getTime().getDate() - 
+                    listOfFoods.get(i).getTime().getTime().getDate();
+//            long difference = dateOfMood.getTimeInMillis() - listOfFoods.get(i).getTime().getTimeInMillis();
+//            if(difference < 0){
+//                difference = difference * -1;
+//            }
+            System.out.println("******************************");
+            System.out.println(dateOfMood.getTime().getMonth()+ " - "+ listOfFoods.get(i).getTime().getTime().getMonth());
+            System.out.println(dateOfMood.getTime().getDate() +" - "+ listOfFoods.get(i).getTime().getTime().getDate());
+            System.out.println("****************************");
+            if(monthDifferent == 0 && dayDifferent == 0){
+                listOfFoods.get(i).addMood(mood);
+                linkedFoods.add(listOfFoods.get(i).getID());
+            }else{
+                System.out.println("no");
+            }
+        }
+        ExternalDataCntl.getExternalDataCntl().writeSerializedData();
+        return linkedFoods;
+    }
+    
+    public int getNewID(){
+        return listOfFoods.size()+1;
     }
 }

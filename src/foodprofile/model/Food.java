@@ -178,6 +178,16 @@ public class Food implements Serializable {
         moods.add(mood);
     }
 
-
+    public void printLinkedMoods(){
+        System.out.print("\n Moods: ");
+        for (int i = 0; i < moods.size(); i++) {
+            System.out.print(moods.get(i)+", ");
+        }
+        System.out.println("\n");
+    }
+    
+    public void setID(int id){
+        this.id = id;
+    }
 
 }

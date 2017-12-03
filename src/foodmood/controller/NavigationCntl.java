@@ -236,9 +236,15 @@ public class NavigationCntl {
     }
     
     public boolean unreadNotification(){
-		//This right here is causing a bug where the UI is being turned into the
-		//Incorrect UI
         notificationCntl = new NotificationCntl(this, new FoodCntl(this), new MoodCntl(this), false);
         return notificationCntl.hasUnreadNotifications();
+    }
+    
+    public FoodCntl getFoodCntl(){
+        return new FoodCntl(this);
+    }
+    
+    public MoodCntl getMoodCntl(){
+        return new MoodCntl(this);
     }
 }

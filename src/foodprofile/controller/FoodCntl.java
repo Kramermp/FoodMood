@@ -19,6 +19,7 @@ import java.sql.Connection;
 import java.sql.Statement;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import moodprofile.controller.MoodCntl;
 
 /**
  *
@@ -82,10 +83,13 @@ public class FoodCntl {
      * @param food the food to add
      */
     public void addFood(Food food){
+        if(food.getID() == 0){
+            food.setID(foodList.getNewID());
+        }
         this.foodList.addFood(food);
     }
     
-    /**
+        /**
      * creates a food and adds it to the list
      * @param name name of the food
      * @param foodCategory name or csv list of names of food categories
@@ -100,10 +104,11 @@ public class FoodCntl {
         if(foodList.size() == 0){
             id = 1;
         }else{
-            id = foodList.getFood(foodList.size()-1).getID()+1;
+            id = foodList.getNewID();
         }
         Food theFood = new Food(id, name, foodCategory, time);
         foodList.addFood(theFood);
+        navigationCntl.getMoodCntl().getMoodList().linkFoods(theFood.getTime(), theFood.getID());
         System.out.println("Food created: "+theFood.getName()+" "+theFood.getTime().getTime().getMonth()+"/"+theFood.getTime().getTime().getDate());
         System.out.println(foodList.size());
     }
@@ -118,7 +123,9 @@ public class FoodCntl {
     }
     
     public void addFood(FoodUI foodUi) {
-        foodList.addFood(getFoodUIFood(foodUi));
+        Food food = getFoodUIFood(foodUi);
+        food.setID(foodList.getNewID());
+        foodList.addFood(food);
     }
     
     private Food getFoodUIFood(FoodUI foodUi) {
@@ -167,5 +174,9 @@ public class FoodCntl {
     
     public void requestExtendedFoodView() {
         navigationCntl.goToScreen(NavigationCntl.ScreenOption.EXTENDEDFOOD);
+    }
+    
+    public ArrayList<Integer> linkFoods(GregorianCalendar moodTime, int moodID, MoodCntl moodCntl){
+        return foodList.linkFoods(moodTime, moodID);
     }
 }
