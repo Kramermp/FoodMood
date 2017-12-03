@@ -6,6 +6,7 @@
 package ui.utils;
 
 import java.awt.FlowLayout;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -45,11 +46,11 @@ public class DateInputPanel extends JPanel {
     }
 
     public int getMonth() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return Integer.parseInt(monthsBox.getSelectedItem().toString());
     }
 
     public int getDay() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return Integer.parseInt(daysBox.getSelectedItem().toString());
     }
 
     public void setDate(GregorianCalendar time) {
@@ -57,6 +58,18 @@ public class DateInputPanel extends JPanel {
         monthsBox.setSelectedIndex(time.get(GregorianCalendar.MONTH));
         //Gregoiran Days start at 1 so inex = date - 1;
         daysBox.setSelectedIndex(time.get(GregorianCalendar.DATE) - 1);
+    }
+    
+    public Date getDate(){
+        int month = getMonth();
+        int date = getDay();
+        return new Date(2017, month, date);
+    }
+    
+    public GregorianCalendar getCalendar(){
+        GregorianCalendar calendar = new GregorianCalendar();
+        calendar.setTime(getDate());
+        return calendar;
     }
     
     
