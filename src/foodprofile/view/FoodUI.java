@@ -81,8 +81,8 @@ public class FoodUI extends JPanel {
     }
     
     public GregorianCalendar getTime() {
-        System.err.println("This is technically a stub (FoodUI.getTime()).");
-        return new GregorianCalendar();
+//        System.err.println("This is technically a stub (FoodUI.getTime()).");
+        return dateInputPanel.getCalendar();
     }
     
     private void addComponents() {
@@ -264,7 +264,7 @@ public class FoodUI extends JPanel {
         this.dateInputPanel.setDate(sourceFood.getTime());
         this.foodGroupInput.setSelectedItem(sourceFood.getFoodCategories().get(0));
         this.timeInput.setText(String.valueOf(sourceFood.getTime().get(GregorianCalendar.HOUR)) + ":" +
-                String.valueOf(sourceFood.getTime().get(GregorianCalendar.MINUTE)));
+        String.valueOf(sourceFood.getTime().get(GregorianCalendar.MINUTE)));
         
     }
   
