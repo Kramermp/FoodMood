@@ -126,8 +126,7 @@ public class LoginUI extends JPanel {
         add(passwordFld, c);
         
         errorMessage = new JPanel();
-        errorText = new JLabel("The Username or Password was"
-                + " incorrect.");
+        errorText = new JLabel("");
         errorText.setForeground(Color.RED);
         errorMessage.add(errorText);
         errorMessage.setEnabled(false);
@@ -187,6 +186,7 @@ public class LoginUI extends JPanel {
     }
     
     public void displayLoginFailure() {
+        System.out.println("DISPLAYING LOGIN FAILURE");
         errorMessage.setEnabled(true);
         errorMessage.setVisible(true);
         errorText.setText("The Username or Password entered was incorrect.");
