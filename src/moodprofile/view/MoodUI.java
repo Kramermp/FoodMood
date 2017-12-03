@@ -224,7 +224,6 @@ public class MoodUI extends JPanel {
     }
     
     public GregorianCalendar getTime() {
-        System.err.println("This is technically a stub (MoodUI.getTime()).");
-        return new GregorianCalendar();
+        return dateInputPanel.getCalendar();
     }
 }
