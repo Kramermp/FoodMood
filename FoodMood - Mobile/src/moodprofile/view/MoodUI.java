@@ -25,10 +25,11 @@ import ui.utils.DateInputPanel;
  * @author mpk5206
  */
 public class MoodUI extends JPanel {
+
     private Mood sourceMood;
-    
+
     private MoodCntl parentCntl;
-    private JTextField moodInput;
+    private JComboBox moodInput;
     private DateInputPanel dateInputPanel;
     private JTextField timeInput;
     private JButton submit;
@@ -36,21 +37,21 @@ public class MoodUI extends JPanel {
     private JButton homeButton;
     private JButton deleteButton;
 
-    
     /**
      * Default Constructor for empty MoodView
+     *
      * @param parentController the parentController
      */
-   
     public MoodUI(MoodCntl moodController) {
-		//System.out.println("Creating MoodUI");
+        //System.out.println("Creating MoodUI");
         //this.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         this.parentCntl = moodController;
         addComponents();
     }
-    
+
     /**
      * Creates a MoodView of the provided MoodProfile
+     *
      * @param moodProfile the source moodprofile
      * @param parentController the parent controller
      */
@@ -58,17 +59,17 @@ public class MoodUI extends JPanel {
         //this.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         this.parentCntl = parentController;
         this.sourceMood = mood;
-        
+
         addComponents();
-        if(sourceMood != null) {
+        if (sourceMood != null) {
             populateFields();
         }
     }
-    
+
     private void addComponents() {
         this.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
-        
+
         JPanel leftMargin = new JPanel();
         //leftMargin.setBackground(Color.BLUE); // For Debugging Purposes
         gbc.gridx = 0;
@@ -78,7 +79,7 @@ public class MoodUI extends JPanel {
         gbc.weightx = .5;
         gbc.weighty = .5;
         this.add(leftMargin, gbc);
-        
+
         gbc.gridx = 1;
         gbc.gridy = 0;
         gbc.gridheight = 1;
@@ -86,7 +87,7 @@ public class MoodUI extends JPanel {
         gbc.weightx = .5;
         gbc.weighty = .5;
         this.add(buildInputPanel(), gbc);
-        
+
         gbc.gridx = 1;
         gbc.gridy = 1;
         gbc.gridheight = 1;
@@ -94,7 +95,7 @@ public class MoodUI extends JPanel {
         gbc.weightx = .5;
         gbc.weighty = .25;
         this.add(buildButtonPanel(), gbc);
-        
+
         JPanel rightMargin = new JPanel();
         //rightMargin.setBackground(Color.MAGENTA); // For Debugging Purposes
         gbc.gridx = 2;
@@ -105,16 +106,16 @@ public class MoodUI extends JPanel {
         gbc.weighty = .5;
         this.add(rightMargin, gbc);
     }
-    
+
     private JPanel buildInputPanel() {
         JPanel inputPanel = new JPanel();
         // inputPanel.setBackground(Color.RED); // For Debugging Purposes
         inputPanel.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
-        
+
         homeButton = new JButton("Home");
         homeButton.addActionListener((ActionEvent ae) -> {
-           parentCntl.requestHomeView();
+            parentCntl.requestHomeView();
         });
         c.gridx = 0;
         c.gridy = 0;
@@ -123,30 +124,30 @@ public class MoodUI extends JPanel {
         //c.fill = GridBagConstraints.BOTH;
         c.anchor = GridBagConstraints.WEST;
         inputPanel.add(homeButton, c);
-        
+
         JLabel dateLbl = new JLabel("Date:");
         c.anchor = GridBagConstraints.EAST;
         c.gridx = 0;
-        c.insets = new Insets(10,10,10,10);
+        c.insets = new Insets(10, 10, 10, 10);
         c.gridwidth = 1;
         c.weighty = 0;
         c.gridy = 1;
         inputPanel.add(dateLbl, c);
-        
+
         dateInputPanel = new DateInputPanel();
         c.anchor = GridBagConstraints.WEST;
         c.gridx = 1;
         c.gridwidth = 1;
         c.gridy = 1;
-        inputPanel.add(dateInputPanel, c); 
-        
+        inputPanel.add(dateInputPanel, c);
+
         JLabel timeLbl = new JLabel("Time:");
         c.gridx = 0;
         c.gridy = 2;
         c.weightx = .25;
         c.anchor = GridBagConstraints.EAST;
         inputPanel.add(timeLbl, c);
-        
+
         timeInput = new JTextField(25);
         c.gridx = 1;
         c.gridy = 2;
@@ -162,67 +163,70 @@ public class MoodUI extends JPanel {
         c.weightx = .25;
         c.fill = GridBagConstraints.NONE;
         inputPanel.add(moodLbl, c);
-        
-        moodInput = new JTextField(25);
+
+        moodInput = new JComboBox(Mood.possiblMoods);
+
         c.gridx = 1;
         c.gridy = 3;
         c.weightx = .25;
         c.weighty = .5;
         c.anchor = GridBagConstraints.NORTHWEST;
         inputPanel.add(moodInput, c);
-        
+
         return inputPanel;
+
     }
-    
+
     private JPanel buildButtonPanel() {
         JPanel buttonPanel = new JPanel();
         // buttonPanel.setBackground(Color.PINK); // For Debugging Purposes
         buttonPanel.setLayout(new GridBagLayout());
-        
+
         submit = new JButton("Submit");
         submit.addActionListener((ActionEvent ae) -> {
             System.out.println("SubmitBtn Click Event Registered");
-            if(sourceMood == null) {
+            if (sourceMood == null) {
                 parentCntl.addMood(this);
             } else {
                 parentCntl.updateMood(this);
-            } 
+            }
         });
         buttonPanel.add(submit);
-        
+
         deleteButton = new JButton("Delete");
-        deleteButton.addActionListener((ActionEvent ae) ->  { 
+        deleteButton.addActionListener((ActionEvent ae) -> {
             System.out.println("DeleteBtn Click Event Registered");
-            if(sourceMood != null) {
+            if (sourceMood != null) {
                 parentCntl.deleteMood(this);
                 parentCntl.requestListView();
             }
         });
-        if(sourceMood != null) {
+        if (sourceMood != null) {
             buttonPanel.add(deleteButton);
         }
-        
+
         listButton = new JButton("Mood List");
-        listButton.addActionListener((ActionEvent ae) -> { 
+        listButton.addActionListener((ActionEvent ae) -> {
             parentCntl.requestListView();
         });
         buttonPanel.add(listButton);
-        
+
         return buttonPanel;
+
     }
-    
-    public final void populateFields(){
+
+    public final void populateFields() {
         System.out.println("Populating Fields");
-        this.moodInput.setText(sourceMood.getName());
+        this.moodInput.setSelectedItem(sourceMood.getName());
         this.dateInputPanel.setDate(sourceMood.getTime());
-        this.timeInput.setText(String.valueOf(sourceMood.getTime().get(GregorianCalendar.HOUR)) + ":" +
-                String.valueOf(sourceMood.getTime().get(GregorianCalendar.MINUTE)));
+        this.timeInput.setText(String.valueOf(sourceMood.getTime().get(GregorianCalendar.HOUR)) + ":"
+                + String.valueOf(sourceMood.getTime().get(GregorianCalendar.MINUTE)));
     }
-    
+
     public String getMoodName() {
-        return this.moodInput.getText();
+        return this.moodInput.getSelectedItem().toString();   
     }
-    
+
     public GregorianCalendar getTime() {
         return dateInputPanel.getCalendar();
     }

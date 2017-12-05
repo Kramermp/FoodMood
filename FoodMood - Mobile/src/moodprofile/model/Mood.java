@@ -5,7 +5,8 @@ import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 public class Mood implements Serializable {
-    
+    public static final String[] possiblMoods = { "Happy", "Sad", "Sick",
+        "Angry", "Upset"};
     private int id;
     private String name;
     private int moodScore;
