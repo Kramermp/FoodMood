@@ -5,8 +5,10 @@
  */
 package foodmood.analytic;
 
+import navigation.controller.NavigationCntl;
+
 /**
- *
+ * This class serves as the entry point to the FoodMood Analytic Application.
  * @author Michael Kramer <mpk5206 @ psu.edu>
  */
 public class FoodMoodAnalytic {
@@ -15,7 +17,7 @@ public class FoodMoodAnalytic {
 	 * @param args the command line arguments
 	 */
 	public static void main(String[] args) {
-		// TODO code application logic here
+		new NavigationCntl();
 	}
 	
 }
