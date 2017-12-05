@@ -5,6 +5,7 @@
  */
 package navigation.ui;
 
+import java.awt.Color;
 import javax.swing.JPanel;
 import navigation.controller.NavigationCntl;
 
@@ -15,7 +16,7 @@ import navigation.controller.NavigationCntl;
 public class NavigationUI extends JPanel {
 
     public NavigationUI(NavigationCntl aThis) {
-        
+        //this.setBackground(Color.RED);
     }
     
 }

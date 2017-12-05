@@ -41,6 +41,7 @@ public class UserInterface extends JFrame {
     }
     
     private void buildWindow() {
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 }
