@@ -5,6 +5,8 @@
  */
 package userprofile.view;
 
+import ui.utils.JPasswordHint;
+import ui.utils.JTextHint;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
@@ -31,7 +33,7 @@ import userprofile.controller.UserCntl;
  * 
  * @author Michael Kramer
  */
-public class NewUserUI extends JFrame {
+public class NewUserUI extends JPanel {
     private LoginCntl parentCntl;
     private UserCntl theUserCntl;
     
@@ -45,16 +47,8 @@ public class NewUserUI extends JFrame {
     public NewUserUI(LoginCntl parentCntl, UserCntl theUserCntl) {
         this.parentCntl = parentCntl;
         this.theUserCntl = theUserCntl;
-        buildWindow();
-        addComponents();
-    }
-    
-    private void buildWindow() {
-        this.setTitle("Create User Account");
-        this.setSize(500, 700);
-        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        this.addWindowListener(new NewUserUIWindowListener());
         this.setLayout(new GridBagLayout());
+        addComponents();
     }
     
     /*
@@ -202,7 +196,7 @@ public class NewUserUI extends JFrame {
         cancelBtn.setPreferredSize(new Dimension(50, 25)); // This ensures that cancel and submit recieve the same space
         cancelBtn.addActionListener((ActionEvent ae) -> { 
             System.out.println("cancelBtn click event registered");
-            closeWindow();
+            returnToLogin();
         });
         gbc.gridx = 1;
         gbc.gridy = 0;
@@ -227,7 +221,7 @@ public class NewUserUI extends JFrame {
         submitBtn.addActionListener((ActionEvent ae) -> {
             System.out.println("submitBtn click event registered");
             if (verifyUserInput())
-                theUserCntl.submitNewUserCredentials(usernameFld.getValue(), passwordFld.getValue());
+                theUserCntl.submitNewUserCredentials(this);
         });
         gbc.gridx = 3;
         gbc.gridy = 0;
@@ -256,7 +250,7 @@ public class NewUserUI extends JFrame {
     
     private boolean verifyUserInput() {
         int errorCount =0;
-        errorPanel.setBackground(Color.yellow);
+        //errorPanel.setBackground(Color.yellow);
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.BOTH;
         errorPanel.removeAll();
@@ -299,8 +293,16 @@ public class NewUserUI extends JFrame {
         }
     }
     
-    public void closeWindow() {
-        parentCntl.closeNewUserUI();
+    public void returnToLogin() {
+        parentCntl.displayLogin();
+    }
+    
+    public String getUsername() {
+        return this.usernameFld.getValue();
+    } 
+    
+    public char[] getPassword() {
+        return this.passwordFld.getValue();
     }
     
     private class NewUserUIWindowListener implements WindowListener {
@@ -313,7 +315,7 @@ public class NewUserUI extends JFrame {
         @Override
         public void windowClosing(WindowEvent we) {
             System.out.println("NewUserUI closing");
-            closeWindow();
+            returnToLogin();
         }
 
         @Override

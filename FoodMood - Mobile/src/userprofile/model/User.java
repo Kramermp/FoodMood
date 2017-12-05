@@ -49,11 +49,7 @@ public class User implements Serializable {
      * @return The boolean result from authenticate, true is authenticated.
      */
     public boolean authenticate(String username, char[] password) {
-        if(username.equalsIgnoreCase(this.username) && java.util.Arrays.equals(password, this.password)){
-            return true;
-        }else{
-            return false;
-        }
+        return username.equalsIgnoreCase(this.username) && java.util.Arrays.equals(password, this.password);
     }
 
     /**

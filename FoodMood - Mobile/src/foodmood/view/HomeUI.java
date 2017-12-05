@@ -23,7 +23,7 @@ public class HomeUI extends JPanel {
     private JButton goMoodScreenButton;
     private JButton goNotificationScreenButton;
     private JButton logoutButton;
-    private JButton goHistoryScreen;
+    private JButton goReccomendationsScreenButton;
     private JButton goUserProfile;
     
     public HomeUI(NavigationCntl theNavigationCntl){
@@ -34,56 +34,53 @@ public class HomeUI extends JPanel {
     
     private void initializeComponents(){
 		System.out.println("Creating components");
-        setLayout(new GridLayout(2,3));
+        setLayout(new GridLayout(6,1));
         goFoodScreenButton = new JButton("Food");
         add(goFoodScreenButton);
         goMoodScreenButton = new JButton("Mood");
         add(goMoodScreenButton);
 		goNotificationScreenButton = new JButton("Notifications");
-//        if(parentCntl.unreadNotificaiton()){
-//            goNotificationScreenButton.setForeground(Color.red);
-//        }
+        if(parentCntl.unreadNotification()){
+            goNotificationScreenButton.setForeground(Color.red);
+        }
+        goReccomendationsScreenButton = new JButton ("Reccomendations");
+        add(goReccomendationsScreenButton);
         add(goNotificationScreenButton);
         goUserProfile = new JButton("User Profile");
         add(goUserProfile);
-        goHistoryScreen = new JButton("History");
-        add(goHistoryScreen);
+        
         logoutButton = new JButton("Logout");
         add(logoutButton);
        
         goFoodScreenButton.addActionListener((ActionEvent ae) -> { 
             System.out.println("goFoodScreenBtn click event triggered.");
-            parentCntl.goFoodScreen();
-            this.setVisible(false);
-		});
+            parentCntl.goToScreen(NavigationCntl.ScreenOption.FOOD);
+        });
         
-		goMoodScreenButton.addActionListener((ActionEvent ae) -> { 
+        goMoodScreenButton.addActionListener((ActionEvent ae) -> { 
             System.out.println("goMoodScreenBtn click event triggered.");
-            parentCntl.goMoodScreen();
-            this.setVisible(false);
-		});	
+            parentCntl.goToScreen(NavigationCntl.ScreenOption.MOOD);
+	});	
        
-		goNotificationScreenButton.addActionListener((ActionEvent ae) -> { 
+	goNotificationScreenButton.addActionListener((ActionEvent ae) -> { 
             System.out.println("goNotificationBtn click event triggered.");
-            parentCntl.goNotifcationScreen();
-            this.setVisible(false);
-		});
+            parentCntl.goToScreen(NavigationCntl.ScreenOption.NOTIFICATIONLIST);
+	});
         
+        goReccomendationsScreenButton.addActionListener((ActionEvent ae) -> { 
+            System.out.println("goReccomendationsBtn click event triggered.");
+            parentCntl.goToScreen(NavigationCntl.ScreenOption.RECOMMENDATION);
+	});
+                
         goUserProfile.addActionListener((ActionEvent ae) -> {
             System.out.println("goUserProfile click event triggered.");
-            parentCntl.goUserProfile();
-            this.setVisible(false);
-        });
-                
-        goHistoryScreen.addActionListener((ActionEvent ae) -> {
-            System.out.println("goHistoryScreen click event triggered.");
-            //parentCntl.goHistoryScreen();
+            parentCntl.goToScreen(NavigationCntl.ScreenOption.USERPROFILE);
         });
         
         logoutButton.addActionListener((ActionEvent ae) -> { 
             System.out.println("logoutBtn click event triggered.");
             setVisible(false);
             parentCntl.logout();
-		});
+	});
     }
 }

@@ -19,6 +19,7 @@ import java.sql.Connection;
 import java.sql.Statement;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import moodprofile.controller.MoodCntl;
 
 /**
  *
@@ -31,10 +32,11 @@ public class FoodCntl {
     private Statement theStatement = null;
     private FoodListUI foodListUI;
     private NavigationCntl navigationCntl;
+    private Food selectedFood;
         
-    public FoodCntl(NavigationCntl navigationCntl, User currentUser){
+    public FoodCntl(NavigationCntl navigationCntl) {
         this.navigationCntl = navigationCntl;
-        foodList = navigationCntl.getActiveUser().getFoodList();
+        this.foodList = navigationCntl.getActiveUser().getFoodList();
     }
         
     /**
@@ -55,7 +57,7 @@ public class FoodCntl {
      * @return the foodList
      */
     public FoodList getFoodList() {
-        return foodList;
+        return this.foodList;
     }
 
     /**
@@ -65,8 +67,6 @@ public class FoodCntl {
     public void setFoodList(FoodList foodList) {
         this.foodList = foodList;
     }
-    
-    
     
     public void viewFood(Food food){
         FoodUI foodUI = new FoodUI(this, food);
@@ -83,10 +83,13 @@ public class FoodCntl {
      * @param food the food to add
      */
     public void addFood(Food food){
+        if(food.getID() == 0){
+            food.setID(foodList.getNewID());
+        }
         this.foodList.addFood(food);
     }
     
-    /**
+        /**
      * creates a food and adds it to the list
      * @param name name of the food
      * @param foodCategory name or csv list of names of food categories
@@ -101,20 +104,17 @@ public class FoodCntl {
         if(foodList.size() == 0){
             id = 1;
         }else{
-            id = foodList.getFood(foodList.size()-1).getID()+1;
+            id = foodList.getNewID();
         }
         Food theFood = new Food(id, name, foodCategory, time);
         foodList.addFood(theFood);
+        navigationCntl.getMoodCntl().getMoodList().linkFoods(theFood.getTime(), theFood.getID());
         System.out.println("Food created: "+theFood.getName()+" "+theFood.getTime().getTime().getMonth()+"/"+theFood.getTime().getTime().getDate());
         System.out.println(foodList.size());
     }
     
-    /**
-     * This updates a food, using the id stored within the food class
-     * @param food  the food to update
-     */
-    public void updateFood(Food food){
-        this.foodList.updateFood(food);
+    public void updateFood(FoodUI foodUi) {
+        this.foodList.updateFood(selectedFood, getFoodUIFood(foodUi));
     }
     
     public void goListView(){
@@ -122,6 +122,16 @@ public class FoodCntl {
         foodListUI.setVisible(true);
     }
     
+    public void addFood(FoodUI foodUi) {
+        Food food = getFoodUIFood(foodUi);
+        food.setID(foodList.getNewID());
+        foodList.addFood(food);
+    }
+    
+    private Food getFoodUIFood(FoodUI foodUi) {
+        return new Food(foodUi.getFoodName(), foodUi.getFoodCategory(),
+                foodUi.getTime());
+    }
      
     /**
      * This deletes the food from the current user's FoodList
@@ -137,7 +147,36 @@ public class FoodCntl {
         
     }
     
-    public void goHome(){
-        navigationCntl.goHomeScreen();
-    }    
+    public void setSelectedFood(Food foodToSelect) {
+        this.selectedFood = foodToSelect;
+    }
+    
+    public Food getSelectedFood() {
+        return this.selectedFood;
+    }
+    
+    public void deleteSelectedFood() {
+        this.foodList.removeFood(selectedFood);
+        selectedFood = null;
+    }
+    
+    public void requestListView() {
+        navigationCntl.goToScreen(NavigationCntl.ScreenOption.FOODLIST);
+    }
+
+    public void requestHomeView() {
+        navigationCntl.goToScreen(NavigationCntl.ScreenOption.HOME);
+    }
+    
+    public void requestFoodView() {
+        navigationCntl.goToScreen(NavigationCntl.ScreenOption.FOOD);
+    }
+    
+    public void requestExtendedFoodView() {
+        navigationCntl.goToScreen(NavigationCntl.ScreenOption.EXTENDEDFOOD);
+    }
+    
+    public ArrayList<Integer> linkFoods(GregorianCalendar moodTime, int moodID, MoodCntl moodCntl){
+        return foodList.linkFoods(moodTime, moodID);
+    }
 }

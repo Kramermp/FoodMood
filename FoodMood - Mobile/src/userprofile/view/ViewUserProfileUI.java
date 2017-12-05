@@ -5,6 +5,8 @@
  */
 package userprofile.view;
 
+import ui.utils.JPasswordHint;
+import ui.utils.JTextHint;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -67,9 +69,6 @@ public class ViewUserProfileUI extends JPanel {
         this.sourceUser = parentCntl.getActiveUser();
         this.setLayout(new GridBagLayout());
         addComponents();
-        this.validate();
-        this.revalidate();
-        this.repaint();
     }
     
     public void loadSourceUser() {
@@ -81,7 +80,7 @@ public class ViewUserProfileUI extends JPanel {
         GridBagConstraints gbc = new GridBagConstraints();
         
         JPanel leftMargin = new JPanel();
-        //leftMargin.setBackground(Color.BLUE);
+        //leftMargin.setBackground(Color.BLUE); // For Debugging Purposes
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.gridheight = 2;
@@ -107,7 +106,7 @@ public class ViewUserProfileUI extends JPanel {
         this.add(buildButtonPanel(), gbc);
         
         JPanel rightMargin = new JPanel();
-        //rightMargin.setBackground(Color.MAGENTA);
+        //rightMargin.setBackground(Color.MAGENTA); // For Debugging Purposes
         gbc.gridx = 2;
         gbc.gridy = 0;
         gbc.gridheight = 2;

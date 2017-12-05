@@ -34,6 +34,11 @@ public class Mood implements Serializable {
         this.time = null;
     }
     
+    public Mood(String mood, GregorianCalendar time) {
+        this.name = mood;
+        this.time = time;
+    }
+    
     /**
      * Get the id of the mood
      * @return the id
@@ -131,7 +136,12 @@ public class Mood implements Serializable {
      * @param toDelete the index of the food to delete
      */
     public void deleteFood(int toDelete){
-        
+        for (int i = 0; i < foodIDs.size(); i++) {
+            if(foodIDs.get(i)==toDelete){
+                foodIDs.remove(i);
+                i--;
+            }
+        }
     }
     
     /**
@@ -139,6 +149,17 @@ public class Mood implements Serializable {
      * @param toAdd the food to add
      */
     public void addFood(int toAdd){
-        
+        if(foodIDs ==null){
+            foodIDs = new ArrayList();
+        }
+        foodIDs.add(toAdd);
+    }
+    
+    public void printLinkedFoods(){
+        System.out.print("\nFoods: ");
+        for (int i = 0; i < foodIDs.size(); i++) {
+            System.out.print(foodIDs.get(i)+", ");
+        }
+        System.out.println("\n");
     }
 }

@@ -17,29 +17,33 @@ import moodprofile.controller.MoodCntl;
  *
  * @author HannahGarthwaite
  */
-public class NotificationCntl {
+public final class NotificationCntl {
     
-    User theUser;
-    NotificationList theNotificationList;
-    NavigationCntl navigationCntl;
+    private User activeUser;
+    private Notification selectedNotification;
+    private NotificationList theNotificationList;
+    private NavigationCntl navigationCntl;
     
     /**
      * Default constructor, needs user to get and assign notifications
      * @param user currentUser
      * @param navigationCntl 
+     * @param foodCntl 
+     * @param moodCntl 
+     * @param showView 
      */
-    public NotificationCntl(User user, NavigationCntl navigationCntl, FoodCntl foodCntl, MoodCntl moodCntl, boolean showView){
-        theUser = user;
-        theNotificationList = user.getNotificationList();
+    public NotificationCntl(NavigationCntl navigationCntl, 
+            FoodCntl foodCntl, MoodCntl moodCntl, boolean showView){
         this.navigationCntl = navigationCntl;
+        this.activeUser = navigationCntl.getActiveUser();
+        this.theNotificationList = activeUser.getNotificationList();
         checkForNotifications(foodCntl, moodCntl);
-        if(showView){
-            viewNotificationList();
-        }
     }
     
     /**
      * checks with FoodCntl and MoodCntl for last time information was entered
+     * @param foodCntl
+     * @param moodCntl
      */
     public void checkForNotifications(FoodCntl foodCntl, MoodCntl moodCntl){
         
@@ -100,29 +104,11 @@ public class NotificationCntl {
     public void deleteNotification(int id){
         theNotificationList.deleteNotification(id);
     }
-    /**
-     * Opens NotificationListUI
-     */
-    public void viewNotificationList(){
-        NotificationListUI theNotificationListUI = new NotificationListUI(this, theNotificationList);
-        theNotificationListUI.setVisible(true);
-    }
     
-    /**
-     * Opens NotificationUI for notification
-     * @param id id of the notification to view
-     */
-    public void viewNotification(int id){
-        Notification theNotificationToView = null;
-        for (int i = 0; i < theNotificationList.getNotificationList().size(); i++) {
-            if(theNotificationList.getNotification(i).getId() == id){
-                theNotificationToView = theNotificationList.getNotification(i);
-                break;
-            }
-        }
-        NotificationUI theNotificationUI = new NotificationUI(this, theNotificationToView);
-        theNotificationUI.setVisible(true);
-        theNotificationList.markNotificationAsRead(theNotificationToView.getId());
+    public void deleteNotification() {
+        theNotificationList.deleteNotification(selectedNotification);
+        selectedNotification = null;
+        navigationCntl.goToScreen(NavigationCntl.ScreenOption.NOTIFICATIONLIST);
     }
     
     /**
@@ -138,29 +124,25 @@ public class NotificationCntl {
      * Calls navigationCntl to go home
      */
     public void goHome(){
-        navigationCntl.goHomeScreen();
+        navigationCntl.goToScreen(NavigationCntl.ScreenOption.HOME);
     }
     
     /**
      * Scrolls forward through notificationList
      * @param id 
      */
-    public void next(int id){
-        Notification theNotificationToView = theNotificationList.next(id);
-        NotificationUI theNotificationUI = new NotificationUI(this, theNotificationToView);
-        theNotificationUI.setVisible(true);
-        theNotificationList.markNotificationAsRead(theNotificationToView.getId());
+    public void next(){
+        selectedNotification = theNotificationList.next(selectedNotification);
+        this.navigationCntl.goToScreen(NavigationCntl.ScreenOption.NOTIFICATION);
     }
     
     /**
      * Scrolls backwards through notificationList
      * @param id 
      */
-    public void previous(int id){
-        Notification theNotificationToView = theNotificationList.previous(id);
-        NotificationUI theNotificationUI = new NotificationUI(this, theNotificationToView);
-        theNotificationUI.setVisible(true);
-        theNotificationList.markNotificationAsRead(theNotificationToView.getId());
+    public void previous(){
+        selectedNotification = theNotificationList.previous(selectedNotification);
+        this.navigationCntl.goToScreen(NavigationCntl.ScreenOption.NOTIFICATION);
     }
     
     /**
@@ -169,6 +151,31 @@ public class NotificationCntl {
      */
     public boolean hasUnreadNotifications(){
         return theNotificationList.hasUnreadNotification();
+    }
+    
+    public NotificationList getNotificationList() {
+        return this.theNotificationList;
+    }
+    
+    public void requestHomeView() {
+        navigationCntl.goToScreen(NavigationCntl.ScreenOption.HOME);
+    }
+    
+    public void requestExtendedNotificationView(Notification notification) {
+        this.selectedNotification = notification;
+        navigationCntl.goToScreen(NavigationCntl.ScreenOption.NOTIFICATION);
+    }
+
+    public Notification getSelectedNotification() {
+       return this.selectedNotification;
+    }
+
+    public boolean hasNext() {
+        return this.theNotificationList.hasNext(selectedNotification);
+    }
+
+    public boolean hasPrevious() {
+        return this.theNotificationList.hasPrevious(selectedNotification);
     }
     
 }

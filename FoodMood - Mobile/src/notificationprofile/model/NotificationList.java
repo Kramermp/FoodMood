@@ -149,6 +149,19 @@ public class NotificationList implements Serializable {
     }
     
     /**
+     * Deletes a notification
+     * @param notification
+     */
+    public void deleteNotification(Notification notification){
+        for (int i = 0; i < notificationList.size(); i++) {
+            if (notificationList.get(i) == notification) {
+                notificationList.remove(i);
+                break;
+            }
+        }
+    }
+    
+    /**
      * Retrieves a notification given the index
      * @param index the index of the notification to get
      * @return notification
@@ -199,6 +212,33 @@ public class NotificationList implements Serializable {
     public void sortByRead(){
         
     }
+
+    public Notification previous(Notification selectedNotification) {
+        if(notificationList.get(0) == selectedNotification) {
+            return null; // If it is the first element there is no previous
+        }
+        for (int i = 1; i < notificationList.size(); i++) {
+            if(notificationList.get(i)== selectedNotification){
+                    return notificationList.get(i - 1);
+            }
+        }
+        return null;
+    }
     
+    public Notification next(Notification selectedNotification) {
+        for (int i = 0; i < notificationList.size() - 1; i++) {
+            if(notificationList.get(i)== selectedNotification){
+                    return notificationList.get(i + 1);
+            }
+        }
+        return null;
+    }
     
+    public boolean hasNext(Notification selectedNotification) {
+        return next(selectedNotification) != null;
+    }
+    
+    public boolean hasPrevious(Notification selectedNotification) {
+        return previous(selectedNotification) != null;
+    }
 }

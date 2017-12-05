@@ -34,21 +34,12 @@ public class UserCntl {
     private LoginCntl loginCntl;
     private User user;
     
-    private NewUserUI newUserUi;
-
-    
     public UserCntl(NavigationCntl navigationCntl) {
         //This is used for editing a user profile;
         this.navigationCntl = navigationCntl;
         this.userProfileUi = new ViewUserProfileUI(this);
-        theUserList = externalDataCntl.getUserList();
+        this.theUserList = externalDataCntl.getUserList();
         this.user = navigationCntl.getActiveUser();
-        this.navigationCntl.getUserInterface().setContentPane(this.userProfileUi);
-        
-        this.navigationCntl.getUserInterface().revalidate();
-        this.navigationCntl.getUserInterface().repaint();
-        this.navigationCntl.getUserInterface().requestFocus();
-       
     }
     
     public UserCntl (LoginCntl loginCntl) {
@@ -56,12 +47,12 @@ public class UserCntl {
         this.loginCntl = loginCntl;
     }
     
-    public void setNewUserUi(NewUserUI newUserUi) {
-        this.newUserUi = newUserUi;
-    }
-    
-    public void submitNewUserCredentials(String username, char[] password) {
+    public void submitNewUserCredentials(NewUserUI newUserUi) {
+        String username = newUserUi.getUsername();
+        char[] password = newUserUi.getPassword();
         boolean[] testResults = validateNewUserInput(username, password);
+        if(testResults == null)
+            System.out.println("huh");
         boolean failedATest = false;
         for(int i = 0; i < testResults.length; i++) {
             if(!testResults[i]) 
@@ -75,8 +66,8 @@ public class UserCntl {
                     break;
                 default:
                     // Just here to include the default it should not happen
-                    // unless you expand the number of test results when submitting
-                    // user credentials without expanding this switch.
+                    // unless you expand the number of test results when 
+                    // submitting user credentials without expanding this switch
                     System.err.println("Switch Case Should Not Enter Default");
                     break;   
             }
@@ -84,7 +75,7 @@ public class UserCntl {
         
         if(!failedATest) {
             addUser(username, password);
-            newUserUi.closeWindow();
+            newUserUi.returnToLogin();
         }
         
     }
@@ -175,7 +166,7 @@ public class UserCntl {
             if(!theUserList.hasUser(newUsername) || oldUsername.equals(newUsername))
                 if (User.isValidPassword(newPassword)) {
                     updateUser(oldUsername, newUsername, newPassword);
-                    navigationCntl.goHomeScreen();
+                    goHomeScreen();
                 } else {
                     System.out.println(String.valueOf(newPassword) + " detectedPass");
                     this.userProfileUi.displayPasswordTooWeakErr(true);
@@ -189,7 +180,6 @@ public class UserCntl {
     }
     
     public void goHomeScreen() {
-        navigationCntl.goHomeScreen();
+        navigationCntl.goToScreen(NavigationCntl.ScreenOption.HOME);
     }
-    
 }

@@ -10,37 +10,116 @@ import moodprofile.controller.MoodCntl;
 import moodprofile.model.Mood;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 /**
  *
  * @author HannahGarthwaite
  */
 public class MoodListUI extends JPanel {
-
-    MoodCntl moodCntl;
+    private MoodCntl moodCntl;
+    
     /**
      * Creates new form MoodListUI
+     * @param moodCntl
      */
-    public MoodListUI() {
-        initComponents();
-    }
     public MoodListUI(MoodCntl moodCntl){
         this.moodCntl = moodCntl;
-        initComponents();
-        initCustomComponents();
+        this.setLayout(new GridBagLayout());
+        addComponents();
     }
     
-    public void initCustomComponents(){
+    private void addComponents() {
+        GridBagConstraints gbc = new GridBagConstraints();
+        
+        JPanel leftMargin = new JPanel();
+        //leftMargin.setBackground(Color.BLUE);
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridheight = 2;
+        gbc.fill = GridBagConstraints.BOTH;
+        gbc.weightx = .25;
+        gbc.weighty = .5;
+        this.add(leftMargin, gbc);
+        
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        gbc.gridheight = 1;
+        gbc.fill = GridBagConstraints.BOTH;
+        gbc.weightx = .5;
+        gbc.weighty = 10;
+        this.add(displayPanel(), gbc);
+        
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+        gbc.gridheight = 1;
+        gbc.fill = GridBagConstraints.BOTH;
+        gbc.weightx = .5;
+        gbc.weighty = .5;
+        this.add(buildButtonPanel(), gbc);
+        
+        JPanel rightMargin = new JPanel();
+        //rightMargin.setBackground(Color.MAGENTA);
+        gbc.gridx = 2;
+        gbc.gridy = 0;
+        gbc.gridheight = 2;
+        gbc.fill = GridBagConstraints.BOTH;
+        gbc.weightx = .25;
+        gbc.weighty = .5;
+        this.add(rightMargin, gbc);
+    }
+    
+    private JPanel displayPanel() {
+        JPanel displayPanel = new JPanel();
+        //displayPanel.setBackground(Color.RED);
+        displayPanel.setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
+        
+        JButton homeBtn = new JButton("Home");
+        homeBtn.addActionListener((ActionEvent ae) -> { 
+            System.out.println("homeBtn Click Event Registered");
+            moodCntl.requestHomeView();
+        });
+        c.gridx = 0;
+        c.gridy = 0;
+        c.weighty = .25;
+        c.weightx = 1;
+        c.anchor = GridBagConstraints.WEST;
+        displayPanel.add(homeBtn, c);
+        
+        scrollPane = new JScrollPane(buildListPanel());
+        //scrollPane.setBackground(Color.PINK);
+        c.gridx = 0;
+        c.gridy = 1;
+        c.weightx = 1;
+        c.weighty = 1;
+        c.fill = GridBagConstraints.BOTH;
+        c.anchor = GridBagConstraints.CENTER;
+        displayPanel.add(scrollPane, c);
+ 
+        return displayPanel;
+    }
+    
+    private JPanel buildListPanel(){
         listPanel = new JPanel();
-        listPanel.setLayout(new BoxLayout(listPanel, BoxLayout.Y_AXIS));
+        listPanel.setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
+        c.gridx =0;
+        c.weightx = 1;
+        c.weighty = 1;
+        c.fill = GridBagConstraints.BOTH;
         
         for (int i = 0; i < moodCntl.getMoodList().size(); i++) {
-            
+            System.out.println("Looping");
             JPanel singleMoodPanel = new JPanel();
             JLabel moodName = new JLabel(moodCntl.getMoodList().getMood(i).getName());
             singleMoodPanel.add(moodName);
@@ -50,36 +129,44 @@ public class MoodListUI extends JPanel {
             //Allows user to click on a mood to view its detail
             singleMoodPanel.addMouseListener(new MouseListener() {
                 
+                @Override
                 public void mouseClicked(MouseEvent e){
-                    viewMood(mood);
+                    moodCntl.setSelectedMood(mood);
+                    moodCntl.requestExtendedMoodScreen();
                 }
                 
+                @Override
                 public void mousePressed(MouseEvent e){
-                    
+                    //Do Nothing
                 }
                 
+                @Override
                 public void mouseReleased(MouseEvent e){
-                    
+                    //Do Nothing
                 }
                 
+                @Override
                 public void mouseEntered(MouseEvent e){
                     singleMoodPanel.setBackground(Color.lightGray);
                 }
                 
+                @Override
                 public void mouseExited(MouseEvent e){
                     singleMoodPanel.setBackground(new Color(238,238,238));
                 }
             });
-            listPanel.add(singleMoodPanel);
-            scrollPane.getViewport().add(listPanel, BorderLayout.NORTH);
+            c.gridy = i;
+            listPanel.add(singleMoodPanel, c);
         }
-        scrollPane.getViewport().add(listPanel, BorderLayout.NORTH);
-            
+
+        return listPanel;
     }
     
-    public void viewMood(Mood mood){
-        this.setVisible(false);
-        moodCntl.viewMood(mood);
+    private JPanel buildButtonPanel() {
+        JPanel buttonPanel = new JPanel();
+        // buttonPanel.setBackground(Color.RED); // For Debugging Purposes
+        // This is just empty for now and just acts as a bottom butffer
+        return buttonPanel;
     }
 
     @SuppressWarnings("unchecked")
@@ -109,19 +196,6 @@ public class MoodListUI extends JPanel {
 
         scrollPane.setViewportView(listPanel);
 
-        jButton1.setText("Home");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        jButton2.setText("Create New");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         setLayout(layout);
@@ -153,53 +227,7 @@ public class MoodListUI extends JPanel {
                 .addContainerGap())
         );
 
-    }// </editor-fold>                        
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        this.setVisible(false);
-        moodCntl.newMood();
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        this.setVisible(false);
-        moodCntl.goHome();
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MoodListUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MoodListUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MoodListUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MoodListUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new MoodListUI().setVisible(true);
-            }
-        });
-    }
+    }                        
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

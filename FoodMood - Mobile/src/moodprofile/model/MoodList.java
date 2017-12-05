@@ -6,6 +6,7 @@
 package moodprofile.model;
 
 import externaldata.controller.ExternalDataCntl;
+import foodprofile.controller.FoodCntl;
 import foodprofile.model.Food;
 import java.io.Serializable;
 import java.sql.Connection;
@@ -66,10 +67,10 @@ public class MoodList implements Serializable {
      * Takes a mood, finds it in the list, and updates it
      * @param mood mood to update
      */
-    public void updateMood(Mood mood){
+    public void updateMood(Mood originalMood, Mood updatedMood){
         for (int i = 0; i < listOfMoods.size(); i++) {
-            if(listOfMoods.get(i).getID()==mood.getID()){
-                listOfMoods.set(i, mood);
+            if(listOfMoods.get(i) == originalMood){
+                listOfMoods.set(i, updatedMood);
             }
         }
     }
@@ -81,8 +82,16 @@ public class MoodList implements Serializable {
     public void deleteMood(int id){
         for (int i = 0; i < listOfMoods.size(); i++) {
             if(listOfMoods.get(i).getID() == id){
-                listOfMoods.remove(i)
-;            }
+                listOfMoods.remove(i);
+            }
+        }
+    }
+    
+    public void deleteMood(Mood moodToDelete) {
+        for (int i = 0; i < listOfMoods.size(); i++) {
+            if(listOfMoods.get(i) == moodToDelete){
+                listOfMoods.remove(i);
+            }
         }
     }
     
@@ -148,5 +157,24 @@ public class MoodList implements Serializable {
      */
     public int size() {
         return listOfMoods.size();
+    }
+    
+        /**
+     * walks through the moodList and if the mood is within 3 hours of the food,
+     * adds the food id to the mood
+     * @param dateOfFood the date to test for
+     * @param food the id to add
+     */
+    public void linkFoods(GregorianCalendar dateOfFood, int food){
+        for (int i = 0; i < listOfMoods.size()-1; i++) {
+            long difference =  listOfMoods.get(i).getTime().getTimeInMillis() - dateOfFood.getTimeInMillis();
+//            if(difference < 0){
+//                difference = difference * -1;
+//            }
+            if(difference <= 3){
+                listOfMoods.get(i).addFood(food);
+            }
+        }
+        ExternalDataCntl.getExternalDataCntl().writeSerializedData();
     }
 }

@@ -15,9 +15,28 @@ public class Food implements Serializable {
     /**
      * Creates food given id, name, foodCategory (single category) and time
      * Default constructor for FoodProfileModel
+     * @param id
+     * @param name
+     * @param foodCategory
+     * @param time
      */
     public Food(int id, String name, String foodCategory, GregorianCalendar time){
         this.id = id;
+        this.name = name;
+        this.foodCategories = new ArrayList();
+        foodCategories.add(foodCategory);
+        moods = new ArrayList();
+        this.time = time;
+    }
+    
+    /**
+     * Creates food given id, name, foodCategory (single category) and time
+     * Default constructor for FoodProfileModel
+     * @param name
+     * @param foodCategory
+     * @param time
+     */
+    public Food(String name, String foodCategory, GregorianCalendar time){
         this.name = name;
         this.foodCategories = new ArrayList();
         foodCategories.add(foodCategory);
@@ -159,6 +178,16 @@ public class Food implements Serializable {
         moods.add(mood);
     }
 
-
+    public void printLinkedMoods(){
+        System.out.print("\n Moods: ");
+        for (int i = 0; i < moods.size(); i++) {
+            System.out.print(moods.get(i)+", ");
+        }
+        System.out.println("\n");
+    }
+    
+    public void setID(int id){
+        this.id = id;
+    }
 
 }
