@@ -9,6 +9,7 @@ import java.awt.Component;
 import static java.awt.Event.HOME;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -26,7 +27,8 @@ public class HistoryUI extends JPanel{
     private JButton goHomeButton;
     private JScrollPane scrollPane;
     
-    public HistoryUI(){
+    public HistoryUI(NavigationCntl parentCntl){
+        this.parentCntl = parentCntl;
         this.setLayout(new GridBagLayout());
         addComponents();
         
@@ -97,9 +99,10 @@ public class HistoryUI extends JPanel{
         c.gridx = 0;
         c.gridy = 1;
         c.weightx = 1;
-        c.weighty = 1;
+        c.weighty = .9;
         c.fill = GridBagConstraints.BOTH;
-        c.anchor = GridBagConstraints.CENTER;
+        c.anchor = GridBagConstraints.NORTH;
+        c.insets = new Insets(0, 0, 50, 0);
         displayPanel.add(scrollPane, c);
         
         return displayPanel;

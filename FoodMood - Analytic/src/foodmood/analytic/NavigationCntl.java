@@ -102,7 +102,7 @@ public class NavigationCntl {
     
     private void goCorrelationScreen(){
         System.out.println("Going to Correlation Screen");
-        theCorrelationUI = new CorrelationUI();
+        theCorrelationUI = new CorrelationUI(this);
         userInterface.add(theCorrelationUI);
         currentScreen = ScreenOption.CORRELATION;
         
@@ -110,7 +110,7 @@ public class NavigationCntl {
     
     private void goHistoryScreen(){
         System.out.println("Going to History Screen");
-        theHistoryUI = new HistoryUI();
+        theHistoryUI = new HistoryUI(this);
         userInterface.add(theHistoryUI);
         currentScreen = ScreenOption.HISTORY;
         
