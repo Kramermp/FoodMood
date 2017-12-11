@@ -26,8 +26,7 @@ public class HistoryUI extends JPanel{
     private JButton goHomeButton;
     private JScrollPane scrollPane;
     
-    public HistoryUI(NavigationCntl navigationCntl){
-        this.parentCntl = navigationCntl;
+    public HistoryUI(){
         this.setLayout(new GridBagLayout());
         addComponents();
         

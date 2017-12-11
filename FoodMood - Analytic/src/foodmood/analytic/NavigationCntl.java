@@ -101,7 +101,11 @@ public class NavigationCntl {
     }
     
     private void goHistoryScreen(){
-        System.out.println("todo: goHistoryScreen navCntl");
+        System.out.println("Going to History Screen");
+        theHistoryUI = new HistoryUI();
+        userInterface.add(theHistoryUI);
+        currentScreen = ScreenOption.HISTORY;
+        
     }
 
     private void goUserProfileScreen() {
