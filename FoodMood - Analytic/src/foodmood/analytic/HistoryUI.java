@@ -5,7 +5,6 @@
  */
 package foodmood.analytic;
 
-import foodmood.analytic.NavigationCntl.ScreenOption;
 import java.awt.Component;
 import static java.awt.Event.HOME;
 import java.awt.GridBagConstraints;
@@ -84,7 +83,7 @@ public class HistoryUI extends JPanel{
 
             public void actionPerformed(ActionEvent ae) {
                 System.out.println("homeBtn Click Event Registered");
-                parentCntl.goToScreen(ScreenOption.HOME);
+                parentCntl.goToScreen(NavigationCntl.ScreenOption.HOME);
             }
         });
         c.gridx = 0;
@@ -95,7 +94,7 @@ public class HistoryUI extends JPanel{
         displayPanel.add(homeBtn, c);
         
         scrollPane = new JScrollPane(buildListPanel());
-         c.gridx = 0;
+        c.gridx = 0;
         c.gridy = 1;
         c.weightx = 1;
         c.weighty = 1;
