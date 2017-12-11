@@ -23,6 +23,7 @@ public class NavigationCntl {
     private HomeUI theHomeUI;
     private ChartUI theChartUI;
     private HistoryUI theHistoryUI;
+    private CorrelationUI theCorrelationUI;
     private LoginCntl loginCntl;
     private UserInterface userInterface;
     private ScreenOption currentScreen;
@@ -97,7 +98,11 @@ public class NavigationCntl {
     }
     
     private void goCorrelationScreen(){
-        System.out.println("todo: goCorrelationScreen navCntl");
+        System.out.println("Going to Correlation Screen");
+        theCorrelationUI = new CorrelationUI();
+        userInterface.add(theCorrelationUI);
+        currentScreen = ScreenOption.CORRELATION;
+        
     }
     
     private void goHistoryScreen(){
