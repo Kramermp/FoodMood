@@ -54,11 +54,11 @@ public class CorrelationUI extends JPanel{
         this.add(displayPanel(), gbc);
         
         JPanel bottomMargin = new JPanel();
-        gbc.gridx = 1;
-        gbc.gridy = 1;
-        gbc.gridheight = 1;
+        gbc.gridx = 2;
+        gbc.gridy = 0;
+        gbc.gridheight = 2;
         gbc.fill = GridBagConstraints.BOTH;
-        gbc.weightx = .5;
+        gbc.weightx = .25;
         gbc.weighty = .5;
         this.add(bottomMargin, gbc);
         
