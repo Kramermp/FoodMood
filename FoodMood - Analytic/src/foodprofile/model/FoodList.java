@@ -21,6 +21,7 @@ import java.util.GregorianCalendar;
  * @author Michael Kramer
  */
 public class FoodList implements Serializable {
+    public static final String[] FOOD_GROUPS = {"Dairy", "Fruits", "Grains", "Protein", "Vegetables"};
     private ArrayList<Food> listOfFoods = new ArrayList<Food>();  
 
     

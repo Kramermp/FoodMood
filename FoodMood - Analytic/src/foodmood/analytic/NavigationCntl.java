@@ -5,6 +5,8 @@
  */
 package foodmood.analytic;
 
+import chart.controller.ChartCntl;
+import chart.view.ChartUI;
 import userprofile.User;
 import userprofile.UserCntl;
 import userprofile.LoginCntl;
@@ -93,8 +95,9 @@ public class NavigationCntl {
     }
     
     private void goChartScreen(){
-        System.out.println("todo: goChartScreen navCntl");
-        
+        System.out.println("Going to ChartScreen");
+        ChartCntl chartCntl = new ChartCntl(this);
+        userInterface.add(new ChartUI(chartCntl));
     }
     
     private void goCorrelationScreen(){
