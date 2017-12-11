@@ -119,6 +119,7 @@ public class MoodList implements Serializable {
      * @param moodProfileToAdd the mood to add
      */
     public void addMood(Mood moodToAdd) {
+        moodToAdd.setId(calculateNextId());
         this.listOfMoods.add(moodToAdd);
         ExternalDataCntl.getExternalDataCntl().writeSerializedData();
     }
@@ -130,6 +131,21 @@ public class MoodList implements Serializable {
      */
     public Mood getMood(int i){
         return listOfMoods.get(i);
+    }
+    
+    /**
+     * Return a mood for a given index
+     * @param i index of the mood
+     * @return 
+     */
+    public Mood getMoodById(int id){
+        for(int i =0; i < listOfMoods.size(); i++) {
+            System.out.println("Looking for " + id + " found " + listOfMoods.get(i).getID());
+            if (id == listOfMoods.get(i).getID()) {
+                return listOfMoods.get(i);
+            }
+        }
+        return null;
     }
     
     /**
@@ -176,5 +192,9 @@ public class MoodList implements Serializable {
             }
         }
         ExternalDataCntl.getExternalDataCntl().writeSerializedData();
+    }
+    
+    private int calculateNextId() {
+        return listOfMoods.size();
     }
 }

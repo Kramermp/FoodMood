@@ -119,6 +119,7 @@ public class MoodList implements Serializable {
      * @param moodProfileToAdd the mood to add
      */
     public void addMood(Mood moodToAdd) {
+        moodToAdd.setId(calculateNextId());
         this.listOfMoods.add(moodToAdd);
         ExternalDataCntl.getExternalDataCntl().writeSerializedData();
     }
@@ -176,5 +177,9 @@ public class MoodList implements Serializable {
             }
         }
         ExternalDataCntl.getExternalDataCntl().writeSerializedData();
+    }
+    
+    private int calculateNextId() {
+        return listOfMoods.size();
     }
 }

@@ -45,6 +45,7 @@ public class ChartCntl {
         for(int i =0; i < moods.length; i++) {
             for(int j =0; j < foodGroups.length; j++) {
                 int count = getMoodCount(moods[i], foodGroups[j]);
+                System.out.println("Testing for " + moods[i]);
                 theDataset.addValue(count, moods[i], foodGroups[j]);
             }
         }   
@@ -66,11 +67,14 @@ public class ChartCntl {
             if(isCorrectFoodCategory) {
                 ArrayList<Integer> moods = selectedFood.getMoods();
                 for(int j = 0; j < moods.size(); j++) {
-                    Mood selectedMood = moodList.getMood(j);
-                    if(selectedMood.getName().equals(moodToTestFor)) {
+                    Mood selectedMood = moodList.getMoodById(j);
+                    if(selectedMood != null && selectedMood.getName().equals(moodToTestFor)) {
                         count++;
                     } else {
                         // Do Nothing
+                        if(selectedMood == null) {
+                            System.out.println("Mood was null");
+                        }
                     }
                 }
             } else {

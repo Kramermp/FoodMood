@@ -45,7 +45,7 @@ public class Mood implements Serializable {
      * @return the id
      */
     public int getID() {
-        return id;
+        return this.id;
     }
 
     /**
