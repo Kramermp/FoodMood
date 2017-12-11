@@ -5,14 +5,10 @@
  */
 package externaldata.controller;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import foodprofile.model.*;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -25,7 +21,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import moodprofile.model.*;
-import userprofile.model.*;
+import userprofile.*;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import java.io.FileReader;
+import java.io.FileWriter;
 
 /**
  * This is the ExternalDataCtnl and it manages the interaction between
@@ -76,13 +76,13 @@ public class ExternalDataCntl {
 		FileOutputStream fos = null;
 		ObjectOutputStream out = null;
 		try {
-			/*fos = new FileOutputStream("Data.ser");
+			/*fos = new FileOutputStream("..\\FoodMood - Mobile\\Data.ser");
 			out = new ObjectOutputStream(fos);
 			out.writeObject(userList);
 			out.flush();
 			out.close();*/
                         //Using Gson to store data in Json format to avoid serial numbers
-                        FileWriter fw = new FileWriter("..\\FoodMood - Analytic\\users.json");
+                        FileWriter fw = new FileWriter("users.json");
                         Gson gson = new GsonBuilder().create();
                         gson.toJson(userList, fw);
                         fw.close();
@@ -100,12 +100,12 @@ public class ExternalDataCntl {
 		try {
 			/*FileInputStream fis = null;
 			ObjectInputStream in = null;
-			fis = new FileInputStream("Data.ser");
+			fis = new FileInputStream("..\\FoodMood - Mobile\\Data.ser");
 			in = new ObjectInputStream(fis);
 			userList = (UserList) in.readObject();
 			in.close();*/
                         //Gson to read from Json file.
-                        FileReader fr = new FileReader("..\\FoodMood - Analytic\\users.json");
+                        FileReader fr = new FileReader("users.json");
                         Gson gson = new GsonBuilder().create();
                         userList = gson.fromJson(fr, UserList.class);
                         fr.close();

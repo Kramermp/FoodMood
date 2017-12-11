@@ -5,7 +5,7 @@
  */
 package foodmood.analytic;
 
-import navigation.controller.NavigationCntl;
+import userprofile.LoginCntl;
 
 /**
  * This class serves as the entry point to the FoodMood Analytic Application.
@@ -17,7 +17,7 @@ public class FoodMoodAnalytic {
 	 * @param args the command line arguments
 	 */
 	public static void main(String[] args) {
-		new NavigationCntl();
+            LoginCntl logingCntl = new LoginCntl();
 	}
 	
 }
