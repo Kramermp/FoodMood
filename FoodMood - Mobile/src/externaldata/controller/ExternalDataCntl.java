@@ -5,10 +5,14 @@
  */
 package externaldata.controller;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import foodprofile.model.*;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -72,11 +76,16 @@ public class ExternalDataCntl {
 		FileOutputStream fos = null;
 		ObjectOutputStream out = null;
 		try {
-			fos = new FileOutputStream("Data.ser");
+			/*fos = new FileOutputStream("Data.ser");
 			out = new ObjectOutputStream(fos);
 			out.writeObject(userList);
 			out.flush();
-			out.close();
+			out.close();*/
+                        //Using Gson to store data in Json format to avoid serial numbers
+                        FileWriter fw = new FileWriter("..\\FoodMood - Analytic\\users.json");
+                        Gson gson = new GsonBuilder().create();
+                        gson.toJson(userList, fw);
+                        fw.close();
 		} catch(IOException ex) {
 			ex.printStackTrace();
 		} catch (Exception ex) {
@@ -89,22 +98,27 @@ public class ExternalDataCntl {
 		String errorType = null;
 		String errorMessage = null;
 		try {
-			FileInputStream fis = null;
+			/*FileInputStream fis = null;
 			ObjectInputStream in = null;
 			fis = new FileInputStream("Data.ser");
 			in = new ObjectInputStream(fis);
 			userList = (UserList) in.readObject();
-			in.close();
+			in.close();*/
+                        //Gson to read from Json file.
+                        FileReader fr = new FileReader("..\\FoodMood - Analytic\\users.json");
+                        Gson gson = new GsonBuilder().create();
+                        userList = gson.fromJson(fr, UserList.class);
+                        fr.close();
 		} catch (FileNotFoundException e) {
 			errorType = "FileNotFoundException";
 			errorMessage = e.getMessage();
 		} catch (IOException e) {
 			errorType = "IOException";
 			errorMessage = e.getMessage();
-		} catch (ClassNotFoundException e) {
+		} /*catch (ClassNotFoundException e) {
 			errorType = "ClassNameNotFoundException";
 			errorMessage = e.getMessage();
-		} catch (Exception e) {
+		} */catch (Exception e) {
 			errorType = e.getClass().getName();
 			errorMessage = e.getMessage();
 		} finally {
@@ -210,7 +224,7 @@ public class ExternalDataCntl {
     }
     
     public void addUser(String username, char[] password){
-        createUserTable();
+        /*createUserTable();
 		System.out.println("adding user to db");
 		try{
 			Class.forName("org.sqlite.JDBC");
@@ -233,7 +247,7 @@ public class ExternalDataCntl {
 		}catch(Exception e){
 			e.printStackTrace();
 			System.exit(0);
-		}
+		}*/
 		writeSerializedData();
     }
     

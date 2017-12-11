@@ -25,3 +25,9 @@ hs_err_pid*
 /dist/
 /build/
 /foodmood.db
+/FoodMood - Analytic/nbproject/private/
+/FoodMood - Analytic/build/
+/FoodMood - Mobile/nbproject/private/
+/FoodMood - Mobile/build/
+/FoodMood - Mobile/Data.ser
+/FoodMood - Analytic/users.json
