@@ -11,6 +11,7 @@ import static java.awt.Event.HOME;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -36,7 +37,6 @@ public class HistoryUI extends JPanel{
         GridBagConstraints gbc = new GridBagConstraints();
         
         JPanel leftMargin = new JPanel();
-        
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.gridheight = 2;
@@ -52,6 +52,15 @@ public class HistoryUI extends JPanel{
         gbc.weightx = .5;
         gbc.weighty = 10;
         this.add(displayPanel(), gbc);
+        
+        JPanel bottomMargin = new JPanel();
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+        gbc.gridheight = 1;
+        gbc.fill = GridBagConstraints.BOTH;
+        gbc.weightx = .5;
+        gbc.weighty = .5;
+        this.add(bottomMargin, gbc);
         
         
         JPanel rightMargin = new JPanel();
@@ -71,9 +80,12 @@ public class HistoryUI extends JPanel{
         GridBagConstraints c = new GridBagConstraints();
         
         JButton homeBtn = new JButton("Home");
-        homeBtn.addActionListener((ActionEvent ae) -> { 
-            System.out.println("homeBtn Click Event Registered");
-            parentCntl.goToScreen(ScreenOption.HOME);
+        homeBtn.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent ae) {
+                System.out.println("homeBtn Click Event Registered");
+                parentCntl.goToScreen(ScreenOption.HOME);
+            }
         });
         c.gridx = 0;
         c.gridy = 0;
@@ -95,7 +107,9 @@ public class HistoryUI extends JPanel{
     }
 
     private Component buildListPanel() {
-        return null;
+        JPanel buildListPanel = new JPanel();
+        //retrieve data from DB
+        return buildListPanel;
     }
     
 }
