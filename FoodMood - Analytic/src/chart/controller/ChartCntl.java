@@ -53,6 +53,18 @@ public class ChartCntl {
         return theDataset;
     }
     
+    public DefaultCategoryDataset getDataset(String foodGroup) {
+        DefaultCategoryDataset theDataset = new DefaultCategoryDataset();
+        String[] moods = Mood.possiblMoods;
+        
+        for(int i =0; i < moods.length; i++) {
+            int count = getMoodCount(moods[i], foodGroup);
+            System.out.println("Testing for " + moods[i]);
+            theDataset.addValue(count, moods[i], foodGroup);
+        }   
+        
+        return theDataset;
+    }
     
     public int getMoodCount(String moodToTestFor, String foodGroup) {
         FoodList foodList = parentCntl.getActiveUser().getFoodList();
