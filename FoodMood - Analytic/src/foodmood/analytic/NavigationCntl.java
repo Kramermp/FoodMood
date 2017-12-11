@@ -21,6 +21,8 @@ public class NavigationCntl {
         USERPROFILE, EMPTY}
     private User activeUser;
     private HomeUI theHomeUI;
+    private ChartUI theChartUI;
+    private HistoryUI theHistoryUI;
     private LoginCntl loginCntl;
     private UserInterface userInterface;
     private ScreenOption currentScreen;
@@ -91,6 +93,7 @@ public class NavigationCntl {
     
     private void goChartScreen(){
         System.out.println("todo: goChartScreen navCntl");
+        
     }
     
     private void goCorrelationScreen(){
