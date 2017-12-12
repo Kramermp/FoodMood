@@ -5,6 +5,8 @@
  */
 package foodmood.analytic;
 
+import foodprofile.model.Food;
+import java.awt.Color;
 import java.awt.Component;
 import static java.awt.Event.HOME;
 import java.awt.GridBagConstraints;
@@ -12,9 +14,13 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 
 /**
  *
@@ -109,9 +115,91 @@ public class HistoryUI extends JPanel{
     }
 
     private Component buildListPanel() {
-        JPanel buildListPanel = new JPanel();
-        //retrieve data from DB
-        return buildListPanel;
+        JPanel listPanel = new JPanel();
+        listPanel.setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
+        c.gridx =0;
+        c.weightx = 1;
+        c.weighty = 1;
+        c.fill = GridBagConstraints.BOTH;
+        for (int i = 0; i < parentCntl.getActiveUser().getFoodList().size(); i++) {
+            JPanel singleFoodPanel = new JPanel();
+            JLabel foodName = new JLabel(parentCntl.getActiveUser().getFoodList().getFood(i).getName());
+            singleFoodPanel.add(foodName);
+            final Food food = parentCntl.getActiveUser().getFoodList().getFood(i);
+            listPanel.add(singleFoodPanel);
+            
+            //Allows user to click on a food to view it
+//            singleFoodPanel.addMouseListener(new MouseListener() {
+//                
+//                @Override
+//                public void mouseClicked(MouseEvent e){
+//                    
+//                }
+//                
+//                @Override
+//                public void mousePressed(MouseEvent e){
+//                    // Do Nothing
+//                }
+//                
+//                @Override
+//                public void mouseReleased(MouseEvent e){
+//                    // Do Nothing
+//                }
+//                
+//                @Override
+//                public void mouseEntered(MouseEvent e){
+//                    singleFoodPanel.setBackground(Color.lightGray);
+//                }
+//                
+//                @Override
+//                public void mouseExited(MouseEvent e){
+//                    singleFoodPanel.setBackground(new Color(238,238,238));
+//                }
+//            });
+            c.gridy = i;
+            listPanel.add(singleFoodPanel, c);
+        }
+        
+        int j = c.gridy + 1;
+        for (int i = 0; i < parentCntl.getActiveUser().getMoodList().size(); i++) {
+            JPanel singleFoodPanel = new JPanel();
+            JLabel foodName = new JLabel(parentCntl.getActiveUser().getMoodList().getMood(i).getName());
+            singleFoodPanel.add(foodName);
+            listPanel.add(singleFoodPanel);
+            
+            //Allows user to click on a food to view it
+//            singleFoodPanel.addMouseListener(new MouseListener() {
+//                
+//                @Override
+//                public void mouseClicked(MouseEvent e){
+//                    
+//                }
+//                
+//                @Override
+//                public void mousePressed(MouseEvent e){
+//                    // Do Nothing
+//                }
+//                
+//                @Override
+//                public void mouseReleased(MouseEvent e){
+//                    // Do Nothing
+//                }
+//                
+//                @Override
+//                public void mouseEntered(MouseEvent e){
+//                    singleFoodPanel.setBackground(Color.lightGray);
+//                }
+//                
+//                @Override
+//                public void mouseExited(MouseEvent e){
+//                    singleFoodPanel.setBackground(new Color(238,238,238));
+//                }
+//            });
+            c.gridy = i + j;
+            listPanel.add(singleFoodPanel, c);
+        }
+        return listPanel;
     }
     
 }
