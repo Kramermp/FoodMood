@@ -46,6 +46,7 @@ public class FoodList implements Serializable {
      * @param foodToAdd the foodToAdd 
      */
     public void addFood(Food foodToAdd) {
+        foodToAdd.setID(getNewID());
         this.listOfFoods.add(foodToAdd);
         ExternalDataCntl.getExternalDataCntl().writeSerializedData();
     }
